@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/splash/original/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.luiscardev27.LCPMProjectsExpo"
     },
     "web": {
       "favicon": "./src/assets/splash/default/favicon/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4b81479d-d754-4032-9dde-9df828e1d0fe"
+      }
     }
   }
 }
