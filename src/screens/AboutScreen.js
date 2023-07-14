@@ -2,25 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Alert, Button, View, Text, StyleSheet, Image, Linking } from 'react-native';
 import { globalStyles, myimgs } from '../styles/global';
 import { ScrollView } from 'react-native-gesture-handler';
-
-type OpenURLButtonProps = {
-  url: string;
-  children: string;
-};
-
-const OpenURLButton = ({ url, children }: OpenURLButtonProps) => {
-  const handlePress = useCallback(async () => {
-    const supported = await Linking.canOpenURL(url);
-
-    if (supported) {
-      await Linking.openURL(url);
-    } else {
-      Alert.alert(`Don't know how to open this URL: ${url}`);
-    }
-  }, [url]);
-
-  return <Button title={children} onPress={handlePress} style={styles.button} />;
-};
+import { A } from '@expo/html-elements';
 
 function AboutScreen() {
   const [isMyContactInfoShown, setIsMyContactInfoShown] = useState(false);
@@ -33,7 +15,7 @@ function AboutScreen() {
           About
         </Text>
         <Text style={styles.text}>
-          LCP Mobile Projects Expo, which is a native mobile app to show, create and share my projects for everyone or me.
+          LCP Mobile App, which is a native mobile app for Android and iOS to show of my projects and other things for everyone.
         </Text>
         <View style={styles.containerButtons}>
           <Button style={styles.btnToggleContact} title={!isMyContactInfoShown ? 'Show my contact info' : 'Hide my contact info'} onPress={toggleContact} />
@@ -56,7 +38,7 @@ function AboutScreen() {
                   Career: Web developer, programmer, engineer, specialist and technician of IT
                 </Text>
                 <View style={styles.buttonGrp}>
-                  <OpenURLButton url={'mailto://luiscarvalho239@gmail.com'}>Send me a email</OpenURLButton>
+                  <A href='mailto://luiscarvalho239@gmail.com'>Send me a email</A>
                 </View>
               </View>
             </View>

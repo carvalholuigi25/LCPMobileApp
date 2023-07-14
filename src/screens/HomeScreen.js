@@ -7,7 +7,7 @@ function HomeScreen() {
     <View style={globalStyles.home}>
       <View style={styles.homeContent}>
         <Image source={myimgs[0].src} style={styles.img} />
-        <Text style={styles.title}>Welcome to LCP Mobile Projects!</Text>
+        <Text style={styles.title}>Welcome to LCP Mobile App!</Text>
       </View>
     </View>
   );
