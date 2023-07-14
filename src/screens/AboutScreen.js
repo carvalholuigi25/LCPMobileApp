@@ -2,11 +2,14 @@ import React, { useCallback, useState } from 'react';
 import { Alert, Button, View, Text, StyleSheet, Image, Linking } from 'react-native';
 import { globalStyles, myimgs } from '../styles/global';
 import { ScrollView } from 'react-native-gesture-handler';
-import { A } from '@expo/html-elements';
 
 function AboutScreen() {
   const [isMyContactInfoShown, setIsMyContactInfoShown] = useState(false);
   const toggleContact = () => setIsMyContactInfoShown(value => !value);
+
+  const sendEmail = () => {
+    Linking.openURL('mailto:luiscarvalho239@gmail.com');
+  }
 
   return (
     <View style={globalStyles.about}>
@@ -38,7 +41,7 @@ function AboutScreen() {
                   Career: Web developer, programmer, engineer, specialist and technician of IT
                 </Text>
                 <View style={styles.buttonGrp}>
-                  <A href='mailto://luiscarvalho239@gmail.com'>Send me a email</A>
+                  <Button title='Send a email to me!' onPress={sendEmail} style={styles.btnmaillink} />
                 </View>
               </View>
             </View>
@@ -100,6 +103,12 @@ const styles = StyleSheet.create({
   buttonGrp: {
     marginTop: 15,
     marginBottom: 15
+  },
+  btnmaillink: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    padding: 15,
+    textTransform: 'uppercase'
   },
   containerButtons: {
     marginTop: 5
