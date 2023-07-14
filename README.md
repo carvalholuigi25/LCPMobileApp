@@ -1,6 +1,6 @@
-# LCP Mobile Projects Expo
+# LCP Mobile App
 
-This is a LCP Mobile Projects Expo, which is a native mobile app to show, create and share my projects for everyone or me.
+This is a LCP Mobile App, which is a native mobile app for Android and iOS to show of my projects and other things for everyone.
 
 Powered by the [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli) and [**Expo**](https://expo.dev).
 
