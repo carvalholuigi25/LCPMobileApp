@@ -8,12 +8,14 @@ import DrawerNav from './navigators/drawerNav';
 SplashScreen.preventAutoHideAsync();
 
 const getFonts = () => Font.loadAsync({
-  'nunito-regular': require('./assets/fonts/Nunito/static/Nunito-Regular.ttf'),
-  'nunito-bold': require('./assets/fonts/Nunito/static/Nunito-Bold.ttf')
+  'quantico': require('./assets/fonts/Quantico/Quantico-Regular.ttf'),
+  'inter': require('./assets/fonts/Inter/static/Inter-Regular.ttf'),
+  'nunito': require('./assets/fonts/Nunito/static/Nunito-Regular.ttf'),
+  'roboto': require('./assets/fonts/Roboto/Roboto-Regular.ttf')
 });
 
 export default function App() {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     async function prepare() {
@@ -24,7 +26,7 @@ export default function App() {
         console.warn(e);
       } finally {
         // Tell the application to render
-        setFontsLoaded(true);
+        setIsLoaded(true);
       }
     }
 
@@ -32,12 +34,12 @@ export default function App() {
   }, []);
 
   const onlay = useCallback(async () => {
-    if (fontsLoaded) {
+    if (isLoaded) {
       await SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [isLoaded]);
 
-  if (!fontsLoaded) {
+  if (!isLoaded) {
     return null;
   }
 
