@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Button, View, ScrollView, Text, StyleSheet, Image, ImageBackground } from 'react-native';
+import { Link } from '@react-navigation/native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { FontAwesome, AntDesign } from '@expo/vector-icons'; 
 import { globalStyles, myimgs } from '../styles/global';
 import { Footer } from '../components';
-import { Link } from '@react-navigation/native';
 
 function HomeScreen() {
   return (
@@ -13,11 +14,17 @@ function HomeScreen() {
 
             <View style={styles.grpBtnsLoaded}>
               <Link to='/login' style={styles.btnGoLog}>
-                Sign in
+                <View style={styles.viewContainer}>
+                  <FontAwesome name="sign-in" style={styles.btnIcon} />
+                  <Text style={styles.btnText}>Sign in</Text>
+                </View>
               </Link>
 
               <Link to='/register' style={styles.btnGoReg}>
-                Sign up
+                <View style={styles.viewContainer}>
+                  <AntDesign name="user" style={styles.btnIcon} />
+                  <Text style={styles.btnText}>Sign up</Text>
+                </View>
               </Link>
             </View>
         </View>
@@ -53,6 +60,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around'
   },
+  viewContainer: {
+    flexDirection: 'row',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
   btnGoLog: {
     padding: 15,
     backgroundColor: 'lightblue',
@@ -66,6 +79,15 @@ const styles = StyleSheet.create({
     borderColor: 'lightblue',
     borderRadius: 15,
     margin: 15
+  },
+  btnIcon: {
+    fontSize: 24,
+    marginRight: 10,
+    color: 'black'
+  },
+  btnText: {
+    fontSize: 16,
+    color: 'black'
   }
 });
 
