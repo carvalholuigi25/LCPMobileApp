@@ -63,6 +63,6 @@ export const myimgs = [
   },
   {
     id: 3,
-    src: require('../assets/images/bkg.jpg')
+    src: require('../assets/images/bkg-min.jpg')
   }
 ];
