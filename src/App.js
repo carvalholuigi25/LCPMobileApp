@@ -9,8 +9,8 @@ SplashScreen.preventAutoHideAsync();
 
 const getFonts = () => Font.loadAsync({
   'quantico': require('./assets/fonts/Quantico/Quantico-Regular.ttf'),
-  'inter': require('./assets/fonts/Inter/static/Inter-Regular.ttf'),
-  'nunito': require('./assets/fonts/Nunito/static/Nunito-Regular.ttf'),
+  'inter': require('./assets/fonts/Inter/Inter-Regular.ttf'),
+  'nunito': require('./assets/fonts/Nunito/Nunito-Regular.ttf'),
   'roboto': require('./assets/fonts/Roboto/Roboto-Regular.ttf')
 });
 
