@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { globalStyles } from "./styles/global";
+import MyMainNav from './navigators/myMainNav';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { globalStyles } from "./styles/global";
-import DrawerNav from './navigators/drawerNav';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,7 +46,9 @@ export default function App() {
 
   return (
     <View style={globalStyles.container} onLayout={onlay}>
-      <DrawerNav />
+      <NavigationContainer>
+        <MyMainNav />
+      </NavigationContainer>
     </View>
   );
 }

@@ -23,6 +23,12 @@ export const globalStyles = StyleSheet.create({
       textShadowRadius: 10,
       fontWeight: '800'
     },
+    titleContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center'
+    },
     home: {
       flex: 1, 
       alignItems: 'center', 
@@ -40,12 +46,52 @@ export const globalStyles = StyleSheet.create({
       alignItems: 'center', 
       justifyContent: 'center'
     },
+    about: {
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center'
+    },
     main: {
       flex: 1, 
       alignItems: 'center', 
       justifyContent: 'center'
     },
-    about: {
+    search: {
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center'
+    },
+    addNews: {
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center'
+    },
+    notifications: {
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center'
+    },
+    users: {
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center'
+    },
+    usersDetails: {
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center'
+    },
+    news: {
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center'
+    },
+    newsDetails: {
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center'
+    },
+    settings: {
       flex: 1,
       alignItems: 'center', 
       justifyContent: 'center'

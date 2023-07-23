@@ -1,12 +1,18 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { globalStyles } from '../styles/global';
+import { Link } from '@react-navigation/native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { globalStyles, myimgs } from '../../styles/global';
+import { Footer } from '../../components';
 
 function MainScreen() {
   return (
     <View style={globalStyles.main}>
       <View style={styles.mainContent}>
-        <Text style={styles.title}>Main</Text>
+        <View style={globalStyles.titleContainer}>
+          <MaterialIcons name="dashboard" size={20} />
+          <Text style={styles.title}>Main</Text>
+        </View>
         <Text style={styles.text}>In construction...</Text>
       </View>
     </View>

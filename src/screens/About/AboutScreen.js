@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Alert, Button, View, Text, StyleSheet, Image, Linking } from 'react-native';
-import { globalStyles, myimgs } from '../styles/global';
+import { globalStyles, myimgs } from '../../styles/global';
 import { ScrollView } from 'react-native-gesture-handler';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 function AboutScreen() {
   const [isMyContactInfoShown, setIsMyContactInfoShown] = useState(false);
@@ -14,9 +15,11 @@ function AboutScreen() {
   return (
     <View style={globalStyles.about}>
       <ScrollView style={styles.aboutContent}>
-        <Text style={styles.title}>
-          About
-        </Text>
+        <View style={globalStyles.titleContainer}>
+          <FontAwesome name="info-circle" size={20} />
+          <Text style={styles.title}>About</Text>
+        </View>
+
         <Text style={styles.text}>
           LCP Mobile App, which is a native mobile app for Android and iOS to show of my projects and other things for everyone.
         </Text>

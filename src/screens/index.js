@@ -1,5 +1,12 @@
-export { default as HomeScreen } from '../screens/HomeScreen';
-export { default as LoginScreen } from '../screens/LoginScreen';
-export { default as RegisterScreen } from '../screens/RegisterScreen';
-export { default as MainScreen } from '../screens/MainScreen';
-export { default as AboutScreen } from '../screens/AboutScreen';
+export { default as HomeScreen } from './Home/HomeScreen';
+export { default as LoginScreen } from './Auth/LoginScreen';
+export { default as RegisterScreen } from './Auth/RegisterScreen';
+export { default as MainScreen } from './Main/MainScreen';
+export { default as SearchScreen } from './Search/SearchScreen';
+export { default as AddNewsScreen } from './News/AddNewsScreen';
+export { default as NotificationsScreen } from './Notifications/NotificationsScreen';
+export { default as UsersScreen } from './Users/UsersScreen';
+export { default as UsersDetailsScreen } from './Users/UsersDetailsScreen';
+export { default as NewsScreen } from './News/NewsScreen';
+export { default as NewsDetailsScreen } from './News/NewsDetailsScreen';
+export { default as AboutScreen } from './About/AboutScreen';
