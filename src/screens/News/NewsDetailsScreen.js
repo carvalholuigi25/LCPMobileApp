@@ -1,10 +1,10 @@
-import React, {useCallback} from 'react';
-import { Alert, Linking, View, Text, StyleSheet, SafeAreaView, FlatList, Image, Button } from 'react-native';
+import React, { useCallback } from 'react';
+import { Alert, Linking, View, Text, StyleSheet, SafeAreaView, ScrollView, FlatList, Image, Button } from 'react-native';
 import { globalStyles } from '../../styles/global';
 import { FontAwesome } from '@expo/vector-icons';
 import db from '../../data/db.json';
 
-const OpenURLButton = ({url, children}) => {
+const OpenURLButton = ({ url, children }) => {
   const handlePress = useCallback(async () => {
     // Checking if the link is supported for links with custom URL scheme.
     const supported = await Linking.canOpenURL(url);
@@ -38,10 +38,10 @@ const ItemNewsDet = ({ data, id }) => {
       <Text style={styles.itemNewsDetText}>{mydata[0].desc}</Text>
       <OpenURLButton url={mydata[0].src}>Source</OpenURLButton>
     </View>
-  ) : ( <></> );
+  ) : (<></>);
 }
 
-const NewsDetailsScreen = ({navigation, route}) => {
+const NewsDetailsScreen = ({ navigation, route }) => {
   return (
     <View style={globalStyles.newsDetails}>
       <View style={styles.newsDetailsContent}>
@@ -51,15 +51,17 @@ const NewsDetailsScreen = ({navigation, route}) => {
         </View>
         <Text style={styles.text}>This is {!!route.params ? route.params.name : "guest"}'s news!</Text>
         <SafeAreaView style={styles.itemNewsSAVContainer}>
-          <FlatList
-            data={db.news}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => <ItemNewsDet data={item} id={!!route.params ? route.params.newsId : -1} />}
-            numColumns={1}
-            style={styles.itemNewsListContainer}
-            contentContainerStyle={{ paddingVertical: 150 }}
-          />
-          <Button title='Back' onPress={() => navigation.navigate('newsDrawer')} />
+          <ScrollView style={styles.itemNewsDetScrollView}>
+            <FlatList
+              data={db.news}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) => <ItemNewsDet data={item} id={!!route.params ? route.params.newsId : -1} />}
+              numColumns={1}
+              style={styles.itemNewsListContainer}
+              contentContainerStyle={{ paddingVertical: 15 }}
+            />
+            <Button title='Back' onPress={() => navigation.navigate('newsDrawer')} />
+          </ScrollView>
         </SafeAreaView>
       </View>
     </View>
@@ -87,6 +89,9 @@ const styles = StyleSheet.create({
     height: '100%',
     paddingHorizontal: 15,
     paddingBottom: 15
+  },
+  itemNewsDetScrollView: {
+    marginHorizontal: 15,
   },
   itemNewsDetImg: {
     width: "100%",

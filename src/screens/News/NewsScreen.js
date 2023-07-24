@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, FlatList, Image } from 'react-native';
+import { Button, View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, FlatList, Image } from 'react-native';
 import { globalStyles } from '../../styles/global';
 import { FontAwesome } from '@expo/vector-icons';
 import db from '../../data/db.json';
@@ -24,14 +24,16 @@ const NewsScreen = ({ navigation }) => {
           <Text style={styles.title}>News</Text>
         </View>
         <SafeAreaView style={styles.itemNewsSAVContainer}>
-          <FlatList
-            data={db.news}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => <ItemNews data={item} navigation={navigation} />}
-            numColumns={2}
-            style={styles.itemNewsListContainer}
-            contentContainerStyle={{ paddingVertical: 15 }}
-          />
+          <ScrollView style={styles.itemNewsScrollView}>
+            <FlatList
+              data={db.news}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) => <ItemNews data={item} navigation={navigation} />}
+              numColumns={2}
+              style={styles.itemNewsListContainer}
+              contentContainerStyle={{ paddingVertical: 15 }}
+            />
+          </ScrollView>
         </SafeAreaView>
         <Button
           title="Go to News details"
@@ -74,6 +76,9 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 15,
     paddingBottom: 15
+  },
+  itemNewsScrollView: {
+    marginHorizontal: 15,
   },
   itemNewsImg: {
     width: "100%",
