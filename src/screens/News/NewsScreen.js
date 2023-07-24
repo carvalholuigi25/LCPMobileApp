@@ -1,9 +1,21 @@
 import * as React from 'react';
-import { Button, View, Text, StyleSheet } from 'react-native';
+import { Button, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, FlatList, Image } from 'react-native';
 import { globalStyles } from '../../styles/global';
 import { FontAwesome } from '@expo/vector-icons';
+import db from '../../data/db.json';
 
-const NewsScreen = ({navigation}) => {
+const ItemNews = ({ data, navigation }) => (
+  <View style={styles.itemNewsContainer}>
+    <TouchableOpacity style={styles.itemNewsTOContainer} onPress={() => 
+      navigation.navigate('newsDetailsDrawer', { newsId: data.id })
+    }>
+      <Image source={{ uri: data.image }} style={styles.itemNewsImg} />
+      <Text style={styles.itemNewsTitle}>{data.title}</Text>
+    </TouchableOpacity>
+  </View>
+);
+
+const NewsScreen = ({ navigation }) => {
   return (
     <View style={globalStyles.news}>
       <View style={styles.newsContent}>
@@ -11,7 +23,16 @@ const NewsScreen = ({navigation}) => {
           <FontAwesome name="newspaper-o" size={20} />
           <Text style={styles.title}>News</Text>
         </View>
-        <Text style={styles.text}>In construction...</Text>
+        <SafeAreaView style={styles.itemNewsSAVContainer}>
+          <FlatList
+            data={db.news}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => <ItemNews data={item} navigation={navigation} />}
+            numColumns={2}
+            style={styles.itemNewsListContainer}
+            contentContainerStyle={{ paddingVertical: 15 }}
+          />
+        </SafeAreaView>
         <Button
           title="Go to News details"
           onPress={() =>
@@ -26,6 +47,7 @@ const NewsScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   newsContent: {
     flex: 1,
+    width: '100%'
   },
   title: {
     fontSize: 20,
@@ -37,6 +59,33 @@ const styles = StyleSheet.create({
     fontSize: 15,
     margin: 15,
     textAlign: 'center'
+  },
+  itemNewsSAVContainer: {
+    flex: 1,
+  },
+  itemNewsTOContainer: {
+    flex: 1,
+  },
+  itemNewsListContainer: {
+    flex: 1
+  },
+  itemNewsContainer: {
+    flex: 1,
+    width: '100%',
+    paddingHorizontal: 15,
+    paddingBottom: 15
+  },
+  itemNewsImg: {
+    width: "100%",
+    height: 140,
+    objectFit: 'cover',
+  },
+  itemNewsTitle: {
+    textAlign: 'center',
+    fontSize: 12,
+    fontWeight: 'bold',
+    fontFamily: 'quantico',
+    marginTop: 8
   }
 });
 

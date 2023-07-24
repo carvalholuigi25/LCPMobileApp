@@ -1,0 +1,60 @@
+{
+    "news": [
+        {
+            "id": 1,
+            "title": "Barbie e Oppenheimer arrecadam mais de $511 milhões na estreia",
+            "category": "filmes",
+            "date": "2023-07-24T16:03:00.000",
+            "desc": "Os filmes Barbie e Oppenheimer chegaram aos cinemas no mesmo dia e de uma forma totalmente inesperada, deram origem a uma das mais curiosas e lucrativas semanas da história do cinema. Nos primeiros dias em exibição, Barbie da Warner Bros. Pictures arrecadou $337 milhões nas bilheteiras e Oppenheimer da Universal Pictures arrecadou $174 milhões nos cinemas, o que significa um total superior a $511 milhões de uma semana espetacular para Hollywood. Nos Estados Unidos, foi apenas a quarta vez em que as bilheteiras arrecadaram mais de $300 milhões num só fim de semana e foi a melhor estreia para Hollywood desde Spider-Man: No Way Home em dezembro de 2021. Barbie tornou-se na melhor estreia do ano nos Estados Unidos, o filme que mais dinheiro arrecadou na fase pré-estreia da Warner Bros., ajudou a alcançar o dia mais lucrativo para os cinemas, e tornou-se na melhor estreia em julho para um filme que não é uma sequela ou remake. O filme bateu ainda diversos recordes a nível pessoal, como a melhor estreia de Greta Gerwig, Margot Robbie e Ryan Gosling, os principais nomes envolvidos na produção de Barbie. O filme tornou-se ainda na melhor estreia para um filme baseado num brinquedo e na melhor estreia da Warner Bros. a nível mundial, num filme que não é da DC ou sequela. Sobre Oppenheimer e Christopher Nolan, é a terceira melhor estreia do realizador, atrás de The Dark Knight Rises e The Dark Knight, na melhor estreia para uma biografia, melhor estreia para um drama desde 2019, e melhor estreia para um filme que não é de um super-herói em 55 países. Oppenheimer foi ainda a melhor estreia de Nolan em 33 países.",
+            "image": "https://assetsio.reedpopcdn.com/Barbie_Ken.jpeg?width=1920&height=1920&fit=bounds&quality=80&format=jpg&auto=webp",
+            "cover": "https://assetsio.reedpopcdn.com/Barbie_Ken.jpeg?width=1920&height=1920&fit=bounds&quality=80&format=jpg&auto=webp",
+            "src": "https://www.eurogamer.pt/barbie-e-oppenheimer-arrecadam-mais-de-511-milhoes-na-estreia",
+            "authorname": "Luigi",
+            "userId": 1
+        },
+        {
+            "id": 2,
+            "title": "Twitter agora é X… o que é que se vai chamar a um Tweet?",
+            "category": "redes sociais",
+            "date": "2023-07-24T17:03:00.000",
+            "desc": "Durante o dia de ontem começaram a surgir os primeiros rumores em torno de uma mudança do nome e logótipo do Twitter já com a letra X como uma certeza para a troca. Agora, o dono da rede social e a sua CEO confirmaram a alteração. A questão é: o que é que se vai chamar a um Tweet? O nome é X e o logótipo passa a ser também um X branco num fundo negro. É assim que Elon Musk e Linda Yaccarino confirmam a nova fase do Twitter. Esta mudança já vinha a ser anunciada ao longo do dia de ontem, com partilhas feitas pelo próprio dono da rede social, tendo o anúncio oficial sido feito há poucas horas. Fazer um tweet ou ler um tweet passou a ser uma expressão do léxico de todos os que estão dentro da rede do pássaro azul. Então, mudando para X, Elon Musk já respondeu aos seus seguidores a indicar que os tweets poderiam passar a ser designados de X! Na descrição da biografia de Elon Musk aparece a ligação X.com que encaminha para os site do Twitter ainda com esse domínio associado. Recorde-se que em abril desta ano, o nome oficial da empresa, Twitter Inc., já tinha sido alterado para X Corp.",
+            "image": "https://pplware.sapo.pt/wp-content/uploads/2023/07/twitter-X-720x405.jpg",
+            "cover": "https://pplware.sapo.pt/wp-content/uploads/2023/07/twitter-X-720x405.jpg",
+            "src": "https://pplware.sapo.pt/redes_sociais/twitter-agora-e-x-o-que-e-que-se-vai-chamar-a-um-tweet/",
+            "authorname": "Luigi",
+            "userId": 1
+        },
+        {
+            "id": 3,
+            "title": "The Walking Dead: Daryl Dixon e Dead City renovadas para 2ª temporada",
+            "category": "séries da tv",
+            "date": "2023-07-24T18:03:00.000",
+            "desc": "The Walking Dead: Daryl Dixon foi renovada para uma segunda temporada, mesmo sem ainda ter estreado. The Walking Dead: Dead City também vai ter direito a uma segunda temporada, tal como foi anunciado na Comic Con de San Diego. Durante o evento, foi exibido o trailer do spinoff centrado em Daryl Dixon, uma das personagens mais amadas pelos fãs da série de zombies. Nesta série, Daryl dá à costa de França, sem saber como foi lá parar, para depois embarcar numa aventura para regressar a casa. <iframe width='560' height='315' src='https://www.youtube-nocookie.com/embed/iTOaFootkSk' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen></iframe> The Walking Dead: Daryl Dixon vai arrancar a 10 de setembro. Entretanto, o final da primeira temporada de Dead City está marcado para o dia 23 de julho. A segunda temporada do spinoff centrado em Maggie e Negan ainda não tem uma data de estreia. Embora a série principal The Walking Dead já tenha chegado ao fim, o universo de The Walking Dead continua de pé, com a última temporada de Fear the Walking Dead a ir para o ar a 22 de outubro e The Ones Who Live - o spinoff de Rick Grimes e Michonne - previsto para 2024.",
+            "image": "https://sm.ign.com/t/ign_pt/news/t/the-walkin/the-walking-dead-daryl-dixon-and-dead-city-renewed-for-secon_9kec.600.jpg",
+            "cover": "https://sm.ign.com/t/ign_pt/news/t/the-walkin/the-walking-dead-daryl-dixon-and-dead-city-renewed-for-secon_9kec.600.jpg",
+            "src": "https://pt.ign.com/the-walking-dead-daryl-carol-spin-off/128147/news/the-walking-dead-daryl-dixon-e-dead-city-renovadas-para-2a-temporada",
+            "authorname": "Luigi",
+            "userId": 1
+        }
+    ],
+    "users": [
+        {
+            "userId": 1,
+            "username": "Luis",
+            "password": "1234",
+            "fullname": "Luis Carvalho",
+            "email": "luiscarvalho239@gmail.com",
+            "role": "superadmin",
+            "about": "Luis 'Luigi' Carvalho is web programmer, engineer, technician and specialist of IT since 2015."
+        },
+        {
+            "userId": 2,
+            "username": "guest",
+            "password": "1234",
+            "fullname": "Guest",
+            "email": "guest@localhost.loc",
+            "role": "guest",
+            "about": "I'm just guest member."
+        }
+    ]
+}
