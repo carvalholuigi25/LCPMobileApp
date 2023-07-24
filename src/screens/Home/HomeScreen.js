@@ -1,32 +1,47 @@
 import * as React from 'react';
 import { Link } from '@react-navigation/native';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
-import { FontAwesome, AntDesign } from '@expo/vector-icons'; 
+import { Button, View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import { globalStyles, myimgs } from '../../styles/global';
 import { Footer } from '../../components';
 
-function HomeScreen() {
+const HomeScreen = ({ navigation }) => {
   return (
     <ImageBackground source={myimgs[2].src} style={globalStyles.mybkgimg}>
       <View style={globalStyles.home}>
         <View style={styles.homeContent}>
-            <Text style={[styles.title, globalStyles.shadowProp]}>LCP</Text>
+          <Text style={[styles.title, globalStyles.shadowProp]}>LCP</Text>
 
-            <View style={styles.grpBtnsLoaded}>
-              <Link to='/login' style={styles.btnGoLog}>
-                <View style={styles.viewContainer}>
-                  <FontAwesome name="sign-in" style={styles.btnIcon} />
-                  <Text style={styles.btnText}>Sign in</Text>
-                </View>
-              </Link>
+          <View style={styles.grpBtnsLoaded}>
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('login')
+            }} style={styles.btnGoReg}>
+              <View style={styles.viewContainer}>
+                <FontAwesome name="sign-in" style={styles.btnIcon} />
+                <Text style={styles.btnText}>Sign in</Text>
+              </View>
+            </TouchableOpacity>
 
-              <Link to='/register' style={styles.btnGoReg}>
-                <View style={styles.viewContainer}>
-                  <AntDesign name="user" style={styles.btnIcon} />
-                  <Text style={styles.btnText}>Sign up</Text>
-                </View>
-              </Link>
-            </View>
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('register')
+            }} style={styles.btnGoReg}>
+              <View style={styles.viewContainer}>
+                <AntDesign name="user" style={styles.btnIcon} />
+                <Text style={styles.btnText}>Sign up</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.grpBtnsLoaded}>
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('main')
+            }} style={styles.btnEnterWOLog}>
+              <View style={styles.viewContainer}>
+                <FontAwesome name="newspaper-o" style={styles.btnIcon} />
+                <Text style={styles.btnText}>Enter</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
         <Footer />
       </View>
@@ -74,6 +89,13 @@ const styles = StyleSheet.create({
     margin: 15
   },
   btnGoReg: {
+    padding: 15,
+    backgroundColor: 'lightblue',
+    borderColor: 'lightblue',
+    borderRadius: 15,
+    margin: 15
+  },
+  btnEnterWOLog: {
     padding: 15,
     backgroundColor: 'lightblue',
     borderColor: 'lightblue',

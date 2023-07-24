@@ -1,17 +1,23 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Button, View, Text, StyleSheet } from 'react-native';
 import { globalStyles } from '../../styles/global';
 import { FontAwesome } from '@expo/vector-icons';
 
-function NewsScreen() {
+const NewsScreen = ({navigation}) => {
   return (
     <View style={globalStyles.news}>
       <View style={styles.newsContent}>
         <View style={globalStyles.titleContainer}>
-          <FontAwesome name="newspaper" size={20} />
+          <FontAwesome name="newspaper-o" size={20} />
           <Text style={styles.title}>News</Text>
         </View>
         <Text style={styles.text}>In construction...</Text>
+        <Button
+          title="Go to News details"
+          onPress={() =>
+            navigation.navigate('newsDetailsDrawer', { name: 'Luigi' })
+          }
+        />
       </View>
     </View>
   );

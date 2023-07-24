@@ -3,14 +3,15 @@ import { View, Text, StyleSheet } from 'react-native';
 import { globalStyles } from '../../styles/global';
 import { FontAwesome } from '@expo/vector-icons';
 
-function NewsDetailsScreen() {
+const NewsDetailsScreen = ({navigation, route}) => {
   return (
     <View style={globalStyles.newsDetails}>
       <View style={styles.newsDetailsContent}>
         <View style={globalStyles.titleContainer}>
-          <FontAwesome name="newspaper" size={20} />
+          <FontAwesome name="newspaper-o" size={20} />
           <Text style={styles.title}>News Details</Text>
         </View>
+        <Text style={styles.text}>This is {!!route.params ? route.params.name : "guest"}'s news!</Text>
         <Text style={styles.text}>In construction...</Text>
       </View>
     </View>

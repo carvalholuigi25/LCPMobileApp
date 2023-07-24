@@ -1,45 +1,49 @@
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { AboutScreen, HomeScreen, LoginScreen, MainScreen, RegisterScreen } from '../screens';
 import MyTabNav from './myTabNav';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AboutScreen, HomeScreen, LoginScreen, MainScreen, RegisterScreen } from '../screens';
 import { FontAwesome, AntDesign, MaterialIcons } from '@expo/vector-icons';
+import MyDrawerNav from './myDrawerNav';
 
-const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
 
-function MyMainNav() {
+const MyMainNav = () => {
   return (
-    <Drawer.Navigator initialRouteName='Home'>
-      <Drawer.Screen name="home" component={HomeScreen} options={{
+    <Stack.Navigator initialRouteName='Home'>
+      <Stack.Screen name="home" component={HomeScreen} options={{
         title: 'Home',
-        drawerIcon: ({ focused }) => (
+        StackIcon: ({ focused }) => (
           <FontAwesome name="home" size={20} color={focused ? 'blue' : '#000000'} />
         )
       }} />
-      <Drawer.Screen name="login" component={LoginScreen} options={{
+      <Stack.Screen name="login" component={LoginScreen} options={{
         title: 'Login',
-        drawerIcon: ({ focused }) => (
+        StackIcon: ({ focused }) => (
           <FontAwesome name="sign-in" size={20} color={focused ? 'blue' : '#000000'} />
         )
       }} />
-      <Drawer.Screen name="register" component={RegisterScreen} options={{
+      <Stack.Screen name="register" component={RegisterScreen} options={{
         title: 'Register',
-        drawerIcon: ({ focused }) => (
+        StackIcon: ({ focused }) => (
           <AntDesign name="user" size={20} color={focused ? 'blue' : '#000000'} />
         )
       }} />
-      <Drawer.Screen name="main" component={MyTabNav} options={{
+      <Stack.Screen name="main" component={MyTabNav} options={{
         title: 'Main',
-        drawerIcon: ({ focused }) => (
+        StackIcon: ({ focused }) => (
           <MaterialIcons name="dashboard" size={20} color={focused ? 'blue' : '#000000'} />
         )
       }} />
-      <Drawer.Screen name="about" component={AboutScreen} options={{
+      <Stack.Screen name="about" component={AboutScreen} options={{
         title: 'About',
-        drawerIcon: ({ focused }) => (
+        StackIcon: ({ focused }) => (
           <FontAwesome name="info-circle" size={20} color={focused ? 'blue' : '#000000'} />
         )
       }} />
-    </Drawer.Navigator>
+      <Stack.Screen name="others" component={MyDrawerNav} options={{
+        title: 'Others'
+      }} />
+    </Stack.Navigator>
   );
 }
 

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Link } from '@react-navigation/native';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { Button, View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { globalStyles, myimgs } from '../../styles/global';
 import { Footer } from '../../components';
 
-function MainScreen() {
+const MainScreen = ({ navigation }) => {
   return (
     <View style={globalStyles.main}>
       <View style={styles.mainContent}>
