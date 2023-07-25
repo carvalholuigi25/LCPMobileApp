@@ -16,6 +16,12 @@ const ItemNews = ({ data, navigation }) => (
 );
 
 const NewsScreen = ({ navigation }) => {
+  const renderItem = ({item, index}) => {
+    return (
+      <ItemNews data={item} navigation={navigation} />
+    )
+  };
+
   return (
     <View style={globalStyles.news}>
       <View style={styles.newsContent}>
@@ -24,23 +30,15 @@ const NewsScreen = ({ navigation }) => {
           <Text style={styles.title}>News</Text>
         </View>
         <SafeAreaView style={styles.itemNewsSAVContainer}>
-          <ScrollView style={styles.itemNewsScrollView}>
-            <FlatList
-              data={db.news}
-              keyExtractor={item => item.id}
-              renderItem={({ item }) => <ItemNews data={item} navigation={navigation} />}
-              numColumns={2}
-              style={styles.itemNewsListContainer}
-              contentContainerStyle={{ paddingVertical: 15 }}
-            />
-          </ScrollView>
+          <FlatList
+            data={db.news}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            numColumns={2}
+            style={styles.itemNewsListContainer}
+            contentContainerStyle={{ paddingVertical: 15 }}
+          />
         </SafeAreaView>
-        <Button
-          title="Go to News details"
-          onPress={() =>
-            navigation.navigate('newsDetailsDrawer', { name: 'Luigi' })
-          }
-        />
       </View>
     </View>
   );

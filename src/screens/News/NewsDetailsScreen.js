@@ -35,13 +35,21 @@ const ItemNewsDet = ({ data, id }) => {
       <Text style={styles.itemNewsDetText}>
         Autor: {mydata[0].authorname}
       </Text>
-      <Text style={styles.itemNewsDetText}>{mydata[0].desc}</Text>
-      <OpenURLButton url={mydata[0].src}>Source</OpenURLButton>
+      <Text style={styles.itemNewsDetText}>
+        {mydata[0].desc}
+      </Text>
+      <OpenURLButton url={mydata[0].src} style={styles.itemNewsDetBtnSrc}>Source</OpenURLButton>
     </View>
   ) : (<></>);
 }
 
 const NewsDetailsScreen = ({ navigation, route }) => {
+  const renderItem = ({ item, index }) => {
+    return (
+      <ItemNewsDet data={item} id={!!route.params ? route.params.newsId : -1} />
+    )
+  };
+
   return (
     <View style={globalStyles.newsDetails}>
       <View style={styles.newsDetailsContent}>
@@ -49,19 +57,16 @@ const NewsDetailsScreen = ({ navigation, route }) => {
           <FontAwesome name="newspaper-o" size={20} />
           <Text style={styles.title}>News Details</Text>
         </View>
-        <Text style={styles.text}>This is {!!route.params ? route.params.name : "guest"}'s news!</Text>
         <SafeAreaView style={styles.itemNewsSAVContainer}>
-          <ScrollView style={styles.itemNewsDetScrollView}>
             <FlatList
               data={db.news}
+              renderItem={renderItem}
               keyExtractor={item => item.id}
-              renderItem={({ item }) => <ItemNewsDet data={item} id={!!route.params ? route.params.newsId : -1} />}
               numColumns={1}
               style={styles.itemNewsListContainer}
               contentContainerStyle={{ paddingVertical: 15 }}
             />
             <Button title='Back' onPress={() => navigation.navigate('newsDrawer')} />
-          </ScrollView>
         </SafeAreaView>
       </View>
     </View>
@@ -82,6 +87,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     margin: 15,
     textAlign: 'center'
+  },
+  itemNewsSAVContainer: {
+    flex: 1,
+  },
+  itemNewsListContainer: {
+    flex: 1
   },
   itemNewsDetContainer: {
     flex: 1,
@@ -110,6 +121,10 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     fontSize: 14,
     fontFamily: 'quantico',
+    marginTop: 15,
+    marginBottom: 15
+  },
+  itemNewsDetBtnSrc: {
     marginTop: 15
   }
 });
