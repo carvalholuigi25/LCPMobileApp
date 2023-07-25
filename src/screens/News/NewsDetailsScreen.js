@@ -1,25 +1,9 @@
-import React, { useCallback } from 'react';
-import { Alert, Linking, View, Text, StyleSheet, SafeAreaView, ScrollView, FlatList, Image, Button } from 'react-native';
-import { globalStyles } from '../../styles/global';
+import React from 'react';
+import { View, Text, StyleSheet, SafeAreaView, FlatList, Image, Button } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { globalStyles } from '../../styles/global';
+import { OpenURLButton } from '../../components';
 import db from '../../data/db.json';
-
-const OpenURLButton = ({ url, children }) => {
-  const handlePress = useCallback(async () => {
-    // Checking if the link is supported for links with custom URL scheme.
-    const supported = await Linking.canOpenURL(url);
-
-    if (supported) {
-      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
-      // by some browser in the mobile
-      await Linking.openURL(url);
-    } else {
-      Alert.alert(`Don't know how to open this URL: ${url}`);
-    }
-  }, [url]);
-
-  return <Button title={children} onPress={handlePress} />;
-};
 
 const ItemNewsDet = ({ data, id }) => {
   var mydata = [data].filter(x => x.id == id);
@@ -126,6 +110,12 @@ const styles = StyleSheet.create({
   },
   itemNewsDetBtnSrc: {
     marginTop: 15
+  },
+  video: {
+    marginTop: 20,
+    width: 320,
+    maxHeight: 200,
+    flex: 1
   }
 });
 

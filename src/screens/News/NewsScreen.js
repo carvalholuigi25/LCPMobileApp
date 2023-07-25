@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Button, View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, FlatList, Image } from 'react-native';
-import { globalStyles } from '../../styles/global';
+import { Button, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, FlatList, Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { globalStyles } from '../../styles/global';
 import db from '../../data/db.json';
 
 const ItemNews = ({ data, navigation }) => (
