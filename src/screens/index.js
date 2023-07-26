@@ -11,3 +11,4 @@ export { default as NewsScreen } from './News/NewsScreen';
 export { default as NewsDetailsScreen } from './News/NewsDetailsScreen';
 export { default as AboutScreen } from './About/AboutScreen';
 export { default as MediaScreen } from './Media/MediaScreen';
+export { default as MediaLocalScreen } from './Media/MediaLocalScreen';
