@@ -96,6 +96,11 @@ export const globalStyles = StyleSheet.create({
       alignItems: 'center', 
       justifyContent: 'center'
     },
+    todoItems: {
+      flex: 1,
+      alignItems: 'center', 
+      justifyContent: 'center'
+    },
     settings: {
       flex: 1,
       alignItems: 'center', 

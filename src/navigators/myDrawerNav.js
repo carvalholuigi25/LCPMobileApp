@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { FontAwesome, AntDesign, MaterialIcons } from '@expo/vector-icons';
-import { NewsScreen, NewsDetailsScreen, MediaScreen, MediaLocalScreen } from '../screens';
+import { NewsScreen, NewsDetailsScreen, MediaScreen, MediaLocalScreen, TodoItemsScreen } from '../screens';
 
 const Drawer = createDrawerNavigator();
 
@@ -36,6 +36,13 @@ const MyDrawerNav = () => {
           ),
           drawerLabel: () => <Text style={styles.DrawerBarLabel}>Media Local</Text>,
           title: 'Media Local'
+        }} />
+        <Drawer.Screen name="todoItemsDrawer" component={TodoItemsScreen} options={{
+          drawerIcon: ({ focused }) => (
+            <MaterialIcons name="list" size={20} color={focused ? 'blue' : '#000000'} />
+          ),
+          drawerLabel: () => <Text style={styles.DrawerBarLabel}>Todo Items</Text>,
+          title: 'Todo items'
         }} />
       </Drawer.Navigator>
     );
