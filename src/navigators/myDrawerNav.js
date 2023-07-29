@@ -3,6 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { FontAwesome, AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { NewsScreen, NewsDetailsScreen, MediaScreen, MediaLocalScreen, TodoItemsScreen } from '../screens';
+import SettingsScreen from '../screens/Settings/SettingsScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -43,6 +44,13 @@ const MyDrawerNav = () => {
           ),
           drawerLabel: () => <Text style={styles.DrawerBarLabel}>Todo Items</Text>,
           title: 'Todo items'
+        }} />
+        <Drawer.Screen name="settingsDrawer" component={SettingsScreen} options={{
+          drawerIcon: ({ focused }) => (
+            <FontAwesome name="gear" size={20} color={focused ? 'blue' : '#000000'} />
+          ),
+          drawerLabel: () => <Text style={styles.DrawerBarLabel}>Settings</Text>,
+          title: 'Settings'
         }} />
       </Drawer.Navigator>
     );

@@ -2,6 +2,8 @@
 setlocal enableextensions
 
 cls
+REM cd ../
+cd "%USERPROFILE%\Documents\projects\react\native\LCPMobileApp"
 
 if exist "node_modules" (
     bash -c "rm -rf node_modules"
