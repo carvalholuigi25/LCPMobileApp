@@ -22,7 +22,8 @@ const MyDrawerNav = () => {
             <FontAwesome name="newspaper-o" size={20} color={focused ? 'blue' : '#000000'} />
           ),
           drawerLabel: () => <Text style={styles.DrawerBarLabel}>News Details</Text>,
-          title: 'News Details'
+          title: 'News Details',
+          drawerItemStyle: { display: 'none' }
         }} />
         <Drawer.Screen name="mediaDrawer" component={MediaScreen} options={{
           drawerIcon: ({ focused }) => (
@@ -57,7 +58,8 @@ const MyDrawerNav = () => {
             <FontAwesome name="controller" size={20} color={focused ? 'blue' : '#000000'} />
           ),
           drawerLabel: () => <Text style={styles.DrawerBarLabel}>Games Details</Text>,
-          title: 'Games Details'
+          title: 'Games Details',
+          drawerItemStyle: { display: 'none' }
         }} />
         <Drawer.Screen name="settingsDrawer" component={SettingsScreen} options={{
           drawerIcon: ({ focused }) => (
