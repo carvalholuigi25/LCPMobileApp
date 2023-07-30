@@ -45,6 +45,20 @@ const MyDrawerNav = () => {
           drawerLabel: () => <Text style={styles.DrawerBarLabel}>Todo Items</Text>,
           title: 'Todo items'
         }} />
+        <Drawer.Screen name="gamesDrawer" component={SettingsScreen} options={{
+          drawerIcon: ({ focused }) => (
+            <FontAwesome name="controller" size={20} color={focused ? 'blue' : '#000000'} />
+          ),
+          drawerLabel: () => <Text style={styles.DrawerBarLabel}>Games</Text>,
+          title: 'Games'
+        }} />
+        <Drawer.Screen name="gamesDetailsDrawer" component={SettingsScreen} options={{
+          drawerIcon: ({ focused }) => (
+            <FontAwesome name="controller" size={20} color={focused ? 'blue' : '#000000'} />
+          ),
+          drawerLabel: () => <Text style={styles.DrawerBarLabel}>Games Details</Text>,
+          title: 'Games Details'
+        }} />
         <Drawer.Screen name="settingsDrawer" component={SettingsScreen} options={{
           drawerIcon: ({ focused }) => (
             <FontAwesome name="gear" size={20} color={focused ? 'blue' : '#000000'} />

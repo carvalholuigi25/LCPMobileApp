@@ -12,4 +12,5 @@ export { default as NewsDetailsScreen } from './News/NewsDetailsScreen';
 export { default as AboutScreen } from './About/AboutScreen';
 export { default as MediaScreen } from './Media/MediaScreen';
 export { default as MediaLocalScreen } from './Media/MediaLocalScreen';
+export { default as GamesScreen } from './Games/GamesScreen';
 export { default as TodoItemsScreen } from './TodoItems/TodoItemsScreen';

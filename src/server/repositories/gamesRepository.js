@@ -1,78 +1,78 @@
 import { useState } from 'react';
 import db from '../database/db';
 
-export const getAllItems = () => {
+export const getAllGames = () => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT * FROM items',
+        'SELECT * FROM games',
         [],
-        (_, { rows }) => resolve(rows._array),
+        (_, result) => resolve(result.rows._array),
         (_, error) => reject(error),
       );
     });
   });
 };
 
-export const getAllItemsById = (mid) => {
+export const getAllGamesById = (mid) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT * FROM items WHERE id = ?',
+        'SELECT * FROM games WHERE id=?',
         [mid],
-        (_, { rows }) => resolve(rows._array),
+        (_, result) => resolve(result.rows._array),
         (_, error) => reject(error),
       );
     });
   });
 };
 
-export const insertItems = (name, desc) => {
+export const insertGames = (objdata) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'INSERT INTO items (name, description) VALUES (?,?)',
-        [name, desc],
-        (_, { rows }) => resolve(rows._array),
+        'INSERT INTO games (title, description) VALUES (?, ?)',
+        [objdata.title, objdata.description],
+        (_, result) => resolve(result),
         (_, error) => reject(error),
       );
     });
   });
 };
 
-export const updateItems = (mid, name, desc) => {
+export const updateGames = (mid, objdata) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'UPDATE items SET name = ?, description = ? WHERE id = ?',
-        [name, desc, mid],
-        (_, { rows }) => resolve(rows._array),
+        'UPDATE games SET title=?, description=? WHERE id=?',
+        [objdata.title, objdata.description, mid],
+        (_, result) => resolve(result),
         (_, error) => reject(error),
       );
     });
   });
 };
 
-export const deleteItems = (mid) => {
+export const deleteGames = (mid) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'DELETE FROM items WHERE id = ?',
+        'DELETE FROM games WHERE id=?',
         [mid],
-        (_, { rows }) => resolve(rows._array),
+        (_, result) => resolve(result),
         (_, error) => reject(error),
       );
     });
   });
 };
 
-export const deleteAllItems = () => {
+export const deleteAllGames = () => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'DELETE FROM items',
+        'DELETE FROM games',
         [],
-        (_, { rows }) => resolve(rows._array),
+        (_, result) => resolve(result),
         (_, error) => reject(error),
       );
     });
