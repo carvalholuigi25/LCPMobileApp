@@ -1,9 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { FontAwesome, AntDesign, MaterialIcons } from '@expo/vector-icons';
-import { NewsScreen, NewsDetailsScreen, MediaScreen, MediaLocalScreen, TodoItemsScreen } from '../screens';
-import SettingsScreen from '../screens/Settings/SettingsScreen';
+import { FontAwesome, AntDesign, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { 
+  NewsScreen, NewsDetailsScreen, MediaScreen, 
+  MediaLocalScreen, TodoItemsScreen, GamesScreen, 
+  GamesDetailScreen, SettingsScreen 
+} from '../screens';
 
 const Drawer = createDrawerNavigator();
 
@@ -46,16 +49,16 @@ const MyDrawerNav = () => {
           drawerLabel: () => <Text style={styles.DrawerBarLabel}>Todo Items</Text>,
           title: 'Todo items'
         }} />
-        <Drawer.Screen name="gamesDrawer" component={SettingsScreen} options={{
+        <Drawer.Screen name="gamesDrawer" component={GamesScreen} options={{
           drawerIcon: ({ focused }) => (
-            <FontAwesome name="controller" size={20} color={focused ? 'blue' : '#000000'} />
+            <MaterialCommunityIcons name="controller-classic" size={20} color={focused ? 'blue' : '#000000'} />
           ),
           drawerLabel: () => <Text style={styles.DrawerBarLabel}>Games</Text>,
           title: 'Games'
         }} />
-        <Drawer.Screen name="gamesDetailsDrawer" component={SettingsScreen} options={{
+        <Drawer.Screen name="gamesDetailsDrawer" component={GamesDetailScreen} options={{
           drawerIcon: ({ focused }) => (
-            <FontAwesome name="controller" size={20} color={focused ? 'blue' : '#000000'} />
+            <MaterialCommunityIcons name="controller-classic" size={20} color={focused ? 'blue' : '#000000'} />
           ),
           drawerLabel: () => <Text style={styles.DrawerBarLabel}>Games Details</Text>,
           title: 'Games Details',

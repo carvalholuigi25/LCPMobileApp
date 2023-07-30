@@ -122,3 +122,12 @@ export const myimgs = [
     src: require('../assets/images/bkg-min.jpg')
   }
 ];
+
+export const gameImgs = [
+  {
+    id: 1,
+    title: 'GTA V',
+    srcImg: require('../assets/images/games/images/gtav.jpeg'),
+    srcCover: require('../assets/images/games/covers/gtav.png')
+  }
+];

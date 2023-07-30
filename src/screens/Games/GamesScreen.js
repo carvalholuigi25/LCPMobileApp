@@ -1,7 +1,9 @@
 // HomeScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { fetchAllGames } from '../../server/services/gamesService';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { gameImgs } from '../../styles/global';
 
 const GamesScreen = ({ navigation }) => {
   const [games, setGames] = useState([]);
@@ -19,21 +21,67 @@ const GamesScreen = ({ navigation }) => {
     }
   };
 
+  const renderItem = ({item, index}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate('gamesDetailsDrawer', { item })}
+      >
+        <Image 
+          style={styles.image} 
+          source={gameImgs[item.id-1].srcCover} 
+          onError={(error) => { this.source = '../assets/images/games/notfound.png'; }}
+          alt={`${item.title}`}
+        />
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <View>
-      <FlatList
-        data={games}
-        keyExtractor={(game) => game.id.toString()}
-        renderItem={({ game }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('gamesDetailsDrawer', { game })}
-          >
-            <Text>{game.title}</Text>
-          </TouchableOpacity>
-        )}
-      />
+    <View style={styles.gamesContainer}>
+      <View style={styles.gamesContent}>
+        <SafeAreaView style={styles.gamesSAV}>
+          <FlatList
+            data={games}
+            renderItem={renderItem}
+            keyExtractor={item => item.id.toString()}
+            numColumns={3}
+            style={styles.gamesListContainer}
+          />
+        </SafeAreaView>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  gamesContent: {
+    flex: 1,
+    width: '100%'
+  },
+  gamesContainer: {
+    flex: 1,
+    width: '100%'
+  },
+  gamesSAV: {
+    flex: 1,
+  },
+  gamesListContainer: {
+    flex: 1,
+    width: '100%',
+    paddingHorizontal: 15,
+    paddingVertical: 15
+  },
+  image: {
+    width: 128,
+    height: 128,
+    marginTop: 15,
+    marginBottom: 15,
+    objectFit: 'contain',
+    aspectRatio: 'auto'
+  }
+});
 
 export default GamesScreen;

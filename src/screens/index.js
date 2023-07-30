@@ -13,4 +13,6 @@ export { default as AboutScreen } from './About/AboutScreen';
 export { default as MediaScreen } from './Media/MediaScreen';
 export { default as MediaLocalScreen } from './Media/MediaLocalScreen';
 export { default as GamesScreen } from './Games/GamesScreen';
+export { default as GamesDetailScreen } from './Games/Detail/GamesDetailScreen';
 export { default as TodoItemsScreen } from './TodoItems/TodoItemsScreen';
+export { default as SettingsScreen } from './Settings/SettingsScreen';
