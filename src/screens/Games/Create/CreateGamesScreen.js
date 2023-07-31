@@ -44,12 +44,13 @@ const CreateGamesScreen = ({route, navigation}) => {
     const handleSubmit = async () => {
         try {
             var mynewitem = {
+                id: Math.floor(Math.random() * 1000),
                 title: title, 
                 description: description, 
                 platforms: platforms,
                 category: category,
                 gamemodes: gamemodes,
-                releaseDate: releaseDate,
+                releaseDate: releaseDate.toISOString(),
                 rating: parseInt(rating, 0),
                 ageRate: parseInt(ageRate, 0),
                 publishers: publishers,
@@ -62,7 +63,7 @@ const CreateGamesScreen = ({route, navigation}) => {
             await insertGamesData(mynewitem);
             navigation.navigate("gamesDrawer");
         } catch {
-            console.log('Error creating game: ', error);
+            console.log('Error creating game: ' + error);
         }
     };
 

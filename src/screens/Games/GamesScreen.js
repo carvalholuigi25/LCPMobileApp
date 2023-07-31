@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { fetchAllGames } from '../../server/services/gamesService';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { gameImgs } from '../../styles/global';
 
 const GamesScreen = ({ navigation }) => {
   const [games, setGames] = useState([]);
@@ -28,8 +27,7 @@ const GamesScreen = ({ navigation }) => {
       >
         <Image 
           style={styles.image} 
-          source={item && ["http", "https", "file"].includes(item.cover) ? { uri: item.cover } : gameImgs[item.id-1].srcCover} 
-          onError={(error) => { this.source = '../assets/images/games/notfound.png'; }}
+          source={{ uri: item.cover }} 
           alt={`${item.title}`}
         />
       </TouchableOpacity>

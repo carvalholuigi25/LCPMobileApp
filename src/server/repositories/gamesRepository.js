@@ -31,9 +31,8 @@ export const insertGames = (item) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO games (title, description, platforms, category, gamemodes, releaseDate, rating, ageRate, publishers, companies, image, cover, isFeatured) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [item.title, item.description, item.platforms, item.category, item.gamemodes, item.releaseDate, item.rating, item.ageRate, item.publishers, item.companies, item.image, item.cover, item.isFeatured],
+        `INSERT INTO games (id, title, description, platforms, category, gamemodes, releaseDate, rating, ageRate, publishers, companies, image, cover, isFeatured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [item.id, item.title, item.description, item.platforms, item.category, item.gamemodes, item.releaseDate, item.rating, item.ageRate, item.publishers, item.companies, item.image, item.cover, item.isFeatured],
         (_, result) => resolve(result),
         (_, error) => reject(error),
       );

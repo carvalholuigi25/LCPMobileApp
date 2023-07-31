@@ -1,18 +1,19 @@
 import React from 'react';
 import { Button, View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-import { gameImgs } from '../../../styles/global';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const GamesDetailScreen = ({ route, navigation }) => {
   const { item } = route.params;
-
+  const mysrcimg = item.image.includes("http") ? { uri: item.image } : item.image;
+  const mysrccover = item.cover.includes("http") ? { uri: item.cover } : item.cover;
+  
   return (
     <SafeAreaView style={styles.savContainer}>
       <ScrollView style={styles.container}>
         <View style={styles.gamesContainer}>
-          <Image source={item && ["http", "https", "file"].includes(item.image) ? { uri: item.image } : gameImgs[item.id - 1].srcImg} style={styles.image} />
+          <Image source={mysrcimg} style={styles.image} />
           <View style={styles.coverContainer}>
-            <Image source={item && ["http", "https", "file"].includes(item.cover) ? { uri: item.cover } : gameImgs[item.id - 1].srcCover} style={styles.cover} />
+            <Image source={mysrccover} style={styles.cover} />
           </View>
           <View style={styles.body}>
             <Text style={styles.title}>{item.title}</Text>
