@@ -6,21 +6,20 @@ import Checkbox from 'expo-checkbox';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const UpdateGamesScreen = ({ route, navigation }) => {
-    const { id, objdata } = route.params;
-    const [title, setTitle] = useState(objdata.title ?? '');
-    const [description, setDescription] = useState(objdata.description ?? '');
-    const [platforms, setPlatforms] = useState(objdata.platforms ?? '');
-    const [category, setCategory] = useState(objdata.category ?? '');
-    const [gamemodes, setGamemodes] = useState(objdata.gamemodes ?? '');
-    const [releaseDate, setReleaseDate] = useState(objdata.releaseDate ?? new Date());
-    const [rating, setRating] = useState(objdata.rating ?? 0);
-    const [ageRate, setAgeRate] = useState(objdata.ageRate ?? 18);
-    const [publishers, setPublishers] = useState(objdata.publishers ?? '');
-    const [companies, setCompanies] = useState(objdata.companies ?? '');
-    const [image, setImage] = useState(objdata.image ?? '');
-    const [cover, setCover] = useState(objdata.cover ?? '');
-    const [isFeatured, setIsFeatured] = useState(objdata.isFeatured ?? false);
-    const [mynewobjdata, setMyNewObjData] = useState({});
+    const { id, item } = route.params;
+    const [title, setTitle] = useState(item.title ?? '');
+    const [description, setDescription] = useState(item.description ?? '');
+    const [platforms, setPlatforms] = useState(item.platforms ?? '');
+    const [category, setCategory] = useState(item.category ?? '');
+    const [gamemodes, setGamemodes] = useState(item.gamemodes ?? '');
+    const [releaseDate, setReleaseDate] = useState(item.releaseDate ?? new Date());
+    const [rating, setRating] = useState(item.rating ?? 0);
+    const [ageRate, setAgeRate] = useState(item.ageRate ?? 18);
+    const [publishers, setPublishers] = useState(item.publishers ?? '');
+    const [companies, setCompanies] = useState(item.companies ?? '');
+    const [image, setImage] = useState(item.image ?? '');
+    const [cover, setCover] = useState(item.cover ?? '');
+    const [isFeatured, setIsFeatured] = useState(item.isFeatured ?? false);
     const [showDTPicker, setShowDTPicker] = useState(false);
 
     const back = () => {
@@ -45,24 +44,25 @@ const UpdateGamesScreen = ({ route, navigation }) => {
 
     const handleSubmit = async () => {
         try {
-            setMyNewObjData({
+            var mynewitem = {
+                id: parseInt(id, 0),
                 title: title,
                 description: description,
                 platforms: platforms,
                 category: category,
                 gamemodes: gamemodes,
                 releaseDate: releaseDate,
-                rating: rating,
-                ageRate: ageRate,
+                rating: parseInt(rating, 0),
+                ageRate: parseInt(ageRate, 0),
                 publishers: publishers,
                 companies: companies,
                 image: image,
                 cover: cover,
                 isFeatured: isFeatured
-            });
+            };
 
-            await updateGamesData(id, mynewobjdata);
-            navigation.navigate("gamesDrawer");
+            await updateGamesData(id, mynewitem);
+            navigation.navigate("gamesDetailsDrawer", { item: mynewitem });
         } catch {
             console.log('Error updating game: ', error);
         }

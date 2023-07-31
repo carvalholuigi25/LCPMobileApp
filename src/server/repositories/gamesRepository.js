@@ -27,13 +27,13 @@ export const getAllGamesById = (mid) => {
   });
 };
 
-export const insertGames = (objdata) => {
+export const insertGames = (item) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
         `INSERT INTO games (title, description, platforms, category, gamemodes, releaseDate, rating, ageRate, publishers, companies, image, cover, isFeatured) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [objdata.title, objdata.description, objdata.platforms, objdata.category, objdata.gamemodes, objdata.releaseDate, objdata.rating, objdata.ageRate, objdata.publishers, objdata.companies, objdata.image, objdata.cover, objdata.isFeatured],
+        [item.title, item.description, item.platforms, item.category, item.gamemodes, item.releaseDate, item.rating, item.ageRate, item.publishers, item.companies, item.image, item.cover, item.isFeatured],
         (_, result) => resolve(result),
         (_, error) => reject(error),
       );
@@ -41,12 +41,12 @@ export const insertGames = (objdata) => {
   });
 };
 
-export const updateGames = (mid, objdata) => {
+export const updateGames = (mid, item) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
         'UPDATE games SET title=?, description=?, platforms=?, category=?, gamemodes=?, releaseDate=?, rating=?, ageRate=?, publishers=?, companies=?, image=?, cover=?, isFeatured=? WHERE id=?',
-        [objdata.title, objdata.description, objdata.platforms, objdata.category, objdata.gamemodes, objdata.releaseDate, objdata.rating, objdata.ageRate, objdata.publishers, objdata.companies, objdata.image, objdata.cover, objdata.isFeatured, mid],
+        [item.title, item.description, item.platforms, item.category, item.gamemodes, item.releaseDate, item.rating, item.ageRate, item.publishers, item.companies, item.image, item.cover, item.isFeatured, mid],
         (_, result) => resolve(result),
         (_, error) => reject(error),
       );

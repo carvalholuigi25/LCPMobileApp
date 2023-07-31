@@ -20,9 +20,9 @@ export const getAllGamesByIdController = async (mid) => {
   }
 };
 
-export const insertGamesController = async (objdata) => {
+export const insertGamesController = async (item) => {
   try {
-    const games = await insertGamesData(objdata);
+    const games = await insertGamesData(item);
     // Handle the inserted games as needed
     console.log(games);
   } catch (error) {
@@ -30,9 +30,9 @@ export const insertGamesController = async (objdata) => {
   }
 };
 
-export const updateGamesController = async (mid, objdata) => {
+export const updateGamesController = async (mid, item) => {
   try {
-    const games = await updateGamesData(mid, objdata);
+    const games = await updateGamesData(mid, item);
     // Handle the updated games as needed
     console.log(games);
   } catch (error) {

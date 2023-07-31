@@ -28,7 +28,7 @@ const GamesScreen = ({ navigation }) => {
       >
         <Image 
           style={styles.image} 
-          source={["http", "https", "file"].includes(item.cover) ? { uri: item.cover } : gameImgs[item.id-1].srcCover} 
+          source={item && ["http", "https", "file"].includes(item.cover) ? { uri: item.cover } : gameImgs[item.id-1].srcCover} 
           onError={(error) => { this.source = '../assets/images/games/notfound.png'; }}
           alt={`${item.title}`}
         />

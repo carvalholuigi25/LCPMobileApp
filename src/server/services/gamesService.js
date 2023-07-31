@@ -8,12 +8,12 @@ export const fetchAllGamesById = (mid) => {
   return getAllGamesById(mid);
 };
 
-export const insertGamesData = (objdata) => {
-  return insertGames(objdata);
+export const insertGamesData = (item) => {
+  return insertGames(item);
 };
 
-export const updateGamesData = (mid, objdata) => {
-  return updateGames(mid, objdata);
+export const updateGamesData = (mid, item) => {
+  return updateGames(mid, item);
 };
 
 export const deleteGamesData = (mid) => {

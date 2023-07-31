@@ -19,7 +19,6 @@ const CreateGamesScreen = ({route, navigation}) => {
     const [image, setImage] = useState('');
     const [cover, setCover] = useState('');
     const [isFeatured, setIsFeatured] = useState(false);
-    const [objdata, setObjData] = useState({});
     const [showDTPicker, setShowDTPicker] = useState(false);
 
     const back = () => {
@@ -44,23 +43,23 @@ const CreateGamesScreen = ({route, navigation}) => {
 
     const handleSubmit = async () => {
         try {
-            setObjData({
+            var mynewitem = {
                 title: title, 
                 description: description, 
                 platforms: platforms,
                 category: category,
                 gamemodes: gamemodes,
                 releaseDate: releaseDate,
-                rating: rating,
-                ageRate: ageRate,
+                rating: parseInt(rating, 0),
+                ageRate: parseInt(ageRate, 0),
                 publishers: publishers,
                 companies: companies,
                 image: image,
                 cover: cover,
                 isFeatured: isFeatured
-            });
+            };
 
-            await insertGamesData(objdata);
+            await insertGamesData(mynewitem);
             navigation.navigate("gamesDrawer");
         } catch {
             console.log('Error creating game: ', error);

@@ -10,14 +10,14 @@ const GamesDetailScreen = ({ route, navigation }) => {
     <SafeAreaView style={styles.savContainer}>
       <ScrollView style={styles.container}>
         <View style={styles.gamesContainer}>
-          <Image source={["http", "https", "file"].includes(item.image) ? { uri: item.image } : gameImgs[item.id - 1].srcImg} style={styles.image} />
+          <Image source={item && ["http", "https", "file"].includes(item.image) ? { uri: item.image } : gameImgs[item.id - 1].srcImg} style={styles.image} />
           <View style={styles.coverContainer}>
-            <Image source={["http", "https", "file"].includes(item.cover) ? { uri: item.cover } : gameImgs[item.id - 1].srcCover} style={styles.cover} />
+            <Image source={item && ["http", "https", "file"].includes(item.cover) ? { uri: item.cover } : gameImgs[item.id - 1].srcCover} style={styles.cover} />
           </View>
           <View style={styles.body}>
             <Text style={styles.title}>{item.title}</Text>
             <View style={styles.btnActions}>
-              <Button title="Update" style={styles.btn} onPress={() => { navigation.navigate("updateGamesDrawer", { id: item.id, objdata: item }) }} />
+              <Button title="Update" style={styles.btn} onPress={() => { navigation.navigate("updateGamesDrawer", { id: item.id, item: item }) }} />
               <Button title="Delete" style={styles.btn} onPress={() => { navigation.navigate("deleteGamesDrawer", { id: item.id }) }} />
             </View>
             <Text style={styles.info}>
