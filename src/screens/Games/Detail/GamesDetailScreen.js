@@ -16,6 +16,10 @@ const GamesDetailScreen = ({ route, navigation }) => {
           </View>
           <View style={styles.body}>
             <Text style={styles.title}>{item.title}</Text>
+            <View style={styles.btnActions}>
+              <Button title="Update" style={styles.btn} onPress={() => { navigation.navigate("updateGamesDrawer", { id: item.id, objdata: item }) }} />
+              <Button title="Delete" style={styles.btn} onPress={() => { navigation.navigate("deleteGamesDrawer", { id: item.id }) }} />
+            </View>
             <Text style={styles.info}>
               <Text style={styles.stitle}>Companies:</Text> {item.companies}
             </Text>
@@ -127,6 +131,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     lineHeight: 30
+  },
+  btnActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 15,
+    padding: 15
+  },
+  btn: {
+    padding: 15,
+    borderRadius: 15
   }
 });
 

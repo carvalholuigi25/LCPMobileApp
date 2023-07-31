@@ -14,5 +14,8 @@ export { default as MediaScreen } from './Media/MediaScreen';
 export { default as MediaLocalScreen } from './Media/MediaLocalScreen';
 export { default as GamesScreen } from './Games/GamesScreen';
 export { default as GamesDetailScreen } from './Games/Detail/GamesDetailScreen';
+export { default as CreateGamesScreen } from './Games/Create/CreateGamesScreen';
+export { default as UpdateGamesScreen } from './Games/Update/UpdateGamesScreen';
+export { default as DeleteGamesScreen } from './Games/Delete/DeleteGamesScreen';
 export { default as TodoItemsScreen } from './TodoItems/TodoItemsScreen';
 export { default as SettingsScreen } from './Settings/SettingsScreen';

@@ -40,6 +40,8 @@ const GamesScreen = ({ navigation }) => {
     <View style={styles.gamesContainer}>
       <View style={styles.gamesContent}>
         <SafeAreaView style={styles.gamesSAV}>
+          <Button title="Create new game" style={styles.btn} onPress={() => navigation.navigate("createGamesDrawer")} />
+
           <FlatList
             data={games}
             renderItem={renderItem}
@@ -81,6 +83,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     objectFit: 'contain',
     aspectRatio: 'auto'
+  },
+  btn: {
+    margin: 15,
+    padding: 15,
+    borderRadius: 15
   }
 });
 

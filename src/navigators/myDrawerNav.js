@@ -5,7 +5,8 @@ import { FontAwesome, AntDesign, MaterialIcons, MaterialCommunityIcons } from '@
 import { 
   NewsScreen, NewsDetailsScreen, MediaScreen, 
   MediaLocalScreen, TodoItemsScreen, GamesScreen, 
-  GamesDetailScreen, SettingsScreen 
+  GamesDetailScreen, SettingsScreen, CreateGamesScreen, 
+  UpdateGamesScreen, DeleteGamesScreen 
 } from '../screens';
 
 const Drawer = createDrawerNavigator();
@@ -62,6 +63,31 @@ const MyDrawerNav = () => {
           ),
           drawerLabel: () => <Text style={styles.DrawerBarLabel}>Games Details</Text>,
           title: 'Games Details',
+          drawerItemStyle: { display: 'none' }
+        }} />
+        <Drawer.Screen name="createGamesDrawer" component={CreateGamesScreen} options={{
+          drawerIcon: ({ focused }) => (
+            <MaterialCommunityIcons name="controller-classic" size={20} color={focused ? 'blue' : '#000000'} />
+          ),
+          drawerLabel: () => <Text style={styles.DrawerBarLabel}>Create Games</Text>,
+          title: 'Create Games',
+          drawerItemStyle: { display: 'none' }
+        }} />
+        <Drawer.Screen name="updateGamesDrawer" component={UpdateGamesScreen} options={{
+          drawerIcon: ({ focused }) => (
+            <MaterialCommunityIcons name="controller-classic" size={20} color={focused ? 'blue' : '#000000'} />
+          ),
+          drawerLabel: () => <Text style={styles.DrawerBarLabel}>Update Games</Text>,
+          title: 'Update Games',
+          drawerItemStyle: { display: 'none' }
+        }} />
+        
+        <Drawer.Screen name="deleteGamesDrawer" component={DeleteGamesScreen} options={{
+          drawerIcon: ({ focused }) => (
+            <MaterialCommunityIcons name="controller-classic" size={20} color={focused ? 'blue' : '#000000'} />
+          ),
+          drawerLabel: () => <Text style={styles.DrawerBarLabel}>Delete Games</Text>,
+          title: 'Delete Games',
           drawerItemStyle: { display: 'none' }
         }} />
         <Drawer.Screen name="settingsDrawer" component={SettingsScreen} options={{
