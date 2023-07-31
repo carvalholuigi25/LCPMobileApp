@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, SafeAreaView } from 'react-n
 import { insertGamesData } from '../../../server/services/gamesService';
 import { ScrollView } from 'react-native-gesture-handler';
 import Checkbox from 'expo-checkbox';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const CreateGamesScreen = ({route, navigation}) => {
     const [title, setTitle] = useState('');
@@ -10,7 +11,7 @@ const CreateGamesScreen = ({route, navigation}) => {
     const [platforms, setPlatforms] = useState('');
     const [category, setCategory] = useState('');
     const [gamemodes, setGamemodes] = useState('');
-    const [releaseDate, setReleaseDate] = useState(new Date().toISOString());
+    const [releaseDate, setReleaseDate] = useState(new Date());
     const [rating, setRating] = useState(0);
     const [ageRate, setAgeRate] = useState(18);
     const [publishers, setPublishers] = useState('');
@@ -19,6 +20,7 @@ const CreateGamesScreen = ({route, navigation}) => {
     const [cover, setCover] = useState('');
     const [isFeatured, setIsFeatured] = useState(false);
     const [objdata, setObjData] = useState({});
+    const [showDTPicker, setShowDTPicker] = useState(false);
 
     const back = () => {
         navigation.navigate("gamesDrawer");
@@ -30,7 +32,7 @@ const CreateGamesScreen = ({route, navigation}) => {
         setPlatforms('');
         setCategory('');
         setGamemodes('');
-        setReleaseDate(new Date().toISOString());
+        setReleaseDate(new Date());
         setRating(0);
         setAgeRate(18);
         setPublishers('');
@@ -67,7 +69,12 @@ const CreateGamesScreen = ({route, navigation}) => {
 
     const onDateChange = (event, selectedDate) => {
         const currentDate = selectedDate;
+        setShowDTPicker(false);
         setReleaseDate(currentDate);
+    };
+
+    const showMyDTPCalender = () => {
+        setShowDTPicker(true);
     };
 
     return (
@@ -128,14 +135,27 @@ const CreateGamesScreen = ({route, navigation}) => {
                 </View>
                 <View style={styles.inputGrp}>
                     <Text>Release Date</Text>
+                    <Button 
+                        title="Show date picker" 
+                        style={styles.btnDT} 
+                        onPress={showMyDTPCalender} 
+                    />
                     <TextInput
                         inputMode='text'
-                        autoComplete='birthdate-full'
                         placeholder='Write the release date here' 
-                        value={releaseDate} 
-                        onChangeText={setReleaseDate}
+                        value={releaseDate.toISOString()} 
                         style={styles.datetime} 
+                        editable={false}
                     />
+                    {showDTPicker && (
+                        <DateTimePicker
+                            testID="myDateTimePicker"
+                            value={releaseDate}
+                            mode={'date'}
+                            is24Hour={true}
+                            onChange={onDateChange}
+                        />
+                    )}
                 </View>
                 <View style={styles.inputGrp}>
                     <Text>Rating</Text>
@@ -259,6 +279,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     btn: {
+        padding: 15,
+        margin: 15
+    },
+    btnDT: {
         padding: 15,
         margin: 15
     },

@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, SafeAreaView } from 'react-n
 import { updateGamesData } from '../../../server/services/gamesService';
 import { ScrollView } from 'react-native-gesture-handler';
 import Checkbox from 'expo-checkbox';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const UpdateGamesScreen = ({ route, navigation }) => {
     const { id, objdata } = route.params;
@@ -20,6 +21,7 @@ const UpdateGamesScreen = ({ route, navigation }) => {
     const [cover, setCover] = useState(objdata.cover ?? '');
     const [isFeatured, setIsFeatured] = useState(objdata.isFeatured ?? false);
     const [mynewobjdata, setMyNewObjData] = useState({});
+    const [showDTPicker, setShowDTPicker] = useState(false);
 
     const back = () => {
         navigation.navigate("gamesDrawer");
@@ -64,6 +66,16 @@ const UpdateGamesScreen = ({ route, navigation }) => {
         } catch {
             console.log('Error updating game: ', error);
         }
+    };
+
+    const onDateChange = (event, selectedDate) => {
+        const currentDate = selectedDate;
+        setShowDTPicker(false);
+        setReleaseDate(new Date(currentDate).toISOString());
+    };
+
+    const showMyDTPCalender = () => {
+        setShowDTPicker(true);
     };
 
     return (
@@ -136,20 +148,34 @@ const UpdateGamesScreen = ({ route, navigation }) => {
                             </View>
                             <View style={styles.inputGrp}>
                                 <Text>Release Date</Text>
+                                <Button 
+                                    title="Show date picker" 
+                                    style={styles.btnDT} 
+                                    onPress={showMyDTPCalender} 
+                                />
                                 <TextInput
-                                    autoComplete='birthdate-full'
+                                    inputMode='text'
                                     placeholder='Write the release date here' 
                                     value={releaseDate} 
-                                    onChangeText={setReleaseDate}
                                     style={styles.datetime} 
+                                    editable={false}
                                 />
+                                {showDTPicker && (
+                                    <DateTimePicker
+                                        testID="myDateTimePicker"
+                                        value={new Date(releaseDate)}
+                                        mode={'date'}
+                                        is24Hour={true}
+                                        onChange={onDateChange}
+                                    />
+                                )}
                             </View>
                             <View style={styles.inputGrp}>
                                 <Text>Rating</Text>
                                 <TextInput 
                                     inputMode='numeric'
                                     placeholder='Write the rating (0-10) here' 
-                                    value={rating} 
+                                    value={rating.toString()} 
                                     onChangeText={setRating} 
                                     style={styles.input} 
                                 />
@@ -159,7 +185,7 @@ const UpdateGamesScreen = ({ route, navigation }) => {
                                 <TextInput 
                                     inputMode='numeric'
                                     placeholder='Write the age rating here' 
-                                    value={ageRate} 
+                                    value={ageRate.toString()} 
                                     onChangeText={setAgeRate} 
                                     style={styles.input} 
                                 />
@@ -216,7 +242,7 @@ const UpdateGamesScreen = ({ route, navigation }) => {
                             </View>
                             <View style={styles.btnGrp}>
                                 <Button title="Reset" style={[styles.btn, styles.btnReset]} onPress={handleReset} />
-                                <Button title="Create" style={[styles.btn, styles.btnSubmit]} onPress={handleSubmit} />
+                                <Button title="Update" style={[styles.btn, styles.btnSubmit]} onPress={handleSubmit} />
                             </View>
                             <View style={styles.btnGrp}>
                                 <Button title="Back" style={styles.btn} onPress={back} />
