@@ -1,6 +1,6 @@
 // HomeScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Button, View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { fetchAllGames } from '../../server/services/gamesService';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { gameImgs } from '../../styles/global';

@@ -11,7 +11,7 @@ const DeleteGamesScreen = ({route, navigation}) => {
     };
 
     const handleNo = () => {
-        navigation.navigate("gamesDrawer");
+        back();
     };
 
     const handleYes = async () => {
@@ -28,18 +28,22 @@ const DeleteGamesScreen = ({route, navigation}) => {
             <ScrollView style={styles.container}>
                 {
                     !id && (
-                        <Text style={styles.title}>Game hasnt been found to be deleted!</Text>
-                        <Button title="Back" style={styles.btn} onPress={back} />
+                        <>
+                            <Text style={styles.title}>Game hasnt been found to be deleted!</Text>
+                            <Button title="Back" style={styles.btn} onPress={back} />
+                        </>
                     )
                 }
 
                 {
                     !!id && (
-                        <Text style={styles.title}>Do you want to delete this game (id: {id})?</Text>
-                        <View style={styles.btnGrp}>
-                            <Button title="No" style={[styles.btn, styles.btnYes]} onPress={handleNo} />
-                            <Button title="Yes" style={[styles.btn, styles.btnNo]} onPress={handleYes} />
-                        </View>
+                        <>
+                            <Text style={styles.title}>Do you want to delete this game (id: {id})?</Text>
+                            <View style={styles.btnGrp}>
+                                <Button title="No" style={[styles.btn, styles.btnYes]} onPress={handleNo} />
+                                <Button title="Yes" style={[styles.btn, styles.btnNo]} onPress={handleYes} />
+                            </View>
+                        </>
                     )
                 }
             </ScrollView>
@@ -53,7 +57,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        flex: 1
+        flex: 1,
+        padding: 15
     },
     title: {
         textAlign: 'center',
@@ -61,7 +66,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     btnGrp: {
-        flexDirection: 'column',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'stretch',
+        flex: 1,
         margin: 15
     },
     btn: {
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
     },
     btnNo: {
         backgroundColor: '#808080',
-        color: 'white'
+        color: 'white',
     },
     btnYes: {
         backgroundColor: '#3F51B5',

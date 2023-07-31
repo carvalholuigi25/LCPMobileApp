@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     padding: 15
   },
   btn: {
+    margin: 15,
     padding: 15,
     borderRadius: 15
   }

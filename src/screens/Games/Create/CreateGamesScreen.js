@@ -3,7 +3,6 @@ import { View, Text, TextInput, Button, StyleSheet, SafeAreaView } from 'react-n
 import { insertGamesData } from '../../../server/services/gamesService';
 import { ScrollView } from 'react-native-gesture-handler';
 import Checkbox from 'expo-checkbox';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 const CreateGamesScreen = ({route, navigation}) => {
     const [title, setTitle] = useState('');
@@ -11,7 +10,7 @@ const CreateGamesScreen = ({route, navigation}) => {
     const [platforms, setPlatforms] = useState('');
     const [category, setCategory] = useState('');
     const [gamemodes, setGamemodes] = useState('');
-    const [releaseDate, setReleaseDate] = useState(new Date());
+    const [releaseDate, setReleaseDate] = useState(new Date().toISOString());
     const [rating, setRating] = useState(0);
     const [ageRate, setAgeRate] = useState(18);
     const [publishers, setPublishers] = useState('');
@@ -21,13 +20,17 @@ const CreateGamesScreen = ({route, navigation}) => {
     const [isFeatured, setIsFeatured] = useState(false);
     const [objdata, setObjData] = useState({});
 
+    const back = () => {
+        navigation.navigate("gamesDrawer");
+    };
+
     const handleReset = () => {
         setTitle('');
         setDescription('');
         setPlatforms('');
         setCategory('');
         setGamemodes('');
-        setReleaseDate(new Date());
+        setReleaseDate(new Date().toISOString());
         setRating(0);
         setAgeRate(18);
         setPublishers('');
@@ -62,7 +65,7 @@ const CreateGamesScreen = ({route, navigation}) => {
         }
     };
 
-    const onChange = (event, selectedDate) => {
+    const onDateChange = (event, selectedDate) => {
         const currentDate = selectedDate;
         setReleaseDate(currentDate);
     };
@@ -125,13 +128,12 @@ const CreateGamesScreen = ({route, navigation}) => {
                 </View>
                 <View style={styles.inputGrp}>
                     <Text>Release Date</Text>
-                    <DateTimePicker
-                        mode='date'
-                        display='default' 
+                    <TextInput
+                        inputMode='text'
+                        autoComplete='birthdate-full'
                         placeholder='Write the release date here' 
                         value={releaseDate} 
-                        is24Hour={true}
-                        onChange={onDateChange} 
+                        onChangeText={setReleaseDate}
                         style={styles.datetime} 
                     />
                 </View>
@@ -140,7 +142,7 @@ const CreateGamesScreen = ({route, navigation}) => {
                     <TextInput 
                         inputMode='numeric'
                         placeholder='Write the rating (0-10) here' 
-                        value={rating} 
+                        value={rating.toString()} 
                         onChangeText={setRating} 
                         style={styles.input} 
                     />
@@ -150,7 +152,7 @@ const CreateGamesScreen = ({route, navigation}) => {
                     <TextInput 
                         inputMode='numeric'
                         placeholder='Write the age rating here' 
-                        value={ageRate} 
+                        value={ageRate.toString()} 
                         onChangeText={setAgeRate} 
                         style={styles.input} 
                     />
@@ -202,16 +204,18 @@ const CreateGamesScreen = ({route, navigation}) => {
                         value={isFeatured} 
                         onValueChange={setIsFeatured} 
                         style={styles.checkbox} 
-                        color={isChecked ? '#bcdf16' : '#808080'}
+                        color={isFeatured ? '#bcdf16' : '#808080'}
                     />
                 </View>
                 <View style={styles.btnGrp}>
                     <Button title="Reset" style={[styles.btn, styles.btnReset]} onPress={handleReset} />
                     <Button title="Create" style={[styles.btn, styles.btnSubmit]} onPress={handleSubmit} />
                 </View>
+                <View style={styles.btnGrp}>
+                    <Button title="Back" style={styles.btn} onPress={back} />
+                </View>
             </ScrollView>
         </SafeAreaView>
-
     );
 }
 
@@ -227,25 +231,34 @@ const styles = StyleSheet.create({
         margin: 15
     },
     input: {
+        backgroundColor: 'white',
+        color: 'black',
         width: '100%',
         padding: 15,
+        marginTop: 15,
         borderRadius: 15
     },
     datetime: {
-        flex: 1,
+        backgroundColor: 'white',
+        color: 'black',
         width: '100%',
         padding: 15,
+        marginTop: 15,
         borderRadius: 15
     },
     checkbox: {
         margin: 15
     },
     btnGrp: {
-        flexDirection: 'column',
-        margin: 15
+        flexDirection: 'row',
+        margin: 15,
+        padding: 15,
+        flex: 1,
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     btn: {
-        textAlign: 'center',
         padding: 15,
         margin: 15
     },

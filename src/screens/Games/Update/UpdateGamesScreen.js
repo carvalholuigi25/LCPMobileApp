@@ -3,7 +3,6 @@ import { View, Text, TextInput, Button, StyleSheet, SafeAreaView } from 'react-n
 import { updateGamesData } from '../../../server/services/gamesService';
 import { ScrollView } from 'react-native-gesture-handler';
 import Checkbox from 'expo-checkbox';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 const UpdateGamesScreen = ({ route, navigation }) => {
     const { id, objdata } = route.params;
@@ -67,162 +66,162 @@ const UpdateGamesScreen = ({ route, navigation }) => {
         }
     };
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate;
-        setReleaseDate(currentDate);
-    };
-
     return (
         <SafeAreaView style={styles.mcontainer}>
             <ScrollView style={styles.container}>
                 {
                     !id && (
-                        <Text style={styles.title}>Game hasnt been found to be updated!</Text>
-                        <Button title="Back" style={styles.btn} onPress={back} />
+                        <>
+                            <Text style={styles.title}>Game hasnt been found to be updated!</Text>
+                            <Button title="Back" style={styles.btn} onPress={back} />
+                        </>
                     )
                 }
 
                 {
                     !!id && (
-                        <View style={styles.inputGrp}>
-                            <Text>Title</Text>
-                            <TextInput 
-                                inputMode='text'
-                                placeholder='Write the title here' 
-                                value={title} 
-                                onChangeText={setTitle} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Description</Text>
-                            <TextInput 
-                                editable
-                                multiline
-                                numberOfLines={4}
-                                inputMode='text'
-                                placeholder='Write the description here' 
-                                value={description} 
-                                onChangeText={setDescription} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Platforms</Text>
-                            <TextInput 
-                                inputMode='text'
-                                placeholder='Write the platforms here' 
-                                value={platforms} 
-                                onChangeText={setPlatforms} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Category</Text>
-                            <TextInput 
-                                inputMode='text'
-                                placeholder='Write the category here' 
-                                value={category} 
-                                onChangeText={setCategory} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Game Modes</Text>
-                            <TextInput 
-                                inputMode='text'
-                                placeholder='Write the game modes (singleplayer, multiplayer, etc...) here' 
-                                value={gamemodes} 
-                                onChangeText={setGamemodes} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Release Date</Text>
-                            <DateTimePicker
-                                mode='date'
-                                display='default' 
-                                placeholder='Write the release date here' 
-                                value={releaseDate} 
-                                is24Hour={true}
-                                onChange={onDateChange} 
-                                style={styles.datetime} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Rating</Text>
-                            <TextInput 
-                                inputMode='numeric'
-                                placeholder='Write the rating (0-10) here' 
-                                value={rating} 
-                                onChangeText={setRating} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Age Rate</Text>
-                            <TextInput 
-                                inputMode='numeric'
-                                placeholder='Write the age rating here' 
-                                value={ageRate} 
-                                onChangeText={setAgeRate} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Publishers</Text>
-                            <TextInput 
-                                inputMode='text'
-                                placeholder='Write the publishers name here' 
-                                value={publishers} 
-                                onChangeText={setPublishers} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Companies</Text>
-                            <TextInput 
-                                inputMode='text'
-                                placeholder='Write the companies name here' 
-                                value={companies} 
-                                onChangeText={setCompanies} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Image</Text>
-                            <TextInput 
-                                inputMode='url'
-                                placeholder='Write the image url here' 
-                                value={image} 
-                                onChangeText={setImage} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Cover</Text>
-                            <TextInput 
-                                inputMode='url'
-                                placeholder='Write the cover url here' 
-                                value={cover} 
-                                onChangeText={setCover} 
-                                style={styles.input} 
-                            />
-                        </View>
-                        <View style={styles.inputGrp}>
-                            <Text>Is Featured?</Text>
-                            <Checkbox 
-                                placeholder='Set status of featured here' 
-                                value={isFeatured} 
-                                onValueChange={setIsFeatured} 
-                                style={styles.checkbox} 
-                                color={isChecked ? '#bcdf16' : '#808080'}
-                            />
-                        </View>
-                        <View style={styles.btnGrp}>
-                            <Button title="Reset" style={[styles.btn, styles.btnReset]} onPress={handleReset} />
-                            <Button title="Create" style={[styles.btn, styles.btnSubmit]} onPress={handleSubmit} />
-                        </View>
+                        <>
+                            <View style={styles.inputGrp}>
+                                <Text>Title</Text>
+                                <TextInput 
+                                    inputMode='text'
+                                    placeholder='Write the title here' 
+                                    value={title} 
+                                    onChangeText={setTitle} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Description</Text>
+                                <TextInput 
+                                    editable
+                                    multiline
+                                    numberOfLines={4}
+                                    inputMode='text'
+                                    placeholder='Write the description here' 
+                                    value={description} 
+                                    onChangeText={setDescription} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Platforms</Text>
+                                <TextInput 
+                                    inputMode='text'
+                                    placeholder='Write the platforms here' 
+                                    value={platforms} 
+                                    onChangeText={setPlatforms} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Category</Text>
+                                <TextInput 
+                                    inputMode='text'
+                                    placeholder='Write the category here' 
+                                    value={category} 
+                                    onChangeText={setCategory} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Game Modes</Text>
+                                <TextInput 
+                                    inputMode='text'
+                                    placeholder='Write the game modes (singleplayer, multiplayer, etc...) here' 
+                                    value={gamemodes} 
+                                    onChangeText={setGamemodes} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Release Date</Text>
+                                <TextInput
+                                    autoComplete='birthdate-full'
+                                    placeholder='Write the release date here' 
+                                    value={releaseDate} 
+                                    onChangeText={setReleaseDate}
+                                    style={styles.datetime} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Rating</Text>
+                                <TextInput 
+                                    inputMode='numeric'
+                                    placeholder='Write the rating (0-10) here' 
+                                    value={rating} 
+                                    onChangeText={setRating} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Age Rate</Text>
+                                <TextInput 
+                                    inputMode='numeric'
+                                    placeholder='Write the age rating here' 
+                                    value={ageRate} 
+                                    onChangeText={setAgeRate} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Publishers</Text>
+                                <TextInput 
+                                    inputMode='text'
+                                    placeholder='Write the publishers name here' 
+                                    value={publishers} 
+                                    onChangeText={setPublishers} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Companies</Text>
+                                <TextInput 
+                                    inputMode='text'
+                                    placeholder='Write the companies name here' 
+                                    value={companies} 
+                                    onChangeText={setCompanies} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Image</Text>
+                                <TextInput 
+                                    inputMode='url'
+                                    placeholder='Write the image url here' 
+                                    value={image} 
+                                    onChangeText={setImage} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Cover</Text>
+                                <TextInput 
+                                    inputMode='url'
+                                    placeholder='Write the cover url here' 
+                                    value={cover} 
+                                    onChangeText={setCover} 
+                                    style={styles.input} 
+                                />
+                            </View>
+                            <View style={styles.inputGrp}>
+                                <Text>Is Featured?</Text>
+                                <Checkbox 
+                                    placeholder='Set status of featured here' 
+                                    value={isFeatured} 
+                                    onValueChange={setIsFeatured} 
+                                    style={styles.checkbox} 
+                                    color={isFeatured ? '#bcdf16' : '#808080'}
+                                />
+                            </View>
+                            <View style={styles.btnGrp}>
+                                <Button title="Reset" style={[styles.btn, styles.btnReset]} onPress={handleReset} />
+                                <Button title="Create" style={[styles.btn, styles.btnSubmit]} onPress={handleSubmit} />
+                            </View>
+                            <View style={styles.btnGrp}>
+                                <Button title="Back" style={styles.btn} onPress={back} />
+                            </View>
+                        </>
                     )
                 }
             </ScrollView>
@@ -247,13 +246,19 @@ const styles = StyleSheet.create({
         margin: 15
     },
     input: {
+        backgroundColor: 'white',
+        color: 'black',
         width: '100%',
         padding: 15,
+        marginTop: 15,
         borderRadius: 15
     },
     datetime: {
         flex: 1,
         width: '100%',
+        backgroundColor: 'white',
+        color: 'black',
+        marginTop: 15,
         padding: 15,
         borderRadius: 15
     },
@@ -261,7 +266,7 @@ const styles = StyleSheet.create({
         margin: 15
     },
     btnGrp: {
-        flexDirection: 'column',
+        flexDirection: 'row',
         margin: 15
     },
     btn: {
