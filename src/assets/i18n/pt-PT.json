@@ -1,0 +1,18 @@
+{
+    "translation": {
+        "settingsTitle": "Definições",
+        "themeTitle": "Tema",
+        "themePlaceholder": "Escolhe o tema",
+        "themeOptDef": "Predefinido",
+        "themeOptDark": "Escuro",
+        "themeOptLight": "Clara",
+        "languageTitle": "Linguagem",
+        "languagePlaceholder": "Escolhe a linguagem",
+        "languageOpt1": "Inglês (Estados Unidos de América)",
+        "languageOpt2": "Português (Portugal)",
+        "titleNetworkStatus": "Estado da Rede",
+        "networkStatusOnline": "Ligado",
+        "networkStatusOffline": "Desligado",
+        "btnCheckNetworkStatus": "Verifique o estado da rede"
+    }
+}

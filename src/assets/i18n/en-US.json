@@ -1,0 +1,18 @@
+{
+    "translation": {
+        "settingsTitle": "Settings",
+        "themeTitle": "Theme",
+        "themePlaceholder": "Choose the theme",
+        "themeOptDef": "Default",
+        "themeOptDark": "Dark",
+        "themeOptLight": "Light",
+        "languageTitle": "Language",
+        "languagePlaceholder": "Choose the language",
+        "languageOpt1": "English (United States of America)",
+        "languageOpt2": "Portuguese (Portugal)",
+        "titleNetworkStatus": "Network Status",
+        "networkStatusOnline": "Online",
+        "networkStatusOffline": "Offline",
+        "btnCheckNetworkStatus": "Check the network status"
+    }
+}

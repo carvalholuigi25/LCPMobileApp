@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import '../../assets/i18n/i18n';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import { globalStyles } from '../../styles/global';
 import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
 import { FontAwesome } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
+import {useTranslation} from 'react-i18next';
 
 const SettingsScreen = () => {
-  const [selectedTheme, setSelectedTheme] = useState('default');
-  const [selectedLanguage, setSelectedLanguage] = useState('en-us');
+  const {t, i18n} = useTranslation();
+  const [currentTheme, setTheme] = useState('default');
+  const [currentLanguage, setLanguage] = useState('en-US');
   const [isOnline, setIsOnline] = useState(false);
 
   useEffect(() => {
@@ -20,47 +23,55 @@ const SettingsScreen = () => {
   }, []);
 
   const checkTheNetwork = () => {
-    Alert.alert("Network status", "" + isOnline);
+    Alert.alert(t('titleNetworkStatus'), (isOnline == true ? t('networkStatusOnline') : t('networkStatusOffline')));
   }
+
+  const changeLanguage = value => {
+    i18n
+      .changeLanguage(value)
+      .then(() => setLanguage(value))
+      .catch(err => console.log(err));
+  };
 
   return (
     <View style={globalStyles.settings}>
       <View style={styles.settingsContent}>
         <View style={globalStyles.titleContainer}>
           <FontAwesome name="gear" size={20} />
-          <Text style={styles.title}>Settings</Text>
+          <Text style={styles.title}>{t('settingsTitle')}</Text>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={styles.lblTitle}>Theme:</Text>
+          <Text style={styles.lblTitle}>{t('themeTitle')}:</Text>
           <Picker
-            selectedValue={selectedTheme}
+            selectedValue={currentTheme}
             onValueChange={(itemValue, itemIndex) =>
-              setSelectedTheme(itemValue)
+              setTheme(itemValue)
             }
-            placeholder='Choose the theme'
+            placeholder={t('themePlaceholder')}
             style={styles.picker}>
-            <Picker.Item label="Choose the theme" value="" enabled={false} />
-            <Picker.Item label="Default" value="default" />
-            <Picker.Item label="Dark" value="dark" />
-            <Picker.Item label="Light" value="light" />
+            <Picker.Item label={t('themePlaceholder')} value="" enabled={false} />
+            <Picker.Item label={t('themeOptDef')} value="default" />
+            <Picker.Item label={t('themeOptDark')} value="dark" />
+            <Picker.Item label={t('themeOptLight')} value="light" />
           </Picker>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={styles.lblTitle}>Language:</Text>
+          <Text style={styles.lblTitle}>{t('languageTitle')}:</Text>
           <Picker
-            selectedValue={selectedLanguage}
-            onValueChange={(itemValue, itemIndex) =>
-              setSelectedLanguage(itemValue)
-            }
-            placeholder='Choose the language'
+            selectedValue={currentLanguage}
+            onValueChange={(itemValue, itemIndex) => {
+              setLanguage(itemValue);
+              changeLanguage(itemValue);
+            }}
+            placeholder={t('languagePlaceholder')}
             style={styles.picker}>
-            <Picker.Item label="Choose the language" value="" enabled={false} />
-            <Picker.Item label="English (United States)" value="en-us" />
-            <Picker.Item label="Português (Portugal)" value="pt-pt" />
+            <Picker.Item label={t('languagePlaceholder')} value="" enabled={false} />
+            <Picker.Item label={t('languageOpt1')} value="en-US" />
+            <Picker.Item label={t('languageOpt2')} value="pt-PT" />
           </Picker>
         </View>
         <View style={styles.optionsContentBtn}>
-          <Button title='Check the network status' onPress={checkTheNetwork} style={styles.btn} />
+          <Button title={t('btnCheckNetworkStatus')} onPress={checkTheNetwork} style={styles.btn} />
         </View>
       </View>
     </View>
