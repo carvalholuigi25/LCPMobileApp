@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import '../../assets/i18n/i18n';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { globalStyles } from '../../styles/global';
-import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
 import { FontAwesome } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
-import {useTranslation} from 'react-i18next';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTranslation } from 'react-i18next';
+import { globalStyles } from '../../styles/global';
 import { myThemes } from '../../styles/themes';
+import '../../assets/i18n/i18n';
 
 const SettingsScreen = () => {
   const { colors } = useTheme();
@@ -51,16 +51,6 @@ const SettingsScreen = () => {
     return () => removeNetInfoSubscription();
   }, []);
 
-  const checkTheNetwork = () => {
-    Alert.alert(t('titleNetworkStatus'), (isOnline == true ? t('networkStatusOnline') : t('networkStatusOffline')));
-  }
-
-  const changeLanguage = (value) => {
-    i18n.changeLanguage(value).then(() => { 
-      setLanguage(value); 
-    }).catch(err => console.log(err));
-  };
-
   const saveTheme = async (value) => {
     try {
       const jsonValue = JSON.stringify(value);
@@ -79,23 +69,47 @@ const SettingsScreen = () => {
     }
   };
 
+  const checkTheNetwork = () => {
+    Alert.alert(t('titleNetworkStatus'), (isOnline == true ? t('networkStatusOnline') : t('networkStatusOffline')));
+  }
+
+  const changeLanguage = (value) => {
+    i18n.changeLanguage(value).then(() => { 
+      setLanguage(value); 
+    }).catch(err => console.log(err));
+  };
+
+  const onThemeChange = async (itemValue, itemIndex) => {
+    setTheme(itemValue);
+    await saveTheme(itemValue);
+  };
+
+  const onLangChange = async (itemValue, itemIndex) => {
+    setLanguage(itemValue);
+    changeLanguage(itemValue);
+    await saveLanguage(itemValue);
+  };
+
+  const setBkgColors = () => { return currentTheme == "dark" ? myThemes.dark.colors.background : myThemes.light.colors.background; }
+  const setTxtColors = () => { return currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text; }
+  const setPickerColors = () => { return currentTheme == "dark" ? myThemes.dark.colors.picker : myThemes.light.colors.picker; }
+  const setBtnColors = () => { return currentTheme == "dark" ? myThemes.dark.colors.button : myThemes.light.colors.button; }
+
   return (
-    <View style={[globalStyles.settings, { backgroundColor: currentTheme == "dark" ? myThemes.dark.colors.background : myThemes.light.colors.background }]}>
+    <View style={[globalStyles.settings, { backgroundColor: setBkgColors() }]}>
       <View style={styles.settingsContent}>
         <View style={globalStyles.titleContainer}>
-          <FontAwesome name="gear" size={20} style={{color: currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text}} />
-          <Text style={[styles.title, {color: currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text}]}>{t('settingsTitle')}</Text>
+          <FontAwesome name="gear" size={20} style={{ color: setTxtColors() }} />
+          <Text style={[styles.title, {color: setTxtColors()}]}>{t('settingsTitle')}</Text>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={[styles.lblTitle, {color: currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text}]}>{t('themeTitle')}:</Text>
+          <Text style={[styles.lblTitle, {color: setTxtColors()}]}>{t('themeTitle')}:</Text>
           <Picker
+            mode='dialog'
             selectedValue={currentTheme}
-            onValueChange={async (itemValue, itemIndex) => {
-              setTheme(itemValue);
-              await saveTheme(itemValue);
-            }}
+            onValueChange={onThemeChange}
             placeholder={t('themePlaceholder')}
-            style={[styles.picker, {color: currentTheme == "dark" ? myThemes.dark.colors.picker : myThemes.light.colors.picker}]}>
+            style={[styles.picker, {color: setPickerColors()}]}>
             <Picker.Item label={t('themePlaceholder')} value="" enabled={false} />
             <Picker.Item label={t('themeOptDef')} value="default" />
             <Picker.Item label={t('themeOptDark')} value="dark" />
@@ -103,23 +117,20 @@ const SettingsScreen = () => {
           </Picker>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={[styles.lblTitle, {color: currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text}]}>{t('languageTitle')}:</Text>
+          <Text style={[styles.lblTitle, {color: setTxtColors()}]}>{t('languageTitle')}:</Text>
           <Picker
+            mode='dialog'
             selectedValue={currentLanguage}
-            onValueChange={async (itemValue, itemIndex) => {
-              setLanguage(itemValue);
-              changeLanguage(itemValue);
-              await saveLanguage(itemValue);
-            }}
+            onValueChange={onLangChange}
             placeholder={t('languagePlaceholder')}
-            style={[styles.picker, {color: currentTheme == "dark" ? myThemes.dark.colors.picker : myThemes.light.colors.picker}]}>
+            style={[styles.picker, {color: setPickerColors()}]}>
             <Picker.Item label={t('languagePlaceholder')} value="" enabled={false} />
             <Picker.Item label={t('languageOpt1')} value="en-US" />
             <Picker.Item label={t('languageOpt2')} value="pt-PT" />
           </Picker>
         </View>
         <View style={styles.optionsContentBtn}>
-          <Button title={t('btnCheckNetworkStatus')} onPress={checkTheNetwork} color={currentTheme == "dark" ? myThemes.dark.colors.button : myThemes.light.colors.button} style={styles.btn} />
+          <Button title={t('btnCheckNetworkStatus')} onPress={checkTheNetwork} color={setBtnColors()} style={styles.btn} />
         </View>
       </View>
     </View>
