@@ -14,7 +14,7 @@ const SettingsScreen = () => {
   const { colors } = useTheme();
   const {t, i18n} = useTranslation();
   const [currentTheme, setTheme] = useState('');
-  const [currentLanguage, setLanguage] = useState('en-US');
+  const [currentLanguage, setLanguage] = useState('');
   const [isOnline, setIsOnline] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,21 @@ const SettingsScreen = () => {
         console.log("The theme couldnt be loaded. Error details: " + e);
       }
     };
+
+    const loadLanguage = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('myLanguage');
+        const mval = jsonValue != null ? JSON.parse(jsonValue) : null;
+        setLanguage(mval);
+        return mval;
+      } catch (e) {
+        console.log("The language couldnt be loaded. Error details: " + e);
+      }
+    };
+    
     setTheme(loadTheme());
+    setLanguage(loadLanguage());
+
     const removeNetInfoSubscription = NetInfo.addEventListener((state: NetInfoState) => {
       const online = (state.isConnected && state.isInternetReachable);
       setIsOnline(online)
@@ -41,11 +55,10 @@ const SettingsScreen = () => {
     Alert.alert(t('titleNetworkStatus'), (isOnline == true ? t('networkStatusOnline') : t('networkStatusOffline')));
   }
 
-  const changeLanguage = value => {
-    i18n
-      .changeLanguage(value)
-      .then(() => setLanguage(value))
-      .catch(err => console.log(err));
+  const changeLanguage = async (value) => {
+    i18n.changeLanguage(value).then(() => { 
+      setLanguage(value); 
+    }).catch(err => console.log(err));
   };
 
   const saveTheme = async (value) => {
@@ -54,6 +67,15 @@ const SettingsScreen = () => {
       await AsyncStorage.setItem('myTheme', jsonValue);
     } catch (e) {
       console.log("The theme couldnt be saved. Error details: " + e);
+    }
+  };
+
+  const saveLanguage = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('myLanguage', jsonValue);
+    } catch (e) {
+      console.log("The language couldnt be saved. Error details: " + e);
     }
   };
 
@@ -84,9 +106,10 @@ const SettingsScreen = () => {
           <Text style={[styles.lblTitle, {color: currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text}]}>{t('languageTitle')}:</Text>
           <Picker
             selectedValue={currentLanguage}
-            onValueChange={(itemValue, itemIndex) => {
+            onValueChange={async (itemValue, itemIndex) => {
               setLanguage(itemValue);
               changeLanguage(itemValue);
+              await saveLanguage(itemValue);
             }}
             placeholder={t('languagePlaceholder')}
             style={[styles.picker, {color: currentTheme == "dark" ? myThemes.dark.colors.picker : myThemes.light.colors.picker}]}>
