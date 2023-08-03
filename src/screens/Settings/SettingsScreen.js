@@ -55,7 +55,7 @@ const SettingsScreen = () => {
     Alert.alert(t('titleNetworkStatus'), (isOnline == true ? t('networkStatusOnline') : t('networkStatusOffline')));
   }
 
-  const changeLanguage = async (value) => {
+  const changeLanguage = (value) => {
     i18n.changeLanguage(value).then(() => { 
       setLanguage(value); 
     }).catch(err => console.log(err));
