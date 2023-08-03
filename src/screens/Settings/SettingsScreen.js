@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import '../../assets/i18n/i18n';
 import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 import { globalStyles } from '../../styles/global';
 import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
 import { FontAwesome } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
 import {useTranslation} from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { myThemes } from '../../styles/themes';
 
 const SettingsScreen = () => {
+  const { colors } = useTheme();
   const {t, i18n} = useTranslation();
-  const [currentTheme, setTheme] = useState('default');
+  const [currentTheme, setTheme] = useState('');
   const [currentLanguage, setLanguage] = useState('en-US');
   const [isOnline, setIsOnline] = useState(false);
 
   useEffect(() => {
+    const loadTheme = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('myTheme');
+        const mval = jsonValue != null ? JSON.parse(jsonValue) : null;
+        setTheme(mval);
+        return mval;
+      } catch (e) {
+        console.log("The theme couldnt be loaded. Error details: " + e);
+      }
+    };
+    setTheme(loadTheme());
     const removeNetInfoSubscription = NetInfo.addEventListener((state: NetInfoState) => {
       const online = (state.isConnected && state.isInternetReachable);
       setIsOnline(online)
@@ -33,22 +48,32 @@ const SettingsScreen = () => {
       .catch(err => console.log(err));
   };
 
+  const saveTheme = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('myTheme', jsonValue);
+    } catch (e) {
+      console.log("The theme couldnt be saved. Error details: " + e);
+    }
+  };
+
   return (
-    <View style={globalStyles.settings}>
+    <View style={[globalStyles.settings, { backgroundColor: currentTheme == "dark" ? myThemes.dark.colors.background : myThemes.light.colors.background }]}>
       <View style={styles.settingsContent}>
         <View style={globalStyles.titleContainer}>
-          <FontAwesome name="gear" size={20} />
-          <Text style={styles.title}>{t('settingsTitle')}</Text>
+          <FontAwesome name="gear" size={20} style={{color: currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text}} />
+          <Text style={[styles.title, {color: currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text}]}>{t('settingsTitle')}</Text>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={styles.lblTitle}>{t('themeTitle')}:</Text>
+          <Text style={[styles.lblTitle, {color: currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text}]}>{t('themeTitle')}:</Text>
           <Picker
             selectedValue={currentTheme}
-            onValueChange={(itemValue, itemIndex) =>
-              setTheme(itemValue)
-            }
+            onValueChange={async (itemValue, itemIndex) => {
+              setTheme(itemValue);
+              await saveTheme(itemValue);
+            }}
             placeholder={t('themePlaceholder')}
-            style={styles.picker}>
+            style={[styles.picker, {color: currentTheme == "dark" ? myThemes.dark.colors.picker : myThemes.light.colors.picker}]}>
             <Picker.Item label={t('themePlaceholder')} value="" enabled={false} />
             <Picker.Item label={t('themeOptDef')} value="default" />
             <Picker.Item label={t('themeOptDark')} value="dark" />
@@ -56,7 +81,7 @@ const SettingsScreen = () => {
           </Picker>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={styles.lblTitle}>{t('languageTitle')}:</Text>
+          <Text style={[styles.lblTitle, {color: currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text}]}>{t('languageTitle')}:</Text>
           <Picker
             selectedValue={currentLanguage}
             onValueChange={(itemValue, itemIndex) => {
@@ -64,14 +89,14 @@ const SettingsScreen = () => {
               changeLanguage(itemValue);
             }}
             placeholder={t('languagePlaceholder')}
-            style={styles.picker}>
+            style={[styles.picker, {color: currentTheme == "dark" ? myThemes.dark.colors.picker : myThemes.light.colors.picker}]}>
             <Picker.Item label={t('languagePlaceholder')} value="" enabled={false} />
             <Picker.Item label={t('languageOpt1')} value="en-US" />
             <Picker.Item label={t('languageOpt2')} value="pt-PT" />
           </Picker>
         </View>
         <View style={styles.optionsContentBtn}>
-          <Button title={t('btnCheckNetworkStatus')} onPress={checkTheNetwork} style={styles.btn} />
+          <Button title={t('btnCheckNetworkStatus')} onPress={checkTheNetwork} color={currentTheme == "dark" ? myThemes.dark.colors.button : myThemes.light.colors.button} style={styles.btn} />
         </View>
       </View>
     </View>
