@@ -34,14 +34,15 @@ const SettingsScreen = () => {
         const jsonValue = await AsyncStorage.getItem('myLanguage');
         const mval = jsonValue != null ? JSON.parse(jsonValue) : null;
         setLanguage(mval);
+        changeLanguage(mval);
         return mval;
       } catch (e) {
         console.log("The language couldnt be loaded. Error details: " + e);
       }
     };
     
-    setTheme(loadTheme());
-    setLanguage(loadLanguage());
+    loadTheme();
+    loadLanguage();
 
     const removeNetInfoSubscription = NetInfo.addEventListener((state: NetInfoState) => {
       const online = (state.isConnected && state.isInternetReachable);
