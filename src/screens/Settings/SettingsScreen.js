@@ -5,10 +5,11 @@ import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
-import { useTranslation } from 'react-i18next';
 import { globalStyles } from '../../styles/global';
-import { myThemes } from '../../styles/themes';
-import '../../assets/i18n/i18n';
+import { LoadSessions, SaveSessions } from '../../sessions';
+import { myThemes, setSomethingTheme, aryThemes } from '../../styles/themes';
+import { useTranslation } from 'react-i18next';
+import * as i18nf from '../../assets/i18n/i18n';
 
 const SettingsScreen = () => {
   const { colors } = useTheme();
@@ -18,57 +19,32 @@ const SettingsScreen = () => {
   const [isOnline, setIsOnline] = useState(false);
 
   useEffect(() => {
-    const loadTheme = async () => {
-      try {
-        const jsonValue = await AsyncStorage.getItem('myTheme');
-        const mval = jsonValue != null ? JSON.parse(jsonValue) : null;
-        setTheme(mval);
-        return mval;
-      } catch (e) {
-        console.log("The theme couldnt be loaded. Error details: " + e);
-      }
-    };
+    const loadTheme = () => {
+      LoadSessions().loadKey('myTheme').then(x => { 
+        setTheme(x); 
+      }).catch(error => console.log(error));
+    }
 
-    const loadLanguage = async () => {
-      try {
-        const jsonValue = await AsyncStorage.getItem('myLanguage');
-        const mval = jsonValue != null ? JSON.parse(jsonValue) : null;
-        setLanguage(mval);
-        changeLanguage(mval);
-        return mval;
-      } catch (e) {
-        console.log("The language couldnt be loaded. Error details: " + e);
-      }
-    };
+    const loadLanguage = () => {
+      LoadSessions().loadKey('myLanguage').then(x => {
+        setLanguage(x);
+        changeLanguage(x);
+      }).catch(error => console.log(error));
+    }
     
     loadTheme();
     loadLanguage();
 
     const removeNetInfoSubscription = NetInfo.addEventListener((state: NetInfoState) => {
       const online = (state.isConnected && state.isInternetReachable);
-      setIsOnline(online)
+      setIsOnline(online);
     });
 
     return () => removeNetInfoSubscription();
   }, []);
 
-  const saveTheme = async (value) => {
-    try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem('myTheme', jsonValue);
-    } catch (e) {
-      console.log("The theme couldnt be saved. Error details: " + e);
-    }
-  };
-
-  const saveLanguage = async (value) => {
-    try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem('myLanguage', jsonValue);
-    } catch (e) {
-      console.log("The language couldnt be saved. Error details: " + e);
-    }
-  };
+  const saveTheme = async (value) => { await SaveSessions().saveKey("myTheme", value); }
+  const saveLanguage = async (value) => { await SaveSessions().saveKey("myLanguage", value); }
 
   const checkTheNetwork = () => {
     Alert.alert(t('titleNetworkStatus'), (isOnline == true ? t('networkStatusOnline') : t('networkStatusOffline')));
@@ -85,53 +61,54 @@ const SettingsScreen = () => {
     await saveTheme(itemValue);
   };
 
-  const onLangChange = async (itemValue, itemIndex) => {
+  const onLangValChange = async (itemValue, itemIndex) => {
     setLanguage(itemValue);
     changeLanguage(itemValue);
     await saveLanguage(itemValue);
   };
 
-  const setBkgColors = () => { return currentTheme == "dark" ? myThemes.dark.colors.background : myThemes.light.colors.background; }
-  const setTxtColors = () => { return currentTheme == "dark" ? myThemes.dark.colors.text : myThemes.light.colors.text; }
-  const setPickerColors = () => { return currentTheme == "dark" ? myThemes.dark.colors.picker : myThemes.light.colors.picker; }
-  const setBtnColors = () => { return currentTheme == "dark" ? myThemes.dark.colors.button : myThemes.light.colors.button; }
-
   return (
-    <View style={[globalStyles.settings, { backgroundColor: setBkgColors() }]}>
+    <View style={[globalStyles.settings, { backgroundColor: setSomethingTheme(currentTheme, "background") }]}>
       <View style={styles.settingsContent}>
         <View style={globalStyles.titleContainer}>
-          <FontAwesome name="gear" size={20} style={{ color: setTxtColors() }} />
-          <Text style={[styles.title, {color: setTxtColors()}]}>{t('settingsTitle')}</Text>
+          <FontAwesome name="gear" size={20} style={{ color: setSomethingTheme(currentTheme, "color") }} />
+          <Text style={[styles.title, {color: setSomethingTheme(currentTheme, "text")}]}>{t('settingsTitle')}</Text>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={[styles.lblTitle, {color: setTxtColors()}]}>{t('themeTitle')}:</Text>
+          <Text style={[styles.lblTitle, {color: setSomethingTheme(currentTheme, "text")}]}>{t('themeTitle')}:</Text>
           <Picker
             mode='dialog'
             selectedValue={currentTheme}
             onValueChange={onThemeChange}
             placeholder={t('themePlaceholder')}
-            style={[styles.picker, {color: setPickerColors()}]}>
+            style={[styles.picker, {color: setSomethingTheme(currentTheme, "picker")}]}>
             <Picker.Item label={t('themePlaceholder')} value="" enabled={false} />
             <Picker.Item label={t('themeOptDef')} value="default" />
-            <Picker.Item label={t('themeOptDark')} value="dark" />
-            <Picker.Item label={t('themeOptLight')} value="light" />
+            {aryThemes.map((x, index) => {
+              return (
+                <Picker.Item label={t('themeOpt'+x.value)} value={x.name} key={index} />
+              )
+            })}
           </Picker>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={[styles.lblTitle, {color: setTxtColors()}]}>{t('languageTitle')}:</Text>
+          <Text style={[styles.lblTitle, {color: setSomethingTheme(currentTheme, "text")}]}>{t('languageTitle')}:</Text>
           <Picker
             mode='dialog'
             selectedValue={currentLanguage}
-            onValueChange={onLangChange}
+            onValueChange={onLangValChange}
             placeholder={t('languagePlaceholder')}
-            style={[styles.picker, {color: setPickerColors()}]}>
+            style={[styles.picker, {color: setSomethingTheme(currentTheme, "picker")}]}>
             <Picker.Item label={t('languagePlaceholder')} value="" enabled={false} />
-            <Picker.Item label={t('languageOpt1')} value="en-US" />
-            <Picker.Item label={t('languageOpt2')} value="pt-PT" />
+            {i18nf.aryLangs.map((x, index) => {
+              return (
+                <Picker.Item label={t('languageOpt'+(index+1))} value={x.name} key={index} />
+              )
+            })}
           </Picker>
         </View>
         <View style={styles.optionsContentBtn}>
-          <Button title={t('btnCheckNetworkStatus')} onPress={checkTheNetwork} color={setBtnColors()} style={styles.btn} />
+          <Button title={t('btnCheckNetworkStatus')} onPress={checkTheNetwork} color={setSomethingTheme(currentTheme, "button")} style={styles.btn} />
         </View>
       </View>
     </View>

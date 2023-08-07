@@ -3,11 +3,24 @@ import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import en from './en-US.json';
 import pt from './pt-PT.json';
+
+export const aryLangs = [
+  {
+    id: 1,
+    name: "en-US",
+    title: "English (United States of America)"
+  },
+  {
+    id: 2,
+    name: "pt-PT",
+    title: "Português (Portugal)"
+  },
+];
   
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v3',
-  lng: 'en-US',
-  fallbackLng: 'en-US',
+  lng: aryLangs[0].name,
+  fallbackLng: aryLangs[0].name,
   resources: {
     en: en,
     'en-US': en,
