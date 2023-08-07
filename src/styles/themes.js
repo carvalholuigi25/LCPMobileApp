@@ -33,22 +33,9 @@ export const myThemes = {
     }
 };
 
-export const aryThemes = [
-    {
-        id: 1,
-        name: "dark",
-        value: "Dark",
-        title: "Dark"
-    },
-    {
-        id: 2,
-        name: "light",
-        value: "Light",
-        title: "Light"
-    }
-];
+export const aryThemes = require('../data/themes.json');
 
-export const setSomethingTheme = (theme, propname) => {
+export const setPropStyleTheme = (theme, propname) => {
     var pval = "";
     var isDark = theme == "dark" ? true : false;
 

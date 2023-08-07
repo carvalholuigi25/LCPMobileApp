@@ -8,7 +8,7 @@ import MyDrawerNav from './myDrawerNav';
 const Tab = createBottomTabNavigator();
 
 const MyTabNav = () => {
-  const enableLabel = true;
+  const enableLabel = false;
 
     return (
       <Tab.Navigator screenOptions={{

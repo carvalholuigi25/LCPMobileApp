@@ -7,7 +7,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Picker } from '@react-native-picker/picker';
 import { globalStyles } from '../../styles/global';
 import { LoadSessions, SaveSessions } from '../../sessions';
-import { myThemes, setSomethingTheme, aryThemes } from '../../styles/themes';
+import { myThemes, setPropStyleTheme, aryThemes } from '../../styles/themes';
 import { useTranslation } from 'react-i18next';
 import * as i18nf from '../../assets/i18n/i18n';
 
@@ -68,20 +68,20 @@ const SettingsScreen = () => {
   };
 
   return (
-    <View style={[globalStyles.settings, { backgroundColor: setSomethingTheme(currentTheme, "background") }]}>
+    <View style={[globalStyles.settings, { backgroundColor: setPropStyleTheme(currentTheme, "background") }]}>
       <View style={styles.settingsContent}>
         <View style={globalStyles.titleContainer}>
-          <FontAwesome name="gear" size={20} style={{ color: setSomethingTheme(currentTheme, "color") }} />
-          <Text style={[styles.title, {color: setSomethingTheme(currentTheme, "text")}]}>{t('settingsTitle')}</Text>
+          <FontAwesome name="gear" size={20} style={{ color: setPropStyleTheme(currentTheme, "color") }} />
+          <Text style={[styles.title, {color: setPropStyleTheme(currentTheme, "text")}]}>{t('settingsTitle')}</Text>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={[styles.lblTitle, {color: setSomethingTheme(currentTheme, "text")}]}>{t('themeTitle')}:</Text>
+          <Text style={[styles.lblTitle, {color: setPropStyleTheme(currentTheme, "text")}]}>{t('themeTitle')}:</Text>
           <Picker
             mode='dialog'
             selectedValue={currentTheme}
             onValueChange={onThemeChange}
             placeholder={t('themePlaceholder')}
-            style={[styles.picker, {color: setSomethingTheme(currentTheme, "picker")}]}>
+            style={[styles.picker, {color: setPropStyleTheme(currentTheme, "picker")}]}>
             <Picker.Item label={t('themePlaceholder')} value="" enabled={false} />
             <Picker.Item label={t('themeOptDef')} value="default" />
             {aryThemes.map((x, index) => {
@@ -92,13 +92,13 @@ const SettingsScreen = () => {
           </Picker>
         </View>
         <View style={styles.optionsContainer}>
-          <Text style={[styles.lblTitle, {color: setSomethingTheme(currentTheme, "text")}]}>{t('languageTitle')}:</Text>
+          <Text style={[styles.lblTitle, {color: setPropStyleTheme(currentTheme, "text")}]}>{t('languageTitle')}:</Text>
           <Picker
             mode='dialog'
             selectedValue={currentLanguage}
             onValueChange={onLangValChange}
             placeholder={t('languagePlaceholder')}
-            style={[styles.picker, {color: setSomethingTheme(currentTheme, "picker")}]}>
+            style={[styles.picker, {color: setPropStyleTheme(currentTheme, "picker")}]}>
             <Picker.Item label={t('languagePlaceholder')} value="" enabled={false} />
             {i18nf.aryLangs.map((x, index) => {
               return (
@@ -108,7 +108,7 @@ const SettingsScreen = () => {
           </Picker>
         </View>
         <View style={styles.optionsContentBtn}>
-          <Button title={t('btnCheckNetworkStatus')} onPress={checkTheNetwork} color={setSomethingTheme(currentTheme, "button")} style={styles.btn} />
+          <Button title={t('btnCheckNetworkStatus')} onPress={checkTheNetwork} color={setPropStyleTheme(currentTheme, "button")} style={styles.btn} />
         </View>
       </View>
     </View>

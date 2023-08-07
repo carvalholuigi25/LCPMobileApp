@@ -1,30 +1,18 @@
 import 'intl-pluralrules';
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
-import en from './en-US.json';
-import pt from './pt-PT.json';
+import * as langs from './index';
 
-export const aryLangs = [
-  {
-    id: 1,
-    name: "en-US",
-    title: "English (United States of America)"
-  },
-  {
-    id: 2,
-    name: "pt-PT",
-    title: "Português (Portugal)"
-  },
-];
+export const aryLangs = require('../../data/languages.json');
   
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v3',
-  lng: aryLangs[0].name,
-  fallbackLng: aryLangs[0].name,
+  lng: aryLangs[0].name ?? 'en-US',
+  fallbackLng: aryLangs[0].name ?? 'en-US',
   resources: {
-    en: en,
-    'en-US': en,
-    'pt-PT': pt,
+    en: langs.en,
+    'en-US': langs.en,
+    'pt-PT': langs.pt,
   },
   interpolation: {
     escapeValue: false // react already safes from xss
