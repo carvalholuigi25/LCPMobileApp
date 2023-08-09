@@ -21,7 +21,7 @@ function AboutScreen() {
         </View>
 
         <Text style={styles.text}>
-          LCP Mobile App, which is a native mobile app for Android and iOS to show of my projects and other things for everyone.
+          LCP Mobile App is a native mobile app for Android and iOS to show of my projects and other things for everyone.
         </Text>
         <View style={styles.containerButtons}>
           <Button style={styles.btnToggleContact} title={!isMyContactInfoShown ? 'Show my contact info' : 'Hide my contact info'} onPress={toggleContact} />
