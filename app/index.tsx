@@ -1,9 +1,9 @@
-import 'react-native-gesture-handler';
 import React from 'react';
+import 'react-native-gesture-handler';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationOptions, createDrawerNavigator } from '@react-navigation/drawer';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
-import { Text, Image, View, StatusBar } from 'react-native';
+import { Text, Image, View, StatusBar, ViewStyle, StyleProp, ImageStyle, TextStyle } from 'react-native';
 import HomeScreen from './screens/home';
 import MyNavMain from './mynavmain';
 
@@ -25,7 +25,7 @@ const drawOptions: DrawerNavigationOptions = {
     headerTransparent: false,
     headerStatusBarHeight: 0,
     headerStyle: {
-        backgroundColor: '#00FF38'
+        backgroundColor: '#00FF38',
     },
     headerTitleStyle: {
         width: '100%'
@@ -33,25 +33,81 @@ const drawOptions: DrawerNavigationOptions = {
 };
 
 function GetLogo(props: any) {
+    const logostyles: any = { 
+        width: 100, 
+        height: 50, 
+        padding: 0, 
+        margin: 0, 
+        resizeMode: 'cover', 
+        alignSelf: 'center' 
+    };
+
     return (
-        <Image source={require('../assets/images/logo_compact.png')} style={{ width: 100, height: 50, padding: 0, margin: 0, resizeMode: 'cover', alignSelf: 'center' }} />
+        <Image source={require('../assets/images/logo_compact.png')} style={logostyles} />
     );
 }
 
 function GetAvatarDet(props: any) {
     const isBigAvDet = false;
-    const imgAvStyle: any = isBigAvDet ? { width: 80, height: 80, padding: 0, margin: 15, resizeMode: 'cover', alignSelf: 'center', borderRadius: 50, borderColor: '#00FF38', borderWidth: 2 } : { width: 40, height: 40, padding: 0, margin: 0, marginRight: 15, resizeMode: 'cover', alignSelf: 'center', borderRadius: 50, borderColor: '#00FF38', borderWidth: 2 };
-    const viewAvStyle: any = isBigAvDet ? { flexDirection: 'column', justifyContent: 'center', alignItems: 'center' } : { flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' };
+
+    const viewAvStyle: StyleProp<ViewStyle> = isBigAvDet ? { 
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'center'
+    } : { 
+        flexDirection: 'row', 
+        justifyContent: 'flex-start', 
+        alignItems: 'center' 
+    };
+
+    const imgAvStyle: StyleProp<ImageStyle> = isBigAvDet ? { 
+        width: 80, 
+        height: 80, 
+    } : { 
+        width: 40, 
+        height: 40 
+    };
+
+    const avDetStyle: StyleProp<TextStyle> = isBigAvDet ? {
+        margin: 15,
+        textAlign: 'center'
+    } : {
+        marginLeft: 15,
+        textAlign: 'center' 
+    };
 
     return (
         <View style={viewAvStyle}>
-            <Image source={require('../assets/images/users/luis.jpg')} style={imgAvStyle} />
-            <Text style={{ textAlign: 'center' }}>Luis Carvalho</Text>
+            <Image 
+                source={require('../assets/images/users/luis.jpg')} 
+                style={[imgAvStyle, {
+                    padding: 0, 
+                    margin: 0, 
+                    resizeMode: 'cover', 
+                    alignSelf: 'center', 
+                    borderRadius: 50, 
+                    borderColor: '#00FF38', 
+                    borderWidth: 2 
+                }]} 
+            />
+            <Text style={avDetStyle}>Luis Carvalho</Text>
         </View>
     );
 }
 
 function CustomDrawerContent(props: any) {
+    const viewVerStyle: StyleProp<ViewStyle> = { 
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'space-around', 
+        alignItems: 'flex-start', 
+        flex: 0 
+    };
+
+    const txtVerStyle: StyleProp<TextStyle> = { 
+        padding: 15 
+    };
+
     return (
         <>
             <DrawerContentScrollView {...props}>
@@ -59,8 +115,10 @@ function CustomDrawerContent(props: any) {
                 <DrawerItem label={props => <GetAvatarDet {...props} />} onPress={() => { }} />
                 <DrawerItemList {...props} />
             </DrawerContentScrollView>
-            <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'flex-start', flex: 0 }}>
-                <Text style={{ padding: 15 }}>Version: 1.0.0.0</Text>
+            <View style={viewVerStyle}>
+                <Text style={txtVerStyle}>
+                    Version: {process.env.EXPO_PUBLIC_MYAPPVERSION}
+                </Text>
             </View>
         </>
     );
