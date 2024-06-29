@@ -10,7 +10,13 @@ export default function SearchScreen() {
         <Text style={styles.txtico}>
           Search
         </Text>
-      </View> 
+      </View>
+
+      <View>
+        <Text style={styles.text}>
+          Coming soon...
+        </Text>
+      </View>
     </View>
   );
 }

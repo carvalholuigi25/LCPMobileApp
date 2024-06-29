@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, View, StyleSheet, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Loader from '@/components/loader';
 import { useNavigation } from '@react-navigation/native';
+import Loader from '@/components/loader';
 
 const LoadingScreen = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -20,6 +20,9 @@ const LoadingScreen = () => {
         <LinearGradient
             colors={colors}
             style={[styles.container]}>
+
+            <StatusBar barStyle="light-content" backgroundColor="#00FF38" />
+
             <View>
                 <Image source={require('../../../assets/images/logo.png')} style={styles.logo} />
                 {isLoading ? (

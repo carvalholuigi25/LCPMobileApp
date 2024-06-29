@@ -10,7 +10,13 @@ export default function SettingsScreen() {
         <Text style={styles.txtico}>
           Settings
         </Text>
-      </View>    
+      </View>
+
+      <View>
+        <Text style={styles.text}>
+          Coming soon...
+        </Text>
+      </View>   
     </View>
   );
 }

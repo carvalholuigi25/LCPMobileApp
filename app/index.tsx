@@ -3,7 +3,7 @@ import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationOptions, createDrawerNavigator } from '@react-navigation/drawer';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
-import { Text, Image, View } from 'react-native';
+import { Text, Image, View, StatusBar } from 'react-native';
 import HomeScreen from './screens/home';
 import MyNavMain from './mynavmain';
 
@@ -68,26 +68,27 @@ function CustomDrawerContent(props: any) {
 
 export default function Index() {
     return (
-        <PaperProvider theme={theme}>
-            <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />} initialRouteName="HomeScreen" backBehavior='history' screenOptions={drawOptions}>
-                <Drawer.Screen 
-                    name="HomeScreen" 
-                    component={HomeScreen} 
-                    options={{ 
-                        title: 'Home',
-                        drawerIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} /> 
-                    }} 
-                />
+        <>
+            <StatusBar barStyle="light-content" backgroundColor="#00FF38" />
+            <PaperProvider theme={theme}>
+                <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />} initialRouteName="HomeScreen" backBehavior='history' screenOptions={drawOptions}>
+                    <Drawer.Screen
+                        name="HomeScreen"
+                        component={HomeScreen}
+                        options={{
+                            title: 'Home',
+                            drawerIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />
+                        }} />
 
-                <Drawer.Screen 
-                    name='MyNavMain' 
-                    component={MyNavMain} 
-                    options={{ 
-                        title: 'Main', 
-                        drawerIcon: ({ color }) => <MaterialCommunityIcons name="post" color={color} size={26} /> 
-                    }} 
-                />
-            </Drawer.Navigator>
-        </PaperProvider>
+                    <Drawer.Screen
+                        name='MyNavMain'
+                        component={MyNavMain}
+                        options={{
+                            title: 'Main',
+                            drawerIcon: ({ color }) => <MaterialCommunityIcons name="post" color={color} size={26} />
+                        }} />
+                </Drawer.Navigator>
+            </PaperProvider>
+        </>
     );
 }

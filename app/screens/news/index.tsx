@@ -11,6 +11,12 @@ export default function NewsScreen() {
           News
         </Text>
       </View>
+
+      <View>
+        <Text style={styles.text}>
+          Coming soon...
+        </Text>
+      </View>
     </View>
   );
 }

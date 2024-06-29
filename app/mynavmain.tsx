@@ -16,7 +16,7 @@ export default function MyNavMain() {
         <Tab.Navigator
             initialRouteName="MainScreen"
             backBehavior='history'
-            activeColor="#e91e63"
+            activeColor="#ffffff"
             inactiveColor="#000000"
             shifting={true}
             labeled={true}

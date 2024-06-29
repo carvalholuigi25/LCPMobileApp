@@ -1,8 +1,10 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
-import { Image, Text, View, StyleSheet, Dimensions, Pressable, Alert } from 'react-native';
+import { Image, Text, View, StyleSheet, Dimensions, Pressable, Alert, ImageBackground, StatusBar, TouchableOpacity } from 'react-native';
 import { StackedBarChart } from "react-native-chart-kit";
 import { AbstractChartConfig } from 'react-native-chart-kit/dist/AbstractChart';
 import { StackedBarChartData } from 'react-native-chart-kit/dist/StackedBarChart';
+import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 
 export default function MainScreen() {
@@ -39,33 +41,64 @@ export default function MainScreen() {
     useShadowColorFromDataset: false,
   };
 
+  const svbcalc: any = StatusBar.currentHeight! + 15 * 2;
+
   return (
-    <View style={[styles.container]}>
-      <View>
-        <Text style={styles.title}>Welcome Luis</Text>
+    <>
+      <View style={styles.container}>
+        <ScrollView style={{marginBottom: svbcalc}}>
+          <View>
+            <Text style={styles.title}>Welcome Luis</Text>
+          </View>
+          <View style={styles.mgraph}>
+            <StackedBarChart data={datagraph} segments={3} width={screenWidth} height={300} yAxisLabel="" yAxisSuffix='%' chartConfig={chartConfig} fromZero={false} style={styles.graph} hideLegend={true} />
+            <Button mode="contained" onPress={refresh_data} style={{ marginTop: 15 }}>Reload</Button>
+          </View>
+          <View style={styles.mprojects}>
+            <Pressable onPress={() => Alert.alert('Websites!', 'Coming soon...')} style={styles.projectsitems}>
+              <Text style={styles.projectsitemsct}>0</Text>
+              <Image source={require('../../../assets/images/projects/iwebsites.png')} style={styles.projectsitemsimg} width={50} height={50} />
+              <Text style={styles.projectsitemstxt}>Websites</Text>
+            </Pressable>
+            <Pressable onPress={() => Alert.alert('Softwares!', 'Coming soon...')} style={styles.projectsitems}>
+              <Text style={styles.projectsitemsct}>0</Text>
+              <Image source={require('../../../assets/images/projects/isoftwares.png')} style={styles.projectsitemsimg} width={50} height={50} />
+              <Text style={styles.projectsitemstxt}>Softwares</Text>
+            </Pressable>
+            <Pressable onPress={() => Alert.alert('Apps!', 'Coming soon...')} style={styles.projectsitems}>
+              <Text style={styles.projectsitemsct}>0</Text>
+              <Image source={require('../../../assets/images/projects/iapps.png')} style={styles.projectsitemsimg} width={50} height={50} />
+              <Text style={styles.projectsitemstxt}>Apps</Text>
+            </Pressable>
+          </View>
+          <View style={styles.mnews}>
+            <TouchableOpacity style={styles.newsitem} onPress={() => Alert.alert('News 1!', 'Coming soon...')}>
+              <ImageBackground source={require('../../../assets/images/technology.jpeg')} style={styles.newsitemimg} imageStyle={styles.newsitemimgs2}>
+                <LinearGradient colors={['transparent', '#000']} style={styles.newssubitem}>
+                  <Text style={styles.newssubitemtxt}>News 1</Text>
+                </LinearGradient>
+              </ImageBackground>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.newsitem} onPress={() => Alert.alert('News 2!', 'Coming soon...')}>
+              <ImageBackground source={require('../../../assets/images/technology.jpeg')} style={styles.newsitemimg} imageStyle={styles.newsitemimgs2}>
+                <LinearGradient colors={['transparent', '#000']} style={styles.newssubitem}>
+                  <Text style={styles.newssubitemtxt}>News 2</Text>
+                </LinearGradient>
+              </ImageBackground>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.newsitem} onPress={() => Alert.alert('News 3!', 'Coming soon...')}>
+              <ImageBackground source={require('../../../assets/images/technology.jpeg')} style={styles.newsitemimg} imageStyle={styles.newsitemimgs2}>
+                <LinearGradient colors={['transparent', '#000']} style={styles.newssubitem}>
+                  <Text style={styles.newssubitemtxt}>News 3</Text>
+                </LinearGradient>
+              </ImageBackground>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </View>
-      <View style={styles.mgraph}>
-        <StackedBarChart data={datagraph} segments={3} width={screenWidth} height={300} yAxisLabel="" yAxisSuffix='%' chartConfig={chartConfig} fromZero={false} style={styles.graph} hideLegend={true} />
-        <Button mode="contained" onPress={refresh_data} style={{marginTop: 15}}>Reload</Button>
-      </View>
-      <View style={styles.mprojects}>
-        <Pressable onPress={() => Alert.alert('Websites!', 'Coming soon...')} style={styles.projectsitems}>
-          <Text style={styles.projectsitemsct}>0</Text>
-          <Image source={require('../../../assets/images/projects/iwebsites.png')} style={styles.projectsitemsimg} width={50} height={50} />
-          <Text style={styles.projectsitemstxt}>Websites</Text>
-        </Pressable>
-        <Pressable onPress={() => Alert.alert('Softwares!', 'Coming soon...')} style={styles.projectsitems}>
-          <Text style={styles.projectsitemsct}>0</Text>
-          <Image source={require('../../../assets/images/projects/isoftwares.png')} style={styles.projectsitemsimg} width={50} height={50} />
-          <Text style={styles.projectsitemstxt}>Softwares</Text>
-        </Pressable>
-        <Pressable onPress={() => Alert.alert('Apps!', 'Coming soon...')} style={styles.projectsitems}>
-          <Text style={styles.projectsitemsct}>0</Text>
-          <Image source={require('../../../assets/images/projects/iapps.png')} style={styles.projectsitemsimg} width={50} height={50} />
-          <Text style={styles.projectsitemstxt}>Apps</Text>
-        </Pressable>
-      </View>
-    </View>
+    </>
   );
 }
 
@@ -115,6 +148,47 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  mnews: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    width: '100%',
+    height: 'auto',
+    marginTop: 15,
+    marginBottom: 15,
+    padding: 15,
+    flex: 1,
+    flexWrap: 'wrap'
+  },
+  newsitem: {
+    marginTop: 0,
+    padding: 5
+  },
+  newsitemimg: { 
+    padding: 0, 
+    margin: 0, 
+    width: 100, 
+    height: 100, 
+    borderRadius: 0 
+  },
+  newsitemimgs2: { 
+    borderRadius: 24 
+  },
+  newssubitem: { 
+    height: '100%', 
+    width: '100%', 
+    borderRadius: 24 
+  },
+  newssubitemtxt: { 
+    position: 'absolute', 
+    bottom: 10, 
+    left: 0, 
+    right: 0, 
+    textAlign: 'center', 
+    color: '#ffffff', 
+    fontSize: 14, 
+    fontWeight: 'bold' 
+  },
   mprojects: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -157,7 +231,7 @@ const styles = StyleSheet.create({
   },
   projectsitemsct: {
     position: 'absolute',
-    top: '-4%',
+    top: '-15%',
     right: '-5%',
     bottom: 0,
     backgroundColor: '#47FE1A',
