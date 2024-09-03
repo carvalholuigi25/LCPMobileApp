@@ -58,19 +58,5 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     alignContent: 'center',
     alignSelf: 'center'
-  },
-  footer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    fontSize: 12,
-    marginTop: 15,
-    textAlign: 'center',
-    alignItems: 'center',
-    padding: 15
-  },
-  footertxt: {
-    color: '#ffffff'
   }
 });

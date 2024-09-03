@@ -3,6 +3,7 @@ import { Image, Text, StyleSheet, Pressable, Linking, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import FooterMain from '@/app/components/footerMain/footerMain';
 
 export default function AboutScreen() {
   return (
@@ -15,8 +16,8 @@ export default function AboutScreen() {
           </Text>
         </View>
         <Image source={require('../../../assets/images/logo.png')} style={styles.logo} />
-        <Text style={styles.text}>Luis Carvalho Projetos (LCP) é um projeto de websites, apps e softwares.</Text>
-        <Text style={styles.text}>Dúvidas? Entre em contacto comigo.</Text>
+        <Text style={styles.text}>Luis Carvalho Projects (LCP) is a project of websites, apps and softwares.</Text>
+        <Text style={styles.text}>Any questions? Contact me.</Text>
         <View style={styles.contactcontainer}>
           <LinearGradient colors={['#00FF38', '#003499']} style={styles.contactitem}>
             <Pressable onPress={() => Linking.openURL('mailto:luiscarvalho239@gmail.com')}>
@@ -35,10 +36,8 @@ export default function AboutScreen() {
             </Pressable>
           </LinearGradient>
         </View>
-        <View style={styles.footer}>
-          <Text style={styles.footertxt}>Criado por Luis Carvalho - &copy; 2024 LCP</Text>
-        </View>
       </ScrollView>
+      <FooterMain />
     </View>
   );
 }
@@ -129,16 +128,5 @@ const styles = StyleSheet.create({
   citemig: {
     backgroundColor: 'purple',
     color: '#ffffff'
-  },
-  footer: {
-    position: 'relative',
-    fontSize: 12,
-    marginTop: 15,
-    textAlign: 'center',
-    alignItems: 'center',
-    padding: 15
-  },
-  footertxt: {
-    color: '#000000'
   }
 });

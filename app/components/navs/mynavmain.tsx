@@ -1,9 +1,9 @@
 import React from 'react';
-import MainScreen from './screens/main';
-import AboutScreen from './screens/about';
-import NewsScreen from './screens/news';
-import SearchScreen from './screens/search';
-import SettingsScreen from './screens/settings';
+import MainScreen from '../../screens/main';
+import AboutScreen from '../../screens/about';
+import NewsScreen from '../../screens/news';
+import SearchScreen from '../../screens/search';
+import SettingsScreen from '../../screens/settings';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 

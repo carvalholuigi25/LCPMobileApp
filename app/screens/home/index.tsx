@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Text, View, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Link } from 'expo-router';
+import Footer from '@/app/components/footer/footer';
 
 export default function HomeScreen() {
   return (
@@ -10,16 +11,16 @@ export default function HomeScreen() {
       style={[styles.container]}>
       <View>
         <Image source={require('../../../assets/images/logo.png')} style={styles.logo} />
-        <Text style={styles.text}>Luis Carvalho Projetos (LCP) é um projeto de websites, apps e softwares.</Text>
+        <Text style={styles.text}>
+          Luis Carvalho Projects (LCP) is a project of websites, apps and softwares.
+        </Text>
         <Link href="/screens/loading" asChild>
           <Pressable style={styles.btngetstarted}>
             <Text style={styles.btngetstartedtxt}>Get Started</Text>
           </Pressable>
         </Link>
       </View>
-      <View style={styles.footer}>
-        <Text style={styles.footertxt}>Criado por Luis Carvalho - &copy; 2024 LCP</Text>
-      </View>
+      <Footer />
     </LinearGradient>
   );
 }
@@ -69,19 +70,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-  footer : {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    fontSize: 12,
-    marginTop: 15,
-    textAlign: 'center',
-    alignItems: 'center',
-    padding: 15,
-  },
-  footertxt: {
-    color: '#ffffff',
   }
 });

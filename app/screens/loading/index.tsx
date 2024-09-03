@@ -3,6 +3,7 @@ import { Image, Text, View, StyleSheet, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import Loader from '@/components/loader';
+import Footer from '@/app/components/footer/footer';
 
 const LoadingScreen = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +21,6 @@ const LoadingScreen = () => {
         <LinearGradient
             colors={colors}
             style={[styles.container]}>
-
             <StatusBar barStyle="light-content" backgroundColor="#00FF38" />
 
             <View>
@@ -32,9 +32,7 @@ const LoadingScreen = () => {
                 )}
             </View>
 
-            <View style={styles.footer}>
-                <Text style={styles.footertxt}>Criado por Luis Carvalho - &copy; 2024 LCP</Text>
-            </View>
+            <Footer />
         </LinearGradient>
     );
 }
@@ -78,20 +76,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
-    },
-    footer: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      bottom: 0,
-      fontSize: 12,
-      marginTop: 15,
-      textAlign: 'center',
-      alignItems: 'center',
-      padding: 15
-    },
-    footertxt: {
-      color: '#ffffff'
     }
 });
 

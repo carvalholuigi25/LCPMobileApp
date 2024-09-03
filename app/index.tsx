@@ -5,7 +5,7 @@ import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationOp
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import { Text, Image, View, StatusBar, ViewStyle, StyleProp, ImageStyle, TextStyle } from 'react-native';
 import HomeScreen from './screens/home';
-import MyNavMain from './mynavmain';
+import MyNavMain from './components/navs/mynavmain';
 
 const Drawer = createDrawerNavigator();
 

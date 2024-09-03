@@ -64,37 +64,5 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     alignContent: 'center',
     alignSelf: 'center'
-  },
-  btngetstarted: {
-    backgroundColor: '#47FE1A',
-    color: '#000000',
-    padding: 15,
-    borderRadius: 15,
-    marginTop: 15,
-    marginBottom: 15,
-    shadowOpacity: 1,
-    shadowColor: '#000000',
-    shadowRadius: 15,
-    textAlign: 'center',
-  },
-  btngetstartedtxt: {
-    color: '#000000',
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  footer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    fontSize: 12,
-    marginTop: 15,
-    textAlign: 'center',
-    alignItems: 'center',
-    padding: 15
-  },
-  footertxt: {
-    color: '#ffffff'
   }
 });
