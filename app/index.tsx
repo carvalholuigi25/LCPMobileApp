@@ -1,11 +1,14 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationOptions, createDrawerNavigator } from '@react-navigation/drawer';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import { Text, Image, View, StatusBar, ViewStyle, StyleProp, ImageStyle, TextStyle } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import MyNavMain from './components/mynavmain';
 import HomeScreen from './screens/home';
-import MyNavMain from './components/navs/mynavmain';
+import AdminScreen from './screens/admin';
+import UserScreen from './screens/user';
 
 const Drawer = createDrawerNavigator();
 
@@ -108,11 +111,21 @@ function CustomDrawerContent(props: any) {
         padding: 15 
     };
 
+    const navigation = useNavigation<any>();
+
+    const navToHome = () => { 
+        navigation.navigate("index", { screen: 'MyHome' });
+    };
+
+    const navToUser = () => { 
+        navigation.navigate("index", { screen: 'MyUser' });
+    };
+
     return (
         <>
             <DrawerContentScrollView {...props}>
-                <DrawerItem label={props => <GetLogo {...props} />} onPress={() => { }} />
-                <DrawerItem label={props => <GetAvatarDet {...props} />} onPress={() => { }} />
+                <DrawerItem label={props => <GetLogo {...props} />} onPress={navToHome} />
+                <DrawerItem label={props => <GetAvatarDet {...props} />} onPress={navToUser} />
                 <DrawerItemList {...props} />
             </DrawerContentScrollView>
             <View style={viewVerStyle}>
@@ -127,15 +140,32 @@ function CustomDrawerContent(props: any) {
 export default function Index() {
     return (
         <>
-            <StatusBar barStyle="light-content" backgroundColor="#00FF38" />
+            <StatusBar barStyle="dark-content" backgroundColor="#00FF38" />
             <PaperProvider theme={theme}>
                 <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />} initialRouteName="HomeScreen" backBehavior='history' screenOptions={drawOptions}>
                     <Drawer.Screen
-                        name="HomeScreen"
+                        name='MyHome'
                         component={HomeScreen}
                         options={{
-                            title: 'Home',
-                            drawerIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />
+                            title: '',
+                            headerShown: false,
+                            drawerItemStyle: { display: 'none' }
+                        }} />
+
+                    <Drawer.Screen
+                        name='MyUser'
+                        component={UserScreen}
+                        options={{
+                            title: 'User',
+                            drawerItemStyle: { display: 'none' }
+                        }} />
+
+                    <Drawer.Screen
+                        name='AdminScreen'
+                        component={AdminScreen}
+                        options={{
+                            title: 'Admin',
+                            drawerIcon: ({ color }) => <MaterialIcons name="admin-panel-settings" color={color} size={26} />,
                         }} />
 
                     <Drawer.Screen
@@ -143,7 +173,8 @@ export default function Index() {
                         component={MyNavMain}
                         options={{
                             title: 'Main',
-                            drawerIcon: ({ color }) => <MaterialCommunityIcons name="post" color={color} size={26} />
+                            drawerIcon: ({ color }) => <MaterialCommunityIcons name="post" color={color} size={26} />,
+                            drawerItemStyle: { display: 'none' }
                         }} />
                 </Drawer.Navigator>
             </PaperProvider>

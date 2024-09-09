@@ -1,14 +1,20 @@
 import React from 'react';
 import { Text, View, StyleSheet, StatusBar } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import Graph from '@/app/components/graph';
+import LinksProjects from '@/app/components/linksprojects';
+import LinksNews from '@/app/components/linksnews';
 
-export default function MainScreen() {
+export default function AdminScreen() {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <View style={styles.mtitle}>
-          <Text style={styles.title}>Welcome Luis</Text>
+        <View>
+          <Text style={styles.title}>Administration</Text>
         </View>
+        <Graph />
+        <LinksProjects />
+        <LinksNews />
       </ScrollView>
     </View>
   );
@@ -30,18 +36,11 @@ const styles = StyleSheet.create({
   scrollView: {
     marginBottom: StatusBar.currentHeight! + padspc,
   },
-  mtitle: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   title: {
     fontSize: 20,
     marginTop: 15,
     fontWeight: 'bold',
     textAlign: 'center',
-    width: '100%',
     color: '#000000',
     lineHeight: 25
   },

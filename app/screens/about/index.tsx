@@ -3,7 +3,7 @@ import { Image, Text, StyleSheet, Pressable, Linking, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import FooterMain from '@/app/components/footerMain/footerMain';
+import FooterMain from '@/app/components/footerMain';
 
 export default function AboutScreen() {
   return (
@@ -19,11 +19,6 @@ export default function AboutScreen() {
         <Text style={styles.text}>Luis Carvalho Projects (LCP) is a project of websites, apps and softwares.</Text>
         <Text style={styles.text}>Any questions? Contact me.</Text>
         <View style={styles.contactcontainer}>
-          <LinearGradient colors={['#00FF38', '#003499']} style={styles.contactitem}>
-            <Pressable onPress={() => Linking.openURL('mailto:luiscarvalho239@gmail.com')}>
-              <MaterialCommunityIcons name="email" size={30} color={styles.citemmail.color} />
-            </Pressable>
-          </LinearGradient>
           <Pressable onPress={() => Linking.openURL('https://www.facebook.com/lcp2267')} style={[styles.contactitem, styles.citemfb]}>
             <MaterialCommunityIcons name="facebook" size={30} color={styles.citemfb.color} />
           </Pressable>
@@ -33,6 +28,11 @@ export default function AboutScreen() {
           <LinearGradient colors={['#FF9A03', '#9C1C9E']} style={styles.contactitem}>
             <Pressable onPress={() => Linking.openURL('https://www.instagram.com/lcp2267')}>
               <MaterialCommunityIcons name="instagram" size={30} color={styles.citemig.color} />
+            </Pressable>
+          </LinearGradient>
+          <LinearGradient colors={['#00FF38', '#003499']} style={styles.contactitem}>
+            <Pressable onPress={() => Linking.openURL('mailto:luiscarvalho239@gmail.com')}>
+              <MaterialCommunityIcons name="email" size={30} color={styles.citemmail.color} />
             </Pressable>
           </LinearGradient>
         </View>
@@ -107,10 +107,13 @@ const styles = StyleSheet.create({
   contactitem: {
     backgroundColor: 'rgba(250, 250, 250, 1)',
     color: '#000000',
-    borderRadius: 15,
+    borderRadius: 25,
     padding: 5,
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginHorizontal: 5
   },
   citemmail: {

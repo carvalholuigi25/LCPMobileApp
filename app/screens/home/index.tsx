@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Text, View, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Link } from 'expo-router';
-import Footer from '@/app/components/footer/footer';
+import Footer from '@/app/components/footer';
 
 export default function HomeScreen() {
   return (

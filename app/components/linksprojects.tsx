@@ -8,17 +8,17 @@ const LinksProjects: React.FC<any> = () => {
       <View style={styles.mprojects}>
         <Pressable onPress={() => Alert.alert('Websites!', 'Coming soon...')} style={styles.projectsitems}>
           <Text style={styles.projectsitemsct}>0</Text>
-          <Image source={require('../assets/images/projects/iwebsites.png')} style={styles.projectsitemsimg} width={50} height={50} />
+          <Image source={require('../../assets/images/projects/iwebsites.png')} style={styles.projectsitemsimg} width={50} height={50} />
           <Text style={styles.projectsitemstxt}>Websites</Text>
         </Pressable>
         <Pressable onPress={() => Alert.alert('Softwares!', 'Coming soon...')} style={styles.projectsitems}>
           <Text style={styles.projectsitemsct}>0</Text>
-          <Image source={require('../assets/images/projects/isoftwares.png')} style={styles.projectsitemsimg} width={50} height={50} />
+          <Image source={require('../../assets/images/projects/isoftwares.png')} style={styles.projectsitemsimg} width={50} height={50} />
           <Text style={styles.projectsitemstxt}>Softwares</Text>
         </Pressable>
         <Pressable onPress={() => Alert.alert('Apps!', 'Coming soon...')} style={styles.projectsitems}>
           <Text style={styles.projectsitemsct}>0</Text>
-          <Image source={require('../assets/images/projects/iapps.png')} style={styles.projectsitemsimg} width={50} height={50} />
+          <Image source={require('../../assets/images/projects/iapps.png')} style={styles.projectsitemsimg} width={50} height={50} />
           <Text style={styles.projectsitemstxt}>Apps</Text>
         </Pressable>
       </View>
