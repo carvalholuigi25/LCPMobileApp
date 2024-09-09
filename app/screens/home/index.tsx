@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Text, View, StyleSheet, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Link } from 'expo-router';
-import Footer from '@/app/components/footer';
+import FooterFixed from '@/app/components/footers/footerFixed';
 
 export default function HomeScreen() {
   return (
@@ -20,7 +20,7 @@ export default function HomeScreen() {
           </Pressable>
         </Link>
       </View>
-      <Footer />
+      <FooterFixed color={'#fff'} />
     </LinearGradient>
   );
 }

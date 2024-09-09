@@ -3,11 +3,34 @@ import { Image, Text, StyleSheet, Pressable, Linking, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import FooterMain from '@/app/components/footerMain';
+import Footer from '@/app/components/footers/footer';
+
+export function SocialLinks() {
+  return (
+    <View style={styles.contactcontainer}>
+      <Pressable onPress={() => Linking.openURL('https://www.facebook.com/lcp2267')} style={[styles.contactitem, styles.citemfb]}>
+        <MaterialCommunityIcons name="facebook" size={30} color={styles.citemfb.color} />
+      </Pressable>
+      <Pressable onPress={() => Linking.openURL('https://github.com/carvalholuigi25')} style={[styles.contactitem, styles.citemgh]}>
+        <MaterialCommunityIcons name="github" size={30} color={styles.citemgh.color} />
+      </Pressable>
+      <LinearGradient colors={['#FF9A03', '#9C1C9E']} style={styles.contactitem}>
+        <Pressable onPress={() => Linking.openURL('https://www.instagram.com/lcp2267')}>
+          <MaterialCommunityIcons name="instagram" size={30} color={styles.citemig.color} />
+        </Pressable>
+      </LinearGradient>
+      <LinearGradient colors={['#00FF38', '#003499']} style={styles.contactitem}>
+        <Pressable onPress={() => Linking.openURL('mailto:luiscarvalho239@gmail.com')}>
+          <MaterialCommunityIcons name="email" size={30} color={styles.citemmail.color} />
+        </Pressable>
+      </LinearGradient>
+    </View>
+  );
+}
 
 export default function AboutScreen() {
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <ScrollView>
         <View style={styles.mico}>
           <MaterialIcons name="info" color={styles.ico.color} size={styles.mico.fontSize} />
@@ -18,26 +41,9 @@ export default function AboutScreen() {
         <Image source={require('../../../assets/images/logo.png')} style={styles.logo} />
         <Text style={styles.text}>Luis Carvalho Projects (LCP) is a project of websites, apps and softwares.</Text>
         <Text style={styles.text}>Any questions? Contact me.</Text>
-        <View style={styles.contactcontainer}>
-          <Pressable onPress={() => Linking.openURL('https://www.facebook.com/lcp2267')} style={[styles.contactitem, styles.citemfb]}>
-            <MaterialCommunityIcons name="facebook" size={30} color={styles.citemfb.color} />
-          </Pressable>
-          <Pressable onPress={() => Linking.openURL('https://github.com/carvalholuigi25')} style={[styles.contactitem, styles.citemgh]}>
-            <MaterialCommunityIcons name="github" size={30} color={styles.citemgh.color} />
-          </Pressable>
-          <LinearGradient colors={['#FF9A03', '#9C1C9E']} style={styles.contactitem}>
-            <Pressable onPress={() => Linking.openURL('https://www.instagram.com/lcp2267')}>
-              <MaterialCommunityIcons name="instagram" size={30} color={styles.citemig.color} />
-            </Pressable>
-          </LinearGradient>
-          <LinearGradient colors={['#00FF38', '#003499']} style={styles.contactitem}>
-            <Pressable onPress={() => Linking.openURL('mailto:luiscarvalho239@gmail.com')}>
-              <MaterialCommunityIcons name="email" size={30} color={styles.citemmail.color} />
-            </Pressable>
-          </LinearGradient>
-        </View>
+        <SocialLinks />
+        <Footer color={'#000'} />
       </ScrollView>
-      <FooterMain />
     </View>
   );
 }

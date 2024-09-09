@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Image, Text, View, StyleSheet, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
-import Loader from '@/app/components/loader';
-import Footer from '@/app/components/footer';
+import Loader from '@/app/features/loader';
+import FooterFixed from '@/app/components/footers/footerFixed';
 
 const LoadingScreen = () => {
     const [isLoading, setIsLoading] = useState(true);
-
     const navigation = useNavigation<any>();
 
     useEffect(() => {
@@ -32,7 +31,7 @@ const LoadingScreen = () => {
                 )}
             </View>
 
-            <Footer />
+            <FooterFixed color={'#fff'} />
         </LinearGradient>
     );
 }

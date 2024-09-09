@@ -5,7 +5,7 @@ import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerNavigationOp
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import { Text, Image, View, StatusBar, ViewStyle, StyleProp, ImageStyle, TextStyle } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import MyNavMain from './components/mynavmain';
+import MyNavMain from './components/navs/mynavmain';
 import HomeScreen from './screens/home';
 import AdminScreen from './screens/admin';
 import UserScreen from './screens/user';
@@ -161,7 +161,7 @@ export default function Index() {
                         }} />
 
                     <Drawer.Screen
-                        name='AdminScreen'
+                        name='MyAdminScreen'
                         component={AdminScreen}
                         options={{
                             title: 'Admin',

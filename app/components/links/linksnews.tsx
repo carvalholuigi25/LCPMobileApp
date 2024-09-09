@@ -8,7 +8,7 @@ const LinksNews: React.FC<any> = () => {
     <View style={[styles.container]}>
       <View style={styles.mnews}>
           <TouchableOpacity style={styles.newsitem} onPress={() => Alert.alert('News 1!', 'Coming soon...')}>
-            <ImageBackground source={require('../../assets/images/technology.jpeg')} style={styles.newsitemimg} imageStyle={styles.newsitemimgs2}>
+            <ImageBackground source={require('../../../assets/images/technology.jpeg')} style={styles.newsitemimg} imageStyle={styles.newsitemimgs2}>
               <LinearGradient colors={['transparent', '#000']} style={styles.newssubitem}>
                 <Text style={styles.newssubitemtxt}>News 1</Text>
               </LinearGradient>
@@ -16,7 +16,7 @@ const LinksNews: React.FC<any> = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.newsitem} onPress={() => Alert.alert('News 2!', 'Coming soon...')}>
-            <ImageBackground source={require('../../assets/images/technology.jpeg')} style={styles.newsitemimg} imageStyle={styles.newsitemimgs2}>
+            <ImageBackground source={require('../../../assets/images/technology.jpeg')} style={styles.newsitemimg} imageStyle={styles.newsitemimgs2}>
               <LinearGradient colors={['transparent', '#000']} style={styles.newssubitem}>
                 <Text style={styles.newssubitemtxt}>News 2</Text>
               </LinearGradient>
@@ -24,7 +24,7 @@ const LinksNews: React.FC<any> = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.newsitem} onPress={() => Alert.alert('News 3!', 'Coming soon...')}>
-            <ImageBackground source={require('../../assets/images/technology.jpeg')} style={styles.newsitemimg} imageStyle={styles.newsitemimgs2}>
+            <ImageBackground source={require('../../../assets/images/technology.jpeg')} style={styles.newsitemimg} imageStyle={styles.newsitemimgs2}>
               <LinearGradient colors={['transparent', '#000']} style={styles.newssubitem}>
                 <Text style={styles.newssubitemtxt}>News 3</Text>
               </LinearGradient>

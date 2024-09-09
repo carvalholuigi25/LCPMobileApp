@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View, StyleSheet, StatusBar } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import Graph from '@/app/components/graph';
-import LinksProjects from '@/app/components/linksprojects';
-import LinksNews from '@/app/components/linksnews';
+import Graph from '@/app/features/graph';
+import LinksProjects from '@/app/components/links/linksprojects';
+import LinksNews from '@/app/components/links/linksnews';
 
 export default function AdminScreen() {
   return (
