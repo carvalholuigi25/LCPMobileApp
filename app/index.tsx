@@ -46,7 +46,7 @@ function GetLogo(props: any) {
     };
 
     return (
-        <Image source={require('../assets/images/logo_compact.png')} style={logostyles} />
+        <Image source={require('assets/images/logo_compact.png')} style={logostyles} />
     );
 }
 
@@ -82,7 +82,7 @@ function GetAvatarDet(props: any) {
     return (
         <View style={viewAvStyle}>
             <Image 
-                source={require('../assets/images/users/luis.jpg')} 
+                source={require('assets/images/users/luis.jpg')} 
                 style={[imgAvStyle, {
                     padding: 0, 
                     margin: 0, 

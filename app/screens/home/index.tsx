@@ -10,7 +10,7 @@ export default function HomeScreen() {
       colors={colors}
       style={[styles.container]}>
       <View>
-        <Image source={require('../../../assets/images/logo.png')} style={styles.logo} />
+        <Image source={require('assets/images/logo.png')} style={styles.logo} />
         <Text style={styles.text}>
           Luis Carvalho Projects (LCP) is a project of websites, apps and softwares.
         </Text>

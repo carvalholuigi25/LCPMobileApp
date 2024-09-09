@@ -7,8 +7,8 @@ export default function UserScreen() {
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.mavatar}>
-          <Image source={require('../../../assets/images/users/covers/luis_c.jpeg')} style={styles.coveravatar} />
-          <Image source={require('../../../assets/images/users/luis.jpg')} style={styles.logoavatar} />
+          <Image source={require('assets/images/users/covers/luis_c.jpeg')} style={styles.coveravatar} />
+          <Image source={require('assets/images/users/luis.jpg')} style={styles.logoavatar} />
         </View>
         
         <View style={styles.munameavatar}>

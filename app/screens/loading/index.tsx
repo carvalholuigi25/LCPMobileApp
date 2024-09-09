@@ -23,7 +23,7 @@ const LoadingScreen = () => {
             <StatusBar barStyle="dark-content" backgroundColor="#00FF38" />
 
             <View>
-                <Image source={require('../../../assets/images/logo.png')} style={styles.logo} />
+                <Image source={require('assets/images/logo.png')} style={styles.logo} />
                 {isLoading ? (
                     <Loader />
                 ) : (

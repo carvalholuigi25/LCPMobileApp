@@ -38,7 +38,7 @@ export default function AboutScreen() {
             About
           </Text>
         </View>
-        <Image source={require('../../../assets/images/logo.png')} style={styles.logo} />
+        <Image source={require('assets/images/logo.png')} style={styles.logo} />
         <Text style={styles.text}>Luis Carvalho Projects (LCP) is a project of websites, apps and softwares.</Text>
         <Text style={styles.text}>Any questions? Contact me.</Text>
         <SocialLinks />
