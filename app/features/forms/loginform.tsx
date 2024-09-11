@@ -1,48 +1,178 @@
+import CheckBox from 'expo-checkbox';
+import { Link } from '@react-navigation/native';
 import { Formik, ErrorMessage } from 'formik';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
+import { Pressable, Text, TextInput, View, StyleSheet, Button } from 'react-native';
 import * as Yup from 'yup';
 
 const userSchema = Yup.object({
-    name: Yup.string().required('Name is required'),
+    username: Yup.string().required('Username is required'),
     password: Yup.string().min(2, 'Password is too short').required('Password is required'),
 });
 
 const LoginForm = () => {
+    const [rememberme, setRememberMe] = useState(false);
     const initialValues = { username: '', password: '' };
-    const handleSubmit = (values: any) => {
+
+    const handleSubmit = (values: any, { resetForm }: any) => {
         // Handle form submission here
         console.log(values);
+        resetForm();
     };
+
     return (
         <Formik initialValues={initialValues} validationSchema={userSchema} onSubmit={handleSubmit}>
-            {({ handleChange, handleBlur, values }) => (
-                <View style={{flexDirection: 'column'}}>
-                    <Text style={{marginTop: 5, textAlign: 'center', color: '#fff'}}>Username</Text>
+            {({ handleChange, handleBlur, resetForm, isSubmitting, values, errors, touched }) => (
+                <View style={styles.mlogfrm}>
+                    <Text style={styles.frmlbl}>Username</Text>
                     <TextInput
+                        placeholder='Write your username here...'
                         onChangeText={handleChange('username')}
                         onBlur={handleBlur('username')}
                         value={values.username}
-                        style={{backgroundColor: 'white', borderRadius: 50, width: 300, marginTop: 5, paddingVertical: 5, paddingHorizontal: 15}}
+                        style={styles.frminp}
                     />
-                    <ErrorMessage name="username" />
 
-                    <Text style={{marginTop: 5, textAlign: 'center', color: '#fff'}}>Password</Text>
+                    {errors.username && touched.username && (
+                        <Text style={styles.frminperr}>
+                            <ErrorMessage name="username" />
+                        </Text>
+                    )}
+
+                    <Text style={styles.frmlbl}>Password</Text>
                     <TextInput
                         secureTextEntry={true}
+                        placeholder='Write your password here...'
                         onChangeText={handleChange('password')}
                         onBlur={handleBlur('password')}
                         value={values.password}
-                        style={{backgroundColor: 'white', borderRadius: 50, width: 300, marginTop: 5, paddingVertical: 5, paddingHorizontal: 15}}
+                        style={styles.frminp}
                     />
-                    <ErrorMessage name="password" />
 
-                    <Pressable onPress={handleSubmit} style={{backgroundColor: '#00FF38', padding: 10, marginTop: 15, marginBottom: 15, borderRadius: 25, width: 'auto', alignItems: 'center', justifyContent: 'center'}}>
-                        <Text>Submit</Text>
-                    </Pressable>
+                    {errors.password && touched.password && (
+                        <Text style={styles.frminperr}>
+                            <ErrorMessage name="password" />
+                        </Text>
+                    )}
+
+                    <View style={styles.mlnks}>
+                        <View style={styles.mchkrememberme}>
+                            <CheckBox
+                                disabled={false}
+                                value={rememberme}
+                                onValueChange={(newValue) => setRememberMe(newValue)}
+                                style={styles.chkrememberme}
+                            />
+                            <Text style={styles.txtrememberme}>Stay logged in?</Text>
+                        </View>
+
+                        <Link to='/screens/auth/recover' style={styles.lnkrecover}>
+                            Forgot Password?
+                        </Link>
+                    </View>
+
+                    <View style={styles.mfrmbtns}>
+                        <Pressable onPress={() => resetForm()} style={styles.frmbtnclear}>
+                            <Text>Clear</Text>
+                        </Pressable>
+
+                        <Pressable onPress={() => {
+                            console.log(values);
+                            resetForm();
+                        }} style={styles.frmbtnsub}>
+                            <Text>Login</Text>
+                        </Pressable>
+                    </View>
+
                 </View>
             )}
         </Formik>
     );
 }
+
+const styles = StyleSheet.create({
+    mlogfrm: {
+        flexDirection: 'column',
+        marginTop: 0,
+        padding: 15,
+    },
+    frmlbl: {
+        marginTop: 15,
+        textAlign: 'center',
+        color: '#fff'
+    },
+    frminp: {
+        backgroundColor: 'white',
+        borderRadius: 50,
+        width: '100%',
+        marginTop: 15,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        paddingVertical: 5,
+        paddingHorizontal: 15,
+        textAlign: 'center'
+    },
+    frminperr: {
+        color: '#fff',
+        padding: 5,
+        textAlign: 'center'
+    },
+    mlnks: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        textAlign: 'center',
+        alignItems: 'center',
+        marginTop: 15,
+        paddingHorizontal: 0
+    },
+    mchkrememberme: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        textAlign: 'center',
+        alignItems: 'center'
+    },
+    chkrememberme: {
+        width: 25,
+        height: 25,
+        backgroundColor: '#fff',
+        borderColor: '#fff',
+        borderRadius: 30
+    },
+    txtrememberme: {
+        textAlign: 'left',
+        marginLeft: 10,
+        color: '#fff'
+    },
+    lnkrecover: {
+        textAlign: 'right',
+        color: '#fff',
+        fontWeight: 'normal'
+    },
+    mfrmbtns: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 0,
+        marginTop: 10,
+    },
+    frmbtnclear: {
+        backgroundColor: '#12C2FF',
+        padding: 10,
+        marginTop: 15,
+        marginBottom: 15,
+        borderRadius: 25,
+        width: '50%',
+        alignItems: 'center'
+    },
+    frmbtnsub: {
+        backgroundColor: '#00FF38',
+        padding: 10,
+        marginTop: 15,
+        marginLeft: 15,
+        marginBottom: 15,
+        borderRadius: 25,
+        width: '50%',
+        alignItems: 'center'
+    }
+});
 
 export default LoginForm;

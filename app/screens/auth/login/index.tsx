@@ -1,51 +1,53 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, View, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Link } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import FooterFixed from '@/app/components/footers/footerFixed';
 import LoginForm from '@/app/features/forms/loginform';
+import Footer from '@/app/components/footers/footer';
 
 export default function LoginScreen() {
   return (
     <LinearGradient
       colors={colors}
       style={[styles.container]}>
-      <View>
-        <Image source={require('assets/images/logo.png')} style={styles.logo} />
-        <Text style={styles.title}>Login</Text>
-      </View>
-      <LoginForm />
-      <View>
-        <Link to='/screens/auth/recover' style={{ color: '#00FF38', fontWeight: 'bold' }}>
-          You forgot your account credientials? Click here.
-        </Link>
-        <Link to='/screens/auth/register' style={{ color: '#00FF38', fontWeight: 'bold' }}>
-          Don't have an account yet? Register here.
-        </Link>
-      </View>
-      <View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{ flex: 1, height: 1, backgroundColor: '#fff' }} />
-          <View>
-            <Text style={{ width: '100%', padding: 5, textAlign: 'center', color: '#fff' }}>Or login with</Text>
-          </View>
-          <View style={{ flex: 1, height: 1, backgroundColor: '#fff' }} />
+      <ScrollView>
+        <View>
+          <Image source={require('assets/images/logo.png')} style={styles.logo} />
+          <Text style={styles.title}>Login</Text>
         </View>
 
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <View style={{ width: 40, height: 40, borderRadius: 50, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-            <MaterialCommunityIcons name='google' size={15} />
+        <View style={styles.subcontainer}>
+          <LoginForm />
+          <View style={styles.vmlnk}>
+            <Link to='/screens/auth/register' style={styles.lnkregister}>
+              Don't have an account yet? Register here.
+            </Link>
           </View>
-          <View style={{ width: 40, height: 40, borderRadius: 50, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff', marginLeft: 15 }}>
-            <MaterialCommunityIcons name='facebook' size={15} />
-          </View>
-          <View style={{ width: 40, height: 40, borderRadius: 50, padding: 0, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff', marginLeft: 15 }}>
-            <MaterialCommunityIcons name='microsoft' size={15} />
+          <View style={styles.vmlinesep}>
+            <View style={styles.mlinesep}>
+              <View style={styles.linesepleft} />
+              <View>
+                <Text style={styles.lineseptxt}>Or login with</Text>
+              </View>
+              <View style={styles.linesepright} />
+            </View>
+
+            <View style={styles.msociallog}>
+              <View style={styles.sociallogbtn}>
+                <MaterialCommunityIcons name='google' size={styles.sociallogbtnico.fontSize} />
+              </View>
+              <View style={styles.sociallogbtn}>
+                <MaterialCommunityIcons name='facebook' size={styles.sociallogbtnico.fontSize} />
+              </View>
+              <View style={styles.sociallogbtn}>
+                <MaterialCommunityIcons name='microsoft' size={styles.sociallogbtnico.fontSize} />
+              </View>
+            </View>
           </View>
         </View>
-      </View>
-      <FooterFixed color={'#fff'} />
+        <Footer color={'#fff'} />
+      </ScrollView>
     </LinearGradient>
   );
 }
@@ -59,8 +61,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     marginTop: 15,
     marginBottom: 15,
     resizeMode: 'cover',
@@ -68,40 +70,75 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     marginTop: 15,
-    fontWeight: 'normal',
+    marginBottom: 15,
+    fontWeight: 'bold',
     textAlign: 'center',
     color: '#ffffff',
     lineHeight: 25
   },
-  frmlog: {
-    color: '#ffffff',
-    flex: 1,
+  subcontainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.17)',
+    borderRadius: 30,
     padding: 15,
-    marginTop: 15,
-    textAlign: 'center',
+    marginLeft: 15,
+    marginRight: 15,
+  },
+  lnkregister: {
+    color: '#00FF38',
+    fontWeight: 'bold'
+  },
+  vmlnk: {
+    marginTop: 0,
+    flexDirection: 'row',
     justifyContent: 'center',
+    textAlign: 'center'
+  },
+  vmlinesep: {
+    marginTop: 15
+  },
+  mlinesep: {
+    paddingHorizontal: 15,
+    width: '100%',
+    flexDirection: 'row',
     alignItems: 'center'
   },
-  inplog: {
+  linesepleft: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#fff'
+  },
+  lineseptxt: {
     width: '100%',
-    padding: 15,
-    borderRadius: 15
+    padding: 5,
+    textAlign: 'center',
+    color: '#fff'
   },
-  inpchlog: {
-    width: 40,
-    height: 40,
+  linesepright: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#fff'
+  },
+  msociallog: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  sociallogbtn: {
+    width: 45,
+    height: 45,
+    borderRadius: 50,
     padding: 0,
-    borderRadius: 40,
-    backgroundColor: '#ffffff'
+    marginTop: 15,
+    marginBottom: 15,
+    marginLeft: 5,
+    marginRight: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
-  btnclear: {
-    color: '#ADD8E6',
-    padding: 15
-  },
-  btnlog: {
-    color: '#00FF38',
-    padding: 15
+  sociallogbtnico: {
+    fontSize: 23
   }
 });
