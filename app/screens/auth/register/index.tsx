@@ -1,26 +1,26 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, View, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Link } from '@react-navigation/native';
-import FooterFixed from '@/app/components/footers/footerFixed';
 import RegisterForm from '@/app/features/forms/regform';
+import Footer from '@/app/components/footers/footer';
 
 export default function RegisterScreen() {
   return (
     <LinearGradient
       colors={colors}
       style={[styles.container]}>
-      <View>
-        <Image source={require('assets/images/logo.png')} style={styles.logo} />
-        <Text style={styles.title}>Register</Text>
-      </View>
-      <RegisterForm />
-      <View>
-        <Link to='/screens/auth/login'>
-          Back to login
-        </Link>
-      </View>
-      <FooterFixed color={'#fff'} />
+      <ScrollView>
+        <View>
+          <Image source={require('assets/images/logo.png')} style={styles.logo} />
+          <Text style={styles.title}>Register</Text>
+        </View>
+
+        <View style={styles.subcontainer}>
+          <RegisterForm />
+        </View>
+        
+        <Footer color={'#fff'} />
+      </ScrollView>
     </LinearGradient>
   );
 }
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     marginTop: 15,
     marginBottom: 15,
     resizeMode: 'cover',
@@ -43,33 +43,19 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     marginTop: 15,
-    fontWeight: 'normal',
+    marginBottom: 15,
+    fontWeight: 'bold',
     textAlign: 'center',
     color: '#ffffff',
     lineHeight: 25
   },
-  frmreg: {
-    color: '#ffffff',
-    flex: 1,
+  subcontainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.17)',
+    borderRadius: 30,
     padding: 15,
-    marginTop: 15,
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  inpreg: {
-    width: '100%',
-    padding: 15,
-    borderRadius: 15
-  },
-  btnclear: {
-    color: '#ADD8E6',
-    padding: 15
-  },
-  btnreg: {
-    color: '#00FF38',
-    padding: 15
+    marginLeft: 15,
+    marginRight: 15,
   }
 });

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, View, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Link } from '@react-navigation/native';
-import FooterFixed from '@/app/components/footers/footerFixed';
+import Footer from '@/app/components/footers/footer';
 import RecoverForm from '@/app/features/forms/recform';
 
 export default function RecoverScreen() {
@@ -10,17 +9,18 @@ export default function RecoverScreen() {
     <LinearGradient
       colors={colors}
       style={[styles.container]}>
-      <View>
-        <Image source={require('assets/images/logo.png')} style={styles.logo} />
-        <Text style={styles.title}>Recover your account credientials</Text>
-      </View>
-      <RecoverForm />
-      <View>
-        <Link to='/screens/auth/login'>
-          Back to login
-        </Link>
-      </View>
-      <FooterFixed color={'#fff'} />
+      <ScrollView>
+        <View>
+          <Image source={require('assets/images/logo.png')} style={styles.logo} />
+          <Text style={styles.title}>Recover your account credientials</Text>
+        </View>
+
+        <View style={styles.subcontainer}>
+          <RecoverForm />
+        </View>
+
+        <Footer color={'#fff'} />
+      </ScrollView>
     </LinearGradient>
   );
 }
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     marginTop: 15,
     marginBottom: 15,
     resizeMode: 'cover',
@@ -43,33 +43,19 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   title: {
-    fontSize: 16,
+    fontSize: 20,
     marginTop: 15,
-    fontWeight: 'normal',
+    marginBottom: 15,
+    fontWeight: 'bold',
     textAlign: 'center',
     color: '#ffffff',
     lineHeight: 25
   },
-  frmrec: {
-    color: '#ffffff',
-    flex: 1,
+  subcontainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.17)',
+    borderRadius: 30,
     padding: 15,
-    marginTop: 15,
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  inprec: {
-    width: '100%',
-    padding: 15,
-    borderRadius: 15
-  },
-  btnclear: {
-    color: '#ADD8E6',
-    padding: 15
-  },
-  btnrec: {
-    color: '#00FF38',
-    padding: 15
+    marginLeft: 15,
+    marginRight: 15,
   }
 });

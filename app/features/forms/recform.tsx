@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 const userSchema = Yup.object({
     username: Yup.string().required('Username is required'),
-    password: Yup.string().min(2, 'Password is too short').required('Password is required'),
+    password: Yup.string().min(4, 'Password is too short').required('Password is required'),
 });
 
 const RecoverForm = () => {
@@ -16,30 +16,51 @@ const RecoverForm = () => {
 
     return (
         <Formik initialValues={initialValues} validationSchema={userSchema} onSubmit={handleSubmit}>
-            {({ handleChange, handleBlur, values }) => (
+            {({ handleChange, handleBlur, resetForm, isSubmitting, values, errors, touched }) => (
                 <View style={styles.mrecfrm}>
                     <Text style={styles.frmlbl}>Username</Text>
                     <TextInput
+                        placeholder='Write your username here...'
                         onChangeText={handleChange('username')}
                         onBlur={handleBlur('username')}
                         value={values.username}
                         style={styles.frminp}
                     />
-                    <ErrorMessage name="username" />
+
+                    {errors.username && touched.username && (
+                        <Text style={styles.frminperr}>
+                            <ErrorMessage name="username" />
+                        </Text>
+                    )}
 
                     <Text style={styles.frmlbl}>Password</Text>
                     <TextInput
                         secureTextEntry={true}
+                        placeholder='Write your password here...'
                         onChangeText={handleChange('password')}
                         onBlur={handleBlur('password')}
                         value={values.password}
                         style={styles.frminp}
                     />
-                    <ErrorMessage name="password" />
 
-                    <Pressable onPress={handleSubmit} style={styles.frmbtnsub}>
-                        <Text>Submit</Text>
-                    </Pressable>
+                    {errors.password && touched.password && (
+                        <Text style={styles.frminperr}>
+                            <ErrorMessage name="password" />
+                        </Text>
+                    )}
+
+                    <View style={styles.mfrmbtns}>
+                        <Pressable onPress={() => resetForm()} style={styles.frmbtnclear}>
+                            <Text>Clear</Text>
+                        </Pressable>
+
+                        <Pressable onPress={() => {
+                            console.log("Recovering...");
+                            resetForm();
+                        }} style={styles.frmbtnsub}>
+                            <Text>Recover</Text>
+                        </Pressable>
+                    </View>
                 </View>
             )}
         </Formik>
@@ -48,30 +69,55 @@ const RecoverForm = () => {
 
 const styles = StyleSheet.create({
     mrecfrm: {
-        flexDirection: 'column'
+        flexDirection: 'column',
+        marginTop: 0,
+        padding: 15
     },
     frmlbl: {
-        marginTop: 5, 
+        marginTop: 15, 
         textAlign: 'center', 
         color: '#fff'
     },
     frminp: {
-        backgroundColor: 'white', 
-        borderRadius: 50, 
-        width: 300, 
-        marginTop: 5, 
-        paddingVertical: 5, 
-        paddingHorizontal: 15
+        backgroundColor: 'white',
+        borderRadius: 50,
+        width: '100%',
+        marginTop: 15,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        paddingVertical: 5,
+        paddingHorizontal: 15,
+        textAlign: 'center'
+    },
+    frminperr: {
+        color: '#fff',
+        padding: 5,
+        textAlign: 'center'
+    },
+    mfrmbtns: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 0,
+        marginTop: 10,
+    },
+    frmbtnclear: {
+        backgroundColor: '#12C2FF',
+        padding: 10,
+        marginTop: 15,
+        marginBottom: 15,
+        borderRadius: 25,
+        width: '50%',
+        alignItems: 'center'
     },
     frmbtnsub: {
-        backgroundColor: '#00FF38', 
-        padding: 10, 
-        marginTop: 15, 
-        marginBottom: 15, 
-        borderRadius: 25, 
-        width: 'auto', 
-        alignItems: 'center', 
-        justifyContent: 'center'
+        backgroundColor: '#00FF38',
+        padding: 10,
+        marginTop: 15,
+        marginLeft: 15,
+        marginBottom: 15,
+        borderRadius: 25,
+        width: '50%',
+        alignItems: 'center'
     }
 });
 

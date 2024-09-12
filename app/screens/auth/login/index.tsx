@@ -19,11 +19,13 @@ export default function LoginScreen() {
 
         <View style={styles.subcontainer}>
           <LoginForm />
+          
           <View style={styles.vmlnk}>
             <Link to='/screens/auth/register' style={styles.lnkregister}>
               Don't have an account yet? Register here.
             </Link>
           </View>
+
           <View style={styles.vmlinesep}>
             <View style={styles.mlinesep}>
               <View style={styles.linesepleft} />
@@ -46,6 +48,7 @@ export default function LoginScreen() {
             </View>
           </View>
         </View>
+        
         <Footer color={'#fff'} />
       </ScrollView>
     </LinearGradient>

@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 
 const userSchema = Yup.object({
     username: Yup.string().required('Username is required'),
-    password: Yup.string().min(2, 'Password is too short').required('Password is required'),
+    password: Yup.string().min(4, 'Password is too short').required('Password is required'),
 });
 
 const LoginForm = () => {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     mlogfrm: {
         flexDirection: 'column',
         marginTop: 0,
-        padding: 15,
+        padding: 15
     },
     frmlbl: {
         marginTop: 15,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     },
     mlnks: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         textAlign: 'center',
         alignItems: 'center',
         marginTop: 15,
