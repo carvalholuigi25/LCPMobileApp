@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Image, Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Link } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -19,7 +19,7 @@ export default function LoginScreen() {
 
         <View style={styles.subcontainer}>
           <LoginForm />
-          
+
           <View style={styles.vmlnk}>
             <Link to='/screens/auth/register' style={styles.lnkregister}>
               Don't have an account yet? Register here.
@@ -36,19 +36,19 @@ export default function LoginScreen() {
             </View>
 
             <View style={styles.msociallog}>
-              <View style={styles.sociallogbtn}>
+              <TouchableOpacity style={styles.sociallogbtn}>
                 <MaterialCommunityIcons name='google' size={styles.sociallogbtnico.fontSize} />
-              </View>
-              <View style={styles.sociallogbtn}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.sociallogbtn}>
                 <MaterialCommunityIcons name='facebook' size={styles.sociallogbtnico.fontSize} />
-              </View>
-              <View style={styles.sociallogbtn}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.sociallogbtn}>
                 <MaterialCommunityIcons name='microsoft' size={styles.sociallogbtnico.fontSize} />
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
-        
+
         <Footer color={'#fff'} />
       </ScrollView>
     </LinearGradient>
@@ -139,7 +139,15 @@ const styles = StyleSheet.create({
     marginRight: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 10
   },
   sociallogbtnico: {
     fontSize: 23

@@ -1,5 +1,5 @@
 import { Formik, ErrorMessage } from 'formik';
-import { TextInput, Text, View, StyleSheet, Pressable } from 'react-native';
+import { TextInput, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Yup from 'yup';
 
 const userSchema = Yup.object({
@@ -66,16 +66,16 @@ const RegisterForm = () => {
                     )}
 
                     <View style={styles.mfrmbtns}>
-                        <Pressable onPress={() => resetForm()} style={styles.frmbtnclear}>
+                        <TouchableOpacity onPress={() => resetForm()} style={styles.frmbtnclear}>
                             <Text>Clear</Text>
-                        </Pressable>
+                        </TouchableOpacity>
 
-                        <Pressable onPress={() => {
+                        <TouchableOpacity onPress={() => {
                             console.log("Registering...");
                             resetForm();
                         }} style={styles.frmbtnsub}>
                             <Text>Register</Text>
-                        </Pressable>
+                        </TouchableOpacity>
                     </View>
                 </View>
             )}
@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     frmlbl: {
         marginTop: 15, 
         textAlign: 'center', 
+        fontWeight: 'bold',
         color: '#fff'
     },
     frminp: {
@@ -103,11 +104,20 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         paddingVertical: 5,
         paddingHorizontal: 15,
-        textAlign: 'center'
+        textAlign: 'center',
+        shadowColor: "#000000",
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10
     },
     frminperr: {
         color: '#fff',
         padding: 5,
+        marginTop: 15,
         textAlign: 'center'
     },
     mfrmbtns: {
@@ -123,7 +133,15 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderRadius: 25,
         width: '50%',
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowColor: "#000000",
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10
     },
     frmbtnsub: {
         backgroundColor: '#00FF38',
@@ -133,7 +151,15 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderRadius: 25,
         width: '50%',
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowColor: "#000000",
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10
     }
 });
 

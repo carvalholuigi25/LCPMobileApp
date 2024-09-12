@@ -17,7 +17,7 @@ const theme = {
     colors: {
         ...DefaultTheme.colors,
         primary: 'tomato',
-        secondary: 'yellow',
+        secondary: 'yellow'
     },
 };
 

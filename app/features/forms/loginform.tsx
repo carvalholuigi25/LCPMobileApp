@@ -1,30 +1,35 @@
-import CheckBox from 'expo-checkbox';
 import { Link } from '@react-navigation/native';
 import { Formik, ErrorMessage } from 'formik';
-import { useState } from 'react';
-import { Pressable, Text, TextInput, View, StyleSheet, Button } from 'react-native';
+import { TextInput, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import CheckBox from 'expo-checkbox';
 import * as Yup from 'yup';
 
 const userSchema = Yup.object({
     username: Yup.string().required('Username is required'),
     password: Yup.string().min(4, 'Password is too short').required('Password is required'),
+    rememberme: Yup.bool()
 });
 
 const LoginForm = () => {
-    const [rememberme, setRememberMe] = useState(false);
-    const initialValues = { username: '', password: '' };
+    const initialValues = { username: '', password: '', rememberme: false };
 
-    const handleSubmit = (values: any, { resetForm }: any) => {
+    const handleClear = ({resetForm}: any) => {
+        resetForm()
+    };
+
+    const handleSubmit = (values: any, { resetForm, setSubmitting }: any) => {
         // Handle form submission here
         console.log(values);
+        setSubmitting(false);
         resetForm();
     };
 
     return (
         <Formik initialValues={initialValues} validationSchema={userSchema} onSubmit={handleSubmit}>
-            {({ handleChange, handleBlur, resetForm, isSubmitting, values, errors, touched }) => (
+            {({ handleChange, handleBlur, resetForm, values, errors, touched, setFieldValue, setSubmitting }) => (
                 <View style={styles.mlogfrm}>
                     <Text style={styles.frmlbl}>Username</Text>
+                    
                     <TextInput
                         placeholder='Write your username here...'
                         onChangeText={handleChange('username')}
@@ -40,6 +45,7 @@ const LoginForm = () => {
                     )}
 
                     <Text style={styles.frmlbl}>Password</Text>
+
                     <TextInput
                         secureTextEntry={true}
                         placeholder='Write your password here...'
@@ -59,11 +65,14 @@ const LoginForm = () => {
                         <View style={styles.mchkrememberme}>
                             <CheckBox
                                 disabled={false}
-                                value={rememberme}
-                                onValueChange={(newValue) => setRememberMe(newValue)}
+                                value={values.rememberme}
+                                onValueChange={(nextValue) => setFieldValue('rememberme', nextValue)}
                                 style={styles.chkrememberme}
                             />
-                            <Text style={styles.txtrememberme}>Stay logged in?</Text>
+                            
+                            <Text style={styles.txtrememberme}>
+                                Stay logged in?
+                            </Text>
                         </View>
 
                         <Link to='/screens/auth/recover' style={styles.lnkrecover}>
@@ -72,18 +81,14 @@ const LoginForm = () => {
                     </View>
 
                     <View style={styles.mfrmbtns}>
-                        <Pressable onPress={() => resetForm()} style={styles.frmbtnclear}>
+                        <TouchableOpacity onPress={() => handleClear({resetForm})} style={styles.frmbtnclear}>
                             <Text>Clear</Text>
-                        </Pressable>
+                        </TouchableOpacity>
 
-                        <Pressable onPress={() => {
-                            console.log(values);
-                            resetForm();
-                        }} style={styles.frmbtnsub}>
+                        <TouchableOpacity onPress={() => { handleSubmit(values, { resetForm, setSubmitting })}} style={styles.frmbtnsub} disabled={!values.username || !values.password ? true : false}>
                             <Text>Login</Text>
-                        </Pressable>
+                        </TouchableOpacity>
                     </View>
-
                 </View>
             )}
         </Formik>
@@ -99,22 +104,33 @@ const styles = StyleSheet.create({
     frmlbl: {
         marginTop: 15,
         textAlign: 'center',
+        fontWeight: 'bold',
         color: '#fff'
     },
     frminp: {
         backgroundColor: 'white',
         borderRadius: 50,
+        fontSize: 14,
         width: '100%',
         marginTop: 15,
         marginLeft: 'auto',
         marginRight: 'auto',
         paddingVertical: 5,
         paddingHorizontal: 15,
-        textAlign: 'center'
+        textAlign: 'center',
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10
     },
     frminperr: {
         color: '#fff',
         padding: 5,
+        marginTop: 15,
         textAlign: 'center'
     },
     mlnks: {
@@ -129,14 +145,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         textAlign: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     chkrememberme: {
         width: 25,
         height: 25,
         backgroundColor: '#fff',
         borderColor: '#fff',
-        borderRadius: 30
+        borderRadius: 30,
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10
     },
     txtrememberme: {
         textAlign: 'left',
@@ -161,7 +185,15 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderRadius: 25,
         width: '50%',
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10
     },
     frmbtnsub: {
         backgroundColor: '#00FF38',
@@ -171,7 +203,15 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderRadius: 25,
         width: '50%',
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10
     }
 });
 
