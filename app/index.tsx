@@ -9,7 +9,6 @@ import MyNavMain from './components/navs/mynavmain';
 import HomeScreen from './screens/home';
 import AdminScreen from './screens/admin';
 import UserScreen from './screens/user';
-import "formik-stepper/dist/style.css";
 
 const Drawer = createDrawerNavigator();
 

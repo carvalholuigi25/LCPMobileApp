@@ -16,18 +16,18 @@ const RecoverForm = () => {
 
     return (
         <Formik initialValues={initialValues} validationSchema={userSchema} onSubmit={handleSubmit}>
-            {({ handleChange, handleBlur, resetForm, isSubmitting, values, errors, touched }) => (
+            {props => (
                 <View style={styles.mrecfrm}>
                     <Text style={styles.frmlbl}>Username</Text>
                     <TextInput
                         placeholder='Write your username here...'
-                        onChangeText={handleChange('username')}
-                        onBlur={handleBlur('username')}
-                        value={values.username}
+                        onChangeText={props.handleChange('username')}
+                        onBlur={props.handleBlur('username')}
+                        value={props.values.username}
                         style={styles.frminp}
                     />
 
-                    {errors.username && touched.username && (
+                    {props.errors.username && props.touched.username && (
                         <Text style={styles.frminperr}>
                             <ErrorMessage name="username" />
                         </Text>
@@ -37,27 +37,24 @@ const RecoverForm = () => {
                     <TextInput
                         secureTextEntry={true}
                         placeholder='Write your password here...'
-                        onChangeText={handleChange('password')}
-                        onBlur={handleBlur('password')}
-                        value={values.password}
+                        onChangeText={props.handleChange('password')}
+                        onBlur={props.handleBlur('password')}
+                        value={props.values.password}
                         style={styles.frminp}
                     />
 
-                    {errors.password && touched.password && (
+                    {props.errors.password && props.touched.password && (
                         <Text style={styles.frminperr}>
                             <ErrorMessage name="password" />
                         </Text>
                     )}
 
                     <View style={styles.mfrmbtns}>
-                        <TouchableOpacity onPress={() => resetForm()} style={styles.frmbtnclear}>
+                        <TouchableOpacity onPress={() => { props.resetForm(); }} style={styles.frmbtnclear}>
                             <Text>Clear</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => {
-                            console.log("Recovering...");
-                            resetForm();
-                        }} style={styles.frmbtnsub}>
+                        <TouchableOpacity onPress={() => { props.handleSubmit(); }} style={styles.frmbtnsub}>
                             <Text>Recover</Text>
                         </TouchableOpacity>
                     </View>

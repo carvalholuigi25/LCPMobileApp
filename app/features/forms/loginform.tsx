@@ -13,10 +13,6 @@ const userSchema = Yup.object({
 const LoginForm = () => {
     const initialValues = { username: '', password: '', rememberme: false };
 
-    const handleClear = ({resetForm}: any) => {
-        resetForm()
-    };
-
     const handleSubmit = (values: any, { resetForm, setSubmitting }: any) => {
         // Handle form submission here
         console.log(values);
@@ -26,19 +22,19 @@ const LoginForm = () => {
 
     return (
         <Formik initialValues={initialValues} validationSchema={userSchema} onSubmit={handleSubmit}>
-            {({ handleChange, handleBlur, resetForm, values, errors, touched, setFieldValue, setSubmitting }) => (
+            {props => (
                 <View style={styles.mlogfrm}>
                     <Text style={styles.frmlbl}>Username</Text>
                     
                     <TextInput
                         placeholder='Write your username here...'
-                        onChangeText={handleChange('username')}
-                        onBlur={handleBlur('username')}
-                        value={values.username}
+                        onChangeText={props.handleChange('username')}
+                        onBlur={props.handleBlur('username')}
+                        value={props.values.username}
                         style={styles.frminp}
                     />
 
-                    {errors.username && touched.username && (
+                    {props.errors.username && props.touched.username && (
                         <Text style={styles.frminperr}>
                             <ErrorMessage name="username" />
                         </Text>
@@ -49,13 +45,13 @@ const LoginForm = () => {
                     <TextInput
                         secureTextEntry={true}
                         placeholder='Write your password here...'
-                        onChangeText={handleChange('password')}
-                        onBlur={handleBlur('password')}
-                        value={values.password}
+                        onChangeText={props.handleChange('password')}
+                        onBlur={props.handleBlur('password')}
+                        value={props.values.password}
                         style={styles.frminp}
                     />
 
-                    {errors.password && touched.password && (
+                    {props.errors.password && props.touched.password && (
                         <Text style={styles.frminperr}>
                             <ErrorMessage name="password" />
                         </Text>
@@ -65,8 +61,8 @@ const LoginForm = () => {
                         <View style={styles.mchkrememberme}>
                             <CheckBox
                                 disabled={false}
-                                value={values.rememberme}
-                                onValueChange={(nextValue) => setFieldValue('rememberme', nextValue)}
+                                value={props.values.rememberme}
+                                onValueChange={(nextValue) => props.setFieldValue('rememberme', nextValue)}
                                 style={styles.chkrememberme}
                             />
                             
@@ -81,11 +77,11 @@ const LoginForm = () => {
                     </View>
 
                     <View style={styles.mfrmbtns}>
-                        <TouchableOpacity onPress={() => handleClear({resetForm})} style={styles.frmbtnclear}>
+                        <TouchableOpacity onPress={() => { props.resetForm(); }} style={styles.frmbtnclear}>
                             <Text>Clear</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => { handleSubmit(values, { resetForm, setSubmitting })}} style={styles.frmbtnsub} disabled={!values.username || !values.password ? true : false}>
+                        <TouchableOpacity onPress={() => { props.handleSubmit(); }} style={styles.frmbtnsub} disabled={!props.values.username || !props.values.password ? true : false}>
                             <Text>Login</Text>
                         </TouchableOpacity>
                     </View>

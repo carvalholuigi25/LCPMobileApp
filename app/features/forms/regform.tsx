@@ -1,18 +1,18 @@
 import * as React from 'react';
 import * as Yup from 'yup';
-import { FormikStepper, FormikHelpers, InputField, CheckBoxField } from 'formik-stepper';
-import { Image, TextInput, Text, View, StyleSheet } from 'react-native';
+import Checkbox from 'expo-checkbox';
+import { ErrorMessage, Formik, FormikHelpers } from 'formik';
 import { IconButton, MD3Colors } from 'react-native-paper';
-import FormikStep from 'formik-stepper/dist/fromikForm/FormikStep';
+import { Image, TextInput, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 const userSchema = Yup.object({
     username: Yup.string().required('Username is required'),
-    email: Yup.string().email('Email is not valid').required('Email is required'),
     password: Yup.string().required('Password is required').matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*)[A-Za-z\d]{8,}$/,
         `Must Contain 8 Characters, One Uppercase, One Lowercase,
         One Number and one special case Character [@$!%*#?&-_]`
     ),
+    email: Yup.string().email('Email is not valid').required('Email is required'),
     firstname: Yup.string().required('Firstname is required'),
     lastname: Yup.string().required('Lastname is required'),
     avatar: Yup.string(),
@@ -21,15 +21,15 @@ const userSchema = Yup.object({
 });
 
 const RegisterForm = () => {
-    const initialValues = { 
-        username: '', 
-        email: '', 
-        password: '', 
-        firstname: '', 
-        lastname: '', 
-        avatar: '', 
-        cover: '', 
-        privacy: false 
+    const initialValues = {
+        username: '',
+        password: '',
+        email: '',
+        firstname: '',
+        lastname: '',
+        avatar: '',
+        cover: '',
+        privacy: false
     };
 
     const onSubmit = async (
@@ -41,114 +41,160 @@ const RegisterForm = () => {
 
     return (
         <>
-            <FormikStepper 
+            <Formik
                 onSubmit={onSubmit}
-                initialValues={initialValues} 
-                validationSchema={userSchema} 
-                withStepperLine={true}
-                nextButton={{ label: "Step" }}
-                prevButton={{ label: "Back" }}
-                submitButton={{ label: "Done", style: { background: "blue" } }}
+                initialValues={initialValues}
+                validationSchema={userSchema}
             >
-                <View style={styles.mregfrm}>
-                    <FormikStep label="Personal Info">
-                        <InputField
-                            type="text"
-                            name="username"
-                            label="Username"
+                {props => (
+                    <View style={styles.mregfrm}>
+                        <Text style={styles.frmlbl}>Username</Text>
+                        <TextInput
                             placeholder='Write your username here...'
+                            onChangeText={props.handleChange('username')}
+                            onBlur={props.handleBlur('username')}
+                            value={props.values.username}
                             style={styles.frminp}
                         />
 
-                        <InputField
-                            type="email"
-                            name="email"
-                            label="Email"
-                            placeholder='Write your email here...'
-                            style={styles.frminp}
-                        />
+                        {props.errors.username && props.touched.username && (
+                            <Text style={styles.frminperr}>
+                                <ErrorMessage name="username" />
+                            </Text>
+                        )}
 
-                        <InputField
-                            type="password"
-                            name="password"
-                            label="Password"
+                        <Text style={styles.frmlbl}>Password</Text>
+                        <TextInput
+                            secureTextEntry={true}
                             placeholder='Write your password here...'
+                            onChangeText={props.handleChange('password')}
+                            onBlur={props.handleBlur('password')}
+                            value={props.values.password}
                             style={styles.frminp}
                         />
 
-                        <InputField
-                            type="text"
-                            name="firstname"
-                            label="First Name"
+                        {props.errors.password && props.touched.password && (
+                            <Text style={styles.frminperr}>
+                                <ErrorMessage name="password" />
+                            </Text>
+                        )}
+
+                        <Text style={styles.frmlbl}>Email</Text>
+                        <TextInput
+                            placeholder='Write your email here...'
+                            onChangeText={props.handleChange('email')}
+                            onBlur={props.handleBlur('email')}
+                            value={props.values.email}
+                            style={styles.frminp}
+                        />
+
+                        {props.errors.email && props.touched.email && (
+                            <Text style={styles.frminperr}>
+                                <ErrorMessage name="email" />
+                            </Text>
+                        )}
+
+                        <Text style={styles.frmlbl}>First Name</Text>
+                        <TextInput
                             placeholder='Write your first name here...'
+                            onChangeText={props.handleChange('firstname')}
+                            onBlur={props.handleBlur('firstname')}
+                            value={props.values.firstname}
                             style={styles.frminp}
                         />
 
-                        <InputField
-                            type="text"
-                            name="lastname"
-                            label="Last Name"
+                        {props.errors.firstname && props.touched.firstname && (
+                            <Text style={styles.frminperr}>
+                                <ErrorMessage name="firstname" />
+                            </Text>
+                        )}
+
+                        <Text style={styles.frmlbl}>Last Name</Text>
+                        <TextInput
                             placeholder='Write your last name here...'
+                            onChangeText={props.handleChange('lastname')}
+                            onBlur={props.handleBlur('lastname')}
+                            value={props.values.lastname}
                             style={styles.frminp}
                         />
-                    </FormikStep>
 
-                    <FormikStep label="Avatar & Cover">
-                        <View>
-                            <Text style={styles.frmlbl}>Avatar</Text>
+                        {props.errors.lastname && props.touched.lastname && (
+                            <Text style={styles.frminperr}>
+                                <ErrorMessage name="lastname" />
+                            </Text>
+                        )}
+
+                        <Text style={styles.frmlbl}>Avatar</Text>
+                        <View style={styles.frmmavatar}>
                             <Image
                                 style={styles.frmavatar}
-                                source={require('@expo/snack-static/react-native-logo.png')}
+                                source={require('assets/images/users/luis.jpg')}
                             />
                             <IconButton
                                 icon="upload"
                                 iconColor={MD3Colors.error50}
                                 size={20}
+                                style={styles.frmicouplavatar}
                                 onPress={() => console.log('image icon pressed...')}
                             />
                         </View>
+                        <Text style={styles.txtmaxresimg}>Max resolution size: 150x150 (cropped to: 100x100)</Text>
 
-                        <View>
-                            <Text style={styles.frmlbl}>Cover</Text>
+                        <Text style={styles.frmlbl}>Cover</Text>
+                        <View style={styles.frmmavatar}>
                             <Image
                                 style={styles.frmcover}
-                                source={require('@expo/snack-static/react-native-logo.png')}
+                                source={require('assets/images/users/covers/luis_c.jpeg')}
                             />
                             <IconButton
                                 icon="upload"
                                 iconColor={MD3Colors.error50}
                                 size={20}
+                                style={styles.frmicoupl}
                                 onPress={() => console.log('image icon pressed...')}
                             />
                         </View>
-                    </FormikStep>
+                        <Text style={styles.txtmaxresimg}>Max resolution size: 1920x1080 (cropped to: 300x150)</Text>
 
-                    <FormikStep label="Final Steps">
                         <Text style={styles.frmlbl}>Terms & Conditions</Text>
                         <TextInput
                             editable={false}
                             multiline={true}
-                            numberOfLines={4}
+                            numberOfLines={1}
                             value={'Lorem ipsum...'}
+                            style={styles.frminp}
                         />
 
                         <View style={styles.magreeterms}>
-                            <CheckBoxField
-                                name='privacy'
-                                label='privacy'
+                            <Checkbox
                                 disabled={false}
-                                value={false}
-                                onValueChange={() => {}}
+                                value={props.values.privacy}
+                                onValueChange={(newVal) => { props.setFieldValue("privacy", newVal); }}
                                 style={styles.chkagreeterms}
                             />
-
                             <Text style={styles.txtagreeterms}>
                                 I agree the terms & conditions.
                             </Text>
                         </View>
-                    </FormikStep>
-                </View>
-            </FormikStepper>
+                            
+                        {props.errors.privacy && props.touched.privacy && (
+                            <Text style={styles.frminperr}>
+                                <ErrorMessage name="privacy" />
+                            </Text>
+                        )}
+
+                        <View style={styles.mfrmbtns}>
+                            <TouchableOpacity onPress={() => { props.resetForm(); }} style={styles.frmbtnclear}>
+                                <Text>Clear</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => { props.handleSubmit(); }} style={styles.frmbtnsub}>
+                                <Text>Register</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                )}
+            </Formik>
         </>
     );
 }
@@ -199,12 +245,47 @@ const styles = StyleSheet.create({
     frmavatar: {
         width: 100,
         height: 100,
-        borderRadius: 50
+        borderRadius: 50,
+        marginTop: 15,
+        marginLeft: 'auto',
+        marginRight: 'auto'
     },
     frmcover: {
         width: 300,
         height: 150,
-        borderRadius: 5
+        borderRadius: 5,
+        marginTop: 15,
+        marginLeft: 'auto',
+        marginRight: 'auto'
+    },
+    frmmavatar: { 
+        position: 'relative' 
+    },
+    frmmcover: { 
+        position: 'relative' 
+    },
+    frmicouplavatar: {
+        backgroundColor: '#fff',
+        position: 'absolute',
+        bottom: -10, 
+        left: '50%',
+        right: 'auto',
+        width: 25,
+        height: 25
+    },
+    frmicoupl: { 
+        backgroundColor: '#fff',
+        position: 'absolute', 
+        bottom: -10, 
+        left: 'auto',
+        right: 0,
+        width: 25,
+        height: 25
+    },
+    txtmaxresimg: {
+        color: '#fff',
+        marginTop: 15, 
+        textAlign: 'center'
     },
     frmbtnback: {
         backgroundColor: '#12C2FF',
@@ -281,6 +362,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         textAlign: 'center',
         alignItems: 'center',
+        marginTop: 15,
     },
     chkagreeterms: {
         width: 25,
