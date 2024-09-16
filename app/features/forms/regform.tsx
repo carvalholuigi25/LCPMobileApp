@@ -7,11 +7,7 @@ import { Image, TextInput, Text, View, StyleSheet, TouchableOpacity } from 'reac
 
 const userSchema = Yup.object({
     username: Yup.string().required('Username is required'),
-    password: Yup.string().required('Password is required').matches(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*)[A-Za-z\d]{8,}$/,
-        `Must Contain 8 Characters, One Uppercase, One Lowercase,
-        One Number and one special case Character [@$!%*#?&-_]`
-    ),
+    password: Yup.string().min(4, 'Password is too short').required('Password is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
     firstname: Yup.string().required('Firstname is required'),
     lastname: Yup.string().required('Lastname is required'),

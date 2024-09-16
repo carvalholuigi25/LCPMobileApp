@@ -2,9 +2,11 @@ import React from 'react';
 import { Image, Text, View, StyleSheet, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import RegisterForm from '@/app/features/forms/regform';
+import RegisterFormStepper from '@/app/features/forms/regformstepper';
 import Footer from '@/app/components/footers/footer';
 
 export default function RegisterScreen() {
+  const mode: string = 'stepper';
   return (
     <LinearGradient
       colors={colors}
@@ -16,7 +18,11 @@ export default function RegisterScreen() {
         </View>
 
         <View style={styles.subcontainer}>
-          <RegisterForm />
+          {mode == 'stepper' ? (
+            <RegisterFormStepper />
+          ) : (
+            <RegisterForm />
+          )}
         </View>
         
         <Footer color={'#fff'} />

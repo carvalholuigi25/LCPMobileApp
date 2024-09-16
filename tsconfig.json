@@ -8,9 +8,18 @@
     }
   },
   "include": [
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.mjs",
+    "**/*.cjs",
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
+    ".expo/types/**/*.tsx",
+    ".expo/types/**/*.mjs",
+    ".expo/types/**/*.cjs",
+    ".expo/types/**/*.js",
+    ".expo/types/**/*.jsx",
     "expo-env.d.ts",
     "app/features/loader.tsx"
   ]
