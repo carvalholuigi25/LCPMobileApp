@@ -91,8 +91,24 @@ const RegisterFormStepper = () => {
             >
                 {props => (
                     <View style={styles.mregfrm}>
-                        <ProgressSteps activeStep={curstep}>
-                            <ProgressStep label="User info">
+                        <ProgressSteps 
+                            activeStep={curstep}
+                            activeLabelColor={'#fff'}
+                            activeStepIconColor={'transparent'}
+                            activeStepIconBorderColor={'#00ff00'}
+                            activeStepNumColor={'#fff'}
+                            completedProgressBarColor={'#00ff00'}
+                            completedStepIconColor={'#00ff00'}
+                            completedLabelColor={'lightgray'}
+                            labelColor={'lightgray'}
+                            progressBarColor={'#ebebe4'}
+                            disabledStepNumColor={'#000'}
+                        >
+                            <ProgressStep 
+                                label="User info"
+                                nextBtnStyle={styles.stepbtnnext}
+                                nextBtnTextStyle={styles.stepbtnnexttxt}
+                            >
                                 <Text style={styles.frmlbl}>Username</Text>
                                 <TextInput
                                     placeholder='Write your username here...'
@@ -169,7 +185,13 @@ const RegisterFormStepper = () => {
                                 )}
                             </ProgressStep>
 
-                            <ProgressStep label="Avatar & Cover">
+                            <ProgressStep 
+                                label="Avatar & Cover"
+                                previousBtnStyle={styles.stepbtnback}
+                                nextBtnStyle={styles.stepbtnnext}
+                                previousBtnTextStyle={styles.stepbtnbacktxt}
+                                nextBtnTextStyle={styles.stepbtnnexttxt}
+                            >
                                 <Text style={styles.frmlbl}>Avatar</Text>
                                 <View style={styles.frmmavatar}>
                                     <Image
@@ -203,7 +225,12 @@ const RegisterFormStepper = () => {
                                 <Text style={styles.txtmaxresimg}>Max resolution size: 1920x1080 (cropped to: 300x150)</Text>
                             </ProgressStep>
 
-                            <ProgressStep label="Final steps">
+                            <ProgressStep 
+                                label="Final steps"
+                                previousBtnStyle={styles.stepbtnback}
+                                previousBtnTextStyle={styles.stepbtnbacktxt}
+                                finishBtnText=""
+                            >
                                 <Text style={styles.frmlbl}>Terms & Conditions</Text>
                                 <TextInput
                                     editable={false}
@@ -336,6 +363,42 @@ const styles = StyleSheet.create({
         color: '#fff',
         marginTop: 15,
         textAlign: 'center'
+    },
+    stepbtnback: {
+        backgroundColor: '#12C2FF',
+        borderRadius: 15,
+        paddingLeft: 15,
+        paddingRight: 15,
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10
+    },
+    stepbtnnext: {
+        backgroundColor: '#00FF38',
+        borderRadius: 15,
+        paddingLeft: 15,
+        paddingRight: 15,
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10
+    },
+    stepbtnbacktxt: {
+        color: '#000',
+        fontSize: 14
+    },
+    stepbtnnexttxt: {
+        color: '#000',
+        fontSize: 14
     },
     frmbtnback: {
         backgroundColor: '#12C2FF',
