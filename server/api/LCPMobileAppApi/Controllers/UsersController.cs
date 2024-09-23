@@ -72,10 +72,29 @@ namespace LCPMobileAppApi.Controllers
 
             return NoContent();
         }
-
-        // POST: api/Users
+        
+        /// <summary>
+        /// Creates a User.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>A newly created User</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/Users
+        ///     {
+        ///         "id": 1,
+        ///         "username": "yourusername",
+        ///         "password": "yourpassword"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Returns the newly created user</response>
+        /// <response code="400">If the user is null</response>
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _context.Users.Add(user);
