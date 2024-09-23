@@ -6,6 +6,7 @@ using NSwag;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<MDBContext>();
 builder.Services.AddControllers();
 builder.Services.AddOpenApiDocument(options => {
      options.PostProcess = document =>
@@ -30,9 +31,7 @@ builder.Services.AddOpenApiDocument(options => {
      };
 });
 
-builder.Services.AddDbContext<DBContext>(opt => opt.UseInMemoryDatabase("DBContext"));
 builder.Services.AddScoped<IUsersRepo, UsersRepo>();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -53,4 +52,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+// using (var scope = app.Services.CreateScope()) {
+//     var db = scope.ServiceProvider.GetRequiredService<MDBContext>();
+//     await MDBContext.InitializeAsync(db);
+// }
+
 app.Run();

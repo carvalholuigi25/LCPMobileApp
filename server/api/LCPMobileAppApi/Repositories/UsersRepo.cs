@@ -8,9 +8,9 @@ namespace LCPMobileAppApi.Repositories;
 
 public class UsersRepo : ControllerBase, IUsersRepo
 {
-    private readonly DBContext _context;
+    private readonly MDBContext _context;
 
-    public UsersRepo(DBContext context)
+    public UsersRepo(MDBContext context)
     {
         _context = context;
     }
