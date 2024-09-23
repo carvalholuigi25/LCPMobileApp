@@ -1,10 +1,10 @@
-using Microsoft.EntityFrameworkCore;
 using LCPMobileAppApi.Context;
+using LCPMobileAppApi.Interfaces;
+using LCPMobileAppApi.Repositories;
+using Microsoft.EntityFrameworkCore;
 using NSwag;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApiDocument(options => {
@@ -30,15 +30,14 @@ builder.Services.AddOpenApiDocument(options => {
      };
 });
 
-builder.Services.AddDbContext<DBContext>(opt =>
-    opt.UseInMemoryDatabase("DBContext"));
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddDbContext<DBContext>(opt => opt.UseInMemoryDatabase("DBContext"));
+builder.Services.AddScoped<IUsersRepo, UsersRepo>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
@@ -52,9 +51,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
