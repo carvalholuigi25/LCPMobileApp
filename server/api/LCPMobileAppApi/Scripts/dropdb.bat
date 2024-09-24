@@ -6,7 +6,7 @@ SET DefDBMode=SQLite
 
 cd %pthproj%
 
-dotnet ef migrations remove
+dotnet ef migrations remove --force
 
 if exist "%pthmig%" (
     rmdir /s /q "%pthmig%"
@@ -14,19 +14,19 @@ if exist "%pthmig%" (
 
 SET DefDBMode=SQLite
 echo %DefDBMode%
-dotnet ef database drop
+dotnet ef database drop --force --context MDBContextSQLite
 
 SET DefDBMode=SQLServer
 echo %DefDBMode%
-dotnet ef database drop
+dotnet ef database drop --force --context MDBContextSQLServer
 
 SET DefDBMode=PostgresSQL
 echo %DefDBMode%
-dotnet ef database drop
+dotnet ef database drop --force --context MDBContextPostgresSQL
 
 @REM SET DefDBMode=MySQL
 @REM echo %DefDBMode%
-@REM dotnet ef database drop
+@REM dotnet ef database drop --force --context MDBContextMySQL
 
 pause
 exit /b 0

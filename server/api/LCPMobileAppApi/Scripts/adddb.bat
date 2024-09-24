@@ -10,19 +10,19 @@ call "%pthproj%\Scripts\dropdb.bat"
 
 SET DefDBMode=SQLite
 echo %DefDBMode%
-dotnet ef migrations add InitialCreateSQLite --context MDBContext --output-dir "%pthmig%\SQLite"
+dotnet ef migrations add InitialCreateSQLite --context MDBContextSQLite --output-dir "%pthmig%\SQLite"
 
 SET DefDBMode=SQLServer
 echo %DefDBMode%
-dotnet ef migrations add InitialCreateSQLServer --context MDBContext --output-dir "%pthmig%\SQLServer"
+dotnet ef migrations add InitialCreateSQLServer --context MDBContextSQLServer --output-dir "%pthmig%\SQLServer"
 
 SET DefDBMode=PostgresSQL
 echo %DefDBMode%
-dotnet ef migrations add InitialCreatePostgresSQL --context MDBContext --output-dir "%pthmig%\PostgresSQL"
+dotnet ef migrations add InitialCreatePostgresSQL --context MDBContextPostgresSQL --output-dir "%pthmig%\PostgresSQL"
 
 @REM SET DefDBMode=MySQL
 @REM echo %DefDBMode%
-@REM dotnet ef migrations add InitialCreateMySQL --context MDBContext --output-dir "%pthmig%\MySQL"
+@REM dotnet ef migrations add InitialCreateMySQL --context MDBContextMySQL --output-dir "%pthmig%\MySQL"
 
 pause
 exit /b 0

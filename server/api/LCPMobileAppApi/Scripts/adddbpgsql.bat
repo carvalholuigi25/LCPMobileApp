@@ -10,9 +10,9 @@ call "%pthproj%\Scripts\dropdbpgsql.bat"
 
 SET DefDBMode=PostgresSQL
 echo %DefDBMode%
-dotnet ef migrations add InitialCreatePostgresSQL --context MDBContext --output-dir "%pthmig%\PostgresSQL"
 
-call "%pthproj%\Scripts\upddb.bat"
+dotnet ef migrations add InitialCreatePostgresSQL --context MDBContextPostgresSQL --output-dir "%pthmig%\PostgresSQL"
+dotnet ef database update --context MDBContextPostgresSQL
 
 pause
 exit /b 0

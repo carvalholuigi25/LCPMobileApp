@@ -4,8 +4,20 @@ using LCPMobileAppApi.Repositories;
 using NSwag;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
 
-builder.Services.AddDbContext<MDBContext>();
+if(config.GetSection("DefDBMode").Value == "MySQL") {
+    builder.Services.AddDbContext<MDBContext, MDBContextMySQL>();
+} else if(config.GetSection("DefDBMode").Value == "PostgresSQL") {
+    builder.Services.AddDbContext<MDBContext, MDBContextPostgresSQL>();
+} else if(config.GetSection("DefDBMode").Value == "SQLite") {
+    builder.Services.AddDbContext<MDBContext, MDBContextSQLite>();
+} else if(config.GetSection("DefDBMode").Value == "SQLServer") {
+    builder.Services.AddDbContext<MDBContext, MDBContextSQLServer>();
+} else {
+    builder.Services.AddDbContext<MDBContext>();
+}
+
 builder.Services.AddControllers();
 builder.Services.AddOpenApiDocument(options => {
      options.PostProcess = document =>

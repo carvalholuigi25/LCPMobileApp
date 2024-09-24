@@ -10,9 +10,9 @@ call "%pthproj%\Scripts\dropdbsqlsrv.bat"
 
 SET DefDBMode=SQLServer
 echo %DefDBMode%
-dotnet ef migrations add InitialCreateSQLServer --context MDBContext --output-dir "%pthmig%\SQLServer"
 
-call "%pthproj%\Scripts\upddb.bat"
+dotnet ef migrations add InitialCreateSQLServer --context MDBContextSQLServer --output-dir "%pthmig%\SQLServer"
+dotnet ef database update --context MDBContextSQLServer
 
 pause
 exit /b 0

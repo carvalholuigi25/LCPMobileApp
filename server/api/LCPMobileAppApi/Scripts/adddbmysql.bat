@@ -10,9 +10,9 @@ call "%pthproj%\Scripts\dropdbmysql.bat"
 
 SET DefDBMode=MySQL
 echo %DefDBMode%
-dotnet ef migrations add InitialCreateMySQL --context MDBContext --output-dir "%pthmig%\MySQL"
 
-call "%pthproj%\Scripts\upddb.bat"
+dotnet ef migrations add InitialCreateMySQL --context MDBContextMySQL --output-dir "%pthmig%\MySQL"
+dotnet ef database update --context MDBContextMySQL
 
 pause
 exit /b 0

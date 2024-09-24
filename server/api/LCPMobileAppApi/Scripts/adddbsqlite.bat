@@ -10,9 +10,9 @@ call "%pthproj%\Scripts\dropdbsqlite.bat"
 
 SET DefDBMode=SQLite
 echo %DefDBMode%
-dotnet ef migrations add InitialCreateSQLite --context MDBContext --output-dir "%pthmig%\SQLite"
 
-call "%pthproj%\Scripts\upddb.bat"
+dotnet ef migrations add InitialCreateSQLite --context MDBContextSQLite --output-dir "%pthmig%\SQLite"
+dotnet ef database update --context MDBContextSQLite
 
 pause
 exit /b 0
