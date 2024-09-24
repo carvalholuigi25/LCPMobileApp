@@ -1,7 +1,6 @@
 using LCPMobileAppApi.Context;
 using LCPMobileAppApi.Interfaces;
 using LCPMobileAppApi.Repositories;
-using Microsoft.EntityFrameworkCore;
 using NSwag;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,10 +51,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-
-// using (var scope = app.Services.CreateScope()) {
-//     var db = scope.ServiceProvider.GetRequiredService<MDBContext>();
-//     await MDBContext.InitializeAsync(db);
-// }
 
 app.Run();

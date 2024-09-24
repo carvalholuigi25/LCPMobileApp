@@ -30,13 +30,4 @@ public class MDBContext : DbContext
             optionsBuilder.UseInMemoryDatabase("DBContext");
         }
     }
-
-    public static async Task InitializeAsync(MDBContext db)
-    {
-        await db.Database.MigrateAsync();
-        
-        // already seeded
-        if (db.Users.Any())
-            return;
-    }
 }
