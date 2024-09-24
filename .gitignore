@@ -16,6 +16,8 @@ ios/
 # api
 server/api/LCPMobileAppApi/bin/
 server/api/LCPMobileAppApi/obj/
+server/api/LCPMobileAppApi/Database/
+server/api/LCPMobileAppApi/Migrations/
 
 # .env
 package-lock.json
