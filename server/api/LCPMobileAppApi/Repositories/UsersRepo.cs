@@ -34,6 +34,10 @@ public class UsersRepo : ControllerBase, IUsersRepo
 
     public async Task<ActionResult<User>> PostUser(User user)
     {
+        if(!string.IsNullOrEmpty(user.Password)) {
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, 10, false);
+        }
+
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
@@ -46,6 +50,10 @@ public class UsersRepo : ControllerBase, IUsersRepo
         if (id != user.Id)
         {
             return BadRequest();
+        }
+
+        if(!string.IsNullOrEmpty(user.Password)) {
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, 10, false);
         }
 
         _context.Entry(user).State = EntityState.Modified;

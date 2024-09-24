@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using LCPMobileAppApi.Models;
 using LCPMobileAppApi.Interfaces;
+using LCPMobileAppApi.Authorization;
 
 namespace LCPMobileAppApi.Controllers
 {
@@ -17,6 +18,7 @@ namespace LCPMobileAppApi.Controllers
 
         // GET: api/Users
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _usersRepo.GetUsers();
@@ -24,6 +26,7 @@ namespace LCPMobileAppApi.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<User>> GetUser(int? id)
         {
             return await _usersRepo.GetUser(id);
@@ -49,6 +52,7 @@ namespace LCPMobileAppApi.Controllers
         /// <response code="400">If the user is null</response>
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<User>> PostUser(User user)
@@ -59,6 +63,7 @@ namespace LCPMobileAppApi.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutUser(int? id, User user)
         {
             return await _usersRepo.PutUser(id, user);
@@ -66,6 +71,7 @@ namespace LCPMobileAppApi.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteUser(int? id)
         {
             return await _usersRepo.DeleteUser(id);
