@@ -22,15 +22,19 @@ public class UserService : IUserService
     private MDBContext _context;
     private IJwtUtils _jwtUtils;
     private readonly AppSettings _appSettings;
+    private readonly ILogger<UserService> _logger;
 
     public UserService(
         MDBContext context,
         IJwtUtils jwtUtils,
-        IOptions<AppSettings> appSettings)
+        IOptions<AppSettings> appSettings,
+        ILogger<UserService> logger
+    )
     {
         _context = context;
         _jwtUtils = jwtUtils;
         _appSettings = appSettings.Value;
+        _logger = logger;
     }
 
     public AuthenticateResponse Authenticate(AuthenticateRequest model, string ipAddress)
@@ -52,6 +56,8 @@ public class UserService : IUserService
         // save changes to db
         _context.Update(user);
         _context.SaveChanges();
+
+        _logger.LogInformation($"Logged in successfully as {user.Username}!");
 
         return new AuthenticateResponse(user, jwtToken, refreshToken.Token);
     }

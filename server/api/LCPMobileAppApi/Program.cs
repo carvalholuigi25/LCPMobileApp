@@ -1,17 +1,27 @@
-using System.Text.Json.Serialization;
 using LCPMobileAppApi.Authorization;
 using LCPMobileAppApi.Context;
 using LCPMobileAppApi.Helpers;
+using LCPMobileAppApi.Hubs;
 using LCPMobileAppApi.Interfaces;
 using LCPMobileAppApi.Repositories;
 using LCPMobileAppApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using NSwag;
 using NSwag.Generation.Processors.Security;
+using NSwag;
+using Serilog;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 var env = builder.Environment;
+
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(config)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 if (config.GetSection("DefDBMode").Value == "MySQL")
 {
@@ -84,13 +94,19 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => 
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        c.EnablePersistAuthorization();
+    });
 
     app.UseReDoc(options =>
     {
@@ -98,6 +114,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();
@@ -109,9 +126,9 @@ app.UseCors(x => x
     .AllowCredentials());
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
-
 app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();
