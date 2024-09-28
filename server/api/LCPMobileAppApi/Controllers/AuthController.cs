@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using LCPMobileAppApi.Authorization;
 using LCPMobileAppApi.Models.UsersAuth;
 using LCPMobileAppApi.Services;
-using LCPMobileAppApi.Attributes;
+// using LCPMobileAppApi.Attributes;
 
 namespace LCPMobileAppApi.Controllers;
 
@@ -28,7 +28,7 @@ public class AuthController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("refresh-token")]
-    [IgnoreAPI]
+    // [IgnoreAPI]
     public IActionResult RefreshToken()
     {
         var refreshToken = Request.Cookies["refreshToken"];
@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
 
     [Authorize(Roles = "admin,moderator")]
     [HttpPost("revoke-token")]
-    [IgnoreAPI]
+    // [IgnoreAPI]
     public IActionResult RevokeToken(RevokeTokenRequest model)
     {
         // accept refresh token in request body or cookie
@@ -54,7 +54,7 @@ public class AuthController : ControllerBase
 
     [Authorize(Roles = "admin,moderator")]
     [HttpGet]
-    [IgnoreAPI]
+    // [IgnoreAPI]
     public IActionResult GetAll()
     {
         var users = _userService.GetAll();
@@ -63,7 +63,7 @@ public class AuthController : ControllerBase
 
     [Authorize(Roles = "admin,moderator")]
     [HttpGet("{id}")]
-    [IgnoreAPI]
+    // [IgnoreAPI]
     public IActionResult GetById(int id)
     {
         var user = _userService.GetById(id);
@@ -72,7 +72,7 @@ public class AuthController : ControllerBase
 
     [Authorize(Roles = "admin,moderator")]
     [HttpGet("{id}/refresh-tokens")]
-    [IgnoreAPI]
+    // [IgnoreAPI]
     public IActionResult GetRefreshTokens(int id)
     {
         var user = _userService.GetById(id);

@@ -89,7 +89,6 @@ builder.Services.AddOpenApiDocument(options =>
 });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<AppSettings>(config.GetSection("AppSettings"));
 
@@ -106,19 +105,6 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseOpenApi();
-app.UseSwagger();
-app.UseSwaggerUI(c => 
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "LCPMobileApp API");
-    c.EnablePersistAuthorization();
-});
-
-app.UseReDoc(options =>
-{
-    options.Path = "/docs";
-});
-
 app.UseCors(x => x
     .SetIsOriginAllowed(origin => true)
     .AllowAnyMethod()
@@ -129,6 +115,17 @@ app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();
+
+app.UseOpenApi();
+app.UseSwaggerUi(settings => 
+{
+    settings.PersistAuthorization = true;
+});
+
+app.UseReDoc(options =>
+{
+    options.Path = "/docs";
+});
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseMiddleware<JwtMiddleware>();
