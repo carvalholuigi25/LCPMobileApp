@@ -3,6 +3,7 @@ using LCPMobileAppApi.Context;
 using LCPMobileAppApi.Helpers;
 using LCPMobileAppApi.Hubs;
 using LCPMobileAppApi.Interfaces;
+using LCPMobileAppApi.Operations;
 using LCPMobileAppApi.Repositories;
 using LCPMobileAppApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -47,9 +48,10 @@ else
 builder.Services.AddCors();
 
 builder.Services.AddControllers()
-    .AddJsonOptions(x =>
-        x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-    );
+    .AddJsonOptions(x => {
+        x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 builder.Services.AddOpenApiDocument(options =>
 {
@@ -83,7 +85,11 @@ builder.Services.AddOpenApiDocument(options =>
     });
 
     options.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
+    options.OperationProcessors.Add(new ExcludeSpecificActionsProcessor());
 });
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<AppSettings>(config.GetSection("AppSettings"));
 
@@ -91,39 +97,38 @@ builder.Services.AddScoped<IUsersRepo, UsersRepo>();
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 builder.Services.AddSignalR();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI(c => 
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        c.EnablePersistAuthorization();
-    });
-
-    app.UseReDoc(options =>
-    {
-        options.Path = "/redoc";
-    });
+    app.UseDeveloperExceptionPage();
 }
 
-app.UseStaticFiles();
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.UseAuthentication();
+app.UseOpenApi();
+app.UseSwagger();
+app.UseSwaggerUI(c => 
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "LCPMobileApp API");
+    c.EnablePersistAuthorization();
+});
+
+app.UseReDoc(options =>
+{
+    options.Path = "/docs";
+});
 
 app.UseCors(x => x
     .SetIsOriginAllowed(origin => true)
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials());
+
+app.UseStaticFiles();
+app.UseHttpsRedirection();
+app.UseAuthorization();
+app.UseAuthentication();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseMiddleware<JwtMiddleware>();

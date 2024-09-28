@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
 namespace LCPMobileAppApi.Models;
@@ -18,7 +19,19 @@ public class User
 
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
+    public Roles? Role { get; set; } = Roles.user;
 
     [JsonIgnore]
     public List<RefreshToken>? RefreshTokens { get; set; }
+}
+
+public enum Roles {
+    [EnumMember(Value = "guest")]
+    guest,
+    [EnumMember(Value = "user")]
+    user,
+    [EnumMember(Value = "moderator")]
+    moderator,
+    [EnumMember(Value = "admin")]
+    admin
 }

@@ -2,12 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using LCPMobileAppApi.Models;
 using LCPMobileAppApi.Authorization;
-using Newtonsoft.Json;
-using NuGet.Protocol;
 
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public class AuthorizeAttribute : Attribute, IAuthorizationFilter
 {
+    public string? Policy { get; set; }
+
+    public string? Roles { get; set; }
+
+    public string? AuthenticationSchemes { get; set; }
+
     public void OnAuthorization(AuthorizationFilterContext context)
     {
         // skip authorization if action is decorated with [AllowAnonymous] attribute
