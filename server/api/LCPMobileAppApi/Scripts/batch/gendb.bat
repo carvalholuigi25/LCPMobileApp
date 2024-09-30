@@ -4,74 +4,62 @@ SET "pthproj=%userprofile%\Documents\projects\LCPMobileApp\server\api\LCPMobileA
 SET "pthmig=%pthproj%\Migrations"
 SET DefDBMode=SQLite
 
+cd %pthproj%
+
 call :main
 
-:rmmigdir
-if exist "%pthmig%\%DefDBMode%" (
-    rmdir /s /q "%pthmig%\%DefDBMode%"
+:addDB
+if exist "%pthmig%" (
+    rmdir /s /q "%pthmig%"
 )
-goto :eof
-EXIT /B %ERRORLEVEL%
 
-:addsqlite
+if not exist "%pthproj%\Database\%~1" (
+    mkdir "%pthproj%\Database\%~1"
+)
+
+dotnet ef migrations remove --force --context "MDBContext%~1"
+dotnet ef database drop --force --context "MDBContext%~1"
+dotnet ef migrations add "InitialCreate%~1" --context "MDBContext%~1" --output-dir "%pthmig%/%~1"
+dotnet ef database update "InitialCreate%~1" --context "MDBContext%~1"
+goto :end
+
+:addSQLite
 cls
 SET DefDBMode=SQLite
 echo %DefDBMode%
-call :rmmigdir
-dotnet ef migrations remove --force --context "MDBContext%DefDBMode%"
-dotnet ef database drop --force --context "MDBContext%DefDBMode%"
-dotnet ef migrations add "InitialCreate%DefDBMode%" --context "MDBContext%DefDBMode%" --output-dir "%pthmig%\%DefDBMode%"
-dotnet ef database update "InitialCreate%DefDBMode%" --context "MDBContext%DefDBMode%"
-goto :eof
-EXIT /B %ERRORLEVEL%
+call :addDB %DefDBMode%
+goto :end
 
-:addsqlserver
+:addSQLServer
 cls
 SET DefDBMode=SQLServer
 echo %DefDBMode%
-call :rmmigdir
-dotnet ef migrations remove --force --context "MDBContext%DefDBMode%"
-dotnet ef database drop --force --context "MDBContext%DefDBMode%"
-dotnet ef migrations add "InitialCreate%DefDBMode%" --context "MDBContext%DefDBMode%" --output-dir "%pthmig%\%DefDBMode%"
-dotnet ef database update "InitialCreate%DefDBMode%" --context "MDBContext%DefDBMode%"
-goto :eof
-EXIT /B %ERRORLEVEL%
+call :addDB %DefDBMode%
+goto :end
 
-:addpostgressql
+:addPostgresSQL
 cls
 SET DefDBMode=PostgresSQL
 echo %DefDBMode%
-call :rmmigdir
-dotnet ef migrations remove --force --context "MDBContext%DefDBMode%"
-dotnet ef database drop --force --context "MDBContext%DefDBMode%"
-dotnet ef migrations add "InitialCreate%DefDBMode%" --context "MDBContext%DefDBMode%" --output-dir "%pthmig%\%DefDBMode%"
-dotnet ef database update "InitialCreate%DefDBMode%" --context "MDBContext%DefDBMode%"
-goto :eof
-EXIT /B %ERRORLEVEL%
+call :addDB %DefDBMode%
+goto :end
 
-:addmysql
+:addMySQL
 cls
 SET DefDBMode=MySQL
 echo %DefDBMode%
-call :rmmigdir
-dotnet ef migrations remove --force --context "MDBContext%DefDBMode%"
-dotnet ef database drop --force --context "MDBContext%DefDBMode%"
-dotnet ef migrations add "InitialCreate%DefDBMode%" --context "MDBContext%DefDBMode%" --output-dir "%pthmig%\%DefDBMode%"
-dotnet ef database update "InitialCreate%DefDBMode%" --context "MDBContext%DefDBMode%"
-goto :eof
-EXIT /B %ERRORLEVEL%
+call :addDB %DefDBMode%
+goto :end
 
-:addall
-call :addsqlite
-call :addsqlserver
-call :addpostgressql
-call :addmysql
-goto :eof
-EXIT /B %ERRORLEVEL%
+:addAll
+call :addSQLite
+call :addSQLServer
+call :addPostgresSQL
+call :addMySQL
+goto :end
 
 :main
 cls
-cd %pthproj%
 echo.
 echo Generate DB for API
 echo.
@@ -94,18 +82,21 @@ echo 5 - All
 echo.
 set /p chdbmode=""
 
-if "%chdbmode%" EQU "" goto :addsqlite
-if "%chdbmode%" EQU "1" goto :addsqlite
-if "%chdbmode%" EQU "2" goto :addsqlserver
-if "%chdbmode%" EQU "3" goto :addpostgressql
-if "%chdbmode%" EQU "4" goto :addmysql
-if "%chdbmode%" EQU "5" goto :addall
-goto :endchoice
+if "%chdbmode%" EQU "" ( goto :addSQLite )
+if "%chdbmode%" EQU "1" ( goto :addSQLite )
+if "%chdbmode%" EQU "2" ( goto :addSQLServer )
+if "%chdbmode%" EQU "3" ( goto :addPostgresSQL )
+if "%chdbmode%" EQU "4" ( goto :addMySQL )
+if "%chdbmode%" EQU "5" ( goto :addAll )
+goto :invChoice
 
-:endchoice
+:invChoice
 cls
 echo Invalid choice!
+goto :end
+
+:end
 pause
-exit /b %ERRORLEVEL%
+exit
 
 endlocal

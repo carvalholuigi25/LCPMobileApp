@@ -32,77 +32,68 @@ main() {
     read -p "" chdbmode
 
     case "$chdbmode" in
-        ""|1) addsqlite ;;
-        2) addsqlserver ;;
-        3) addpostgressql ;;
-        4) addmysql ;;
-        5) addall ;;
-        *) endchoice ;;
+        ""|1) addSQLite ;;
+        2) addSQLServer ;;
+        3) addPostgresSQL ;;
+        4) addMySQL ;;
+        5) addAll ;;
+        *) invChoice ;;
     esac
 }
 
-rmmigdir() {
-    if [ -d "$pthmig/$DefDBMode" ]; then
-        rm -rf "$pthmig/$DefDBMode"
+addDB() {
+    if [ -d "$pthmig" ]; then
+        rm -rf "$pthmig"
     fi
+
+    if [ ! -d "$pthproj/Database/$1" ]; then
+        mkdir -p "$pthproj/Database/$1"
+    fi
+
+    dotnet ef migrations remove --force --context "MDBContext$1"
+    dotnet ef database drop --force --context "MDBContext$1"
+    dotnet ef migrations add "InitialCreate$1" --context "MDBContext$1" --output-dir "$pthmig/$1"
+    dotnet ef database update "InitialCreate$1" --context "MDBContext$1"
 }
 
-addsqlite() {
+addSQLite() {
     clear
     DefDBMode="SQLite"
     echo "$DefDBMode"
-    rmmigdir
-    dotnet ef migrations remove --force --context "MDBContext$DefDBMode"
-    dotnet ef database drop --force --context "MDBContext$DefDBMode"
-    dotnet ef migrations add "InitialCreate$DefDBMode" --context "MDBContext$DefDBMode" --output-dir "$pthmig/$DefDBMode"
-    dotnet ef database update "InitialCreate$DefDBMode" --context "MDBContext$DefDBMode"
+    addDB "$DefDBMode"
 }
 
-addsqlserver() {
+addSQLServer() {
     clear
     DefDBMode="SQLServer"
     echo "$DefDBMode"
-    rmmigdir
-    dotnet ef migrations remove --force --context "MDBContext$DefDBMode"
-    dotnet ef database drop --force --context "MDBContext$DefDBMode"
-    dotnet ef migrations add "InitialCreate$DefDBMode" --context "MDBContext$DefDBMode" --output-dir "$pthmig/$DefDBMode"
-    dotnet ef database update "InitialCreate$DefDBMode" --context "MDBContext$DefDBMode"
+    addDB "$DefDBMode"
 }
 
-addpostgressql() {
+addPostgresSQL() {
     clear
     DefDBMode="PostgresSQL"
     echo "$DefDBMode"
-    rmmigdir
-    dotnet ef migrations remove --force --context "MDBContext$DefDBMode"
-    dotnet ef database drop --force --context "MDBContext$DefDBMode"
-    dotnet ef migrations add "InitialCreate$DefDBMode" --context "MDBContext$DefDBMode" --output-dir "$pthmig/$DefDBMode"
-    dotnet ef database update "InitialCreate$DefDBMode" --context "MDBContext$DefDBMode"
+    addDB "$DefDBMode"
 }
 
-addmysql() {
+addMySQL() {
     clear
     DefDBMode="MySQL"
     echo "$DefDBMode"
-    rmmigdir
-    dotnet ef migrations remove --force --context "MDBContext$DefDBMode"
-    dotnet ef database drop --force --context "MDBContext$DefDBMode"
-    dotnet ef migrations add "InitialCreate$DefDBMode" --context "MDBContext$DefDBMode" --output-dir "$pthmig/$DefDBMode"
-    dotnet ef database update "InitialCreate$DefDBMode" --context "MDBContext$DefDBMode"
+    addDB "$DefDBMode"
 }
 
-addall() {
-    addsqlite
-    addsqlserver
-    addpostgressql
-    addmysql
+addAll() {
+    addSQLite
+    addSQLServer
+    addPostgresSQL
+    addMySQL
 }
 
-endchoice() {
+invChoice() {
     clear
     echo "Invalid choice!"
-    read -p "Press any key to continue..." -n1 -s
-    exit 1
 }
 
 main
