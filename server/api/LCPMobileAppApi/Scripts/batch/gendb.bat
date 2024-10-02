@@ -8,7 +8,18 @@ cd %pthproj%
 
 call :main
 
+:chkDNEFInstalled
+dotnet ef >nul 2>&1
+if %errorlevel% neq 0 (
+    dotnet tool install --global dotnet-ef
+) else (
+    echo Dotnet EF Core Tools installed
+)
+goto :end
+
 :addDB
+call :chkDNEFInstalled
+
 if exist "%pthmig%" (
     rmdir /s /q "%pthmig%"
 )

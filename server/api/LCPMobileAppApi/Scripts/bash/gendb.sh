@@ -41,7 +41,19 @@ main() {
     esac
 }
 
+chkDNEFInstalled() {
+  dotnet ef
+  if [ $? -ne 0 ]
+  then
+    dotnet tool install --global dotnet-ef
+  else
+    echo Dotnet EF Core Tools installed
+  fi
+}
+
 addDB() {
+    chkDNEFInstalled
+
     if [ -d "$pthmig" ]; then
         rm -rf "$pthmig"
     fi
