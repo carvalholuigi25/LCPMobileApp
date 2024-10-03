@@ -58,6 +58,10 @@ addDB() {
         rm -rf "$pthmig"
     fi
 
+    if [ -d "$pthproj/Database/$1" ]; then
+        rm -rf "$pthproj/Database/$1"
+    fi
+
     if [ ! -d "$pthproj/Database/$1" ]; then
         mkdir -p "$pthproj/Database/$1"
     fi
@@ -66,6 +70,7 @@ addDB() {
     dotnet ef database drop --force --context "MDBContext$1"
     dotnet ef migrations add "InitialCreate$1" --context "MDBContext$1" --output-dir "$pthmig/$1"
     dotnet ef database update "InitialCreate$1" --context "MDBContext$1"
+    dotnet ef migrations script --context "MDBContext$1" --output "Scripts/sql/migscr$1.sql"
 }
 
 addSQLite() {

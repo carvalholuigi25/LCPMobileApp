@@ -15,13 +15,17 @@ if %errorlevel% neq 0 (
 ) else (
     echo Dotnet EF Core Tools installed
 )
-goto :end
+goto :endalt
 
 :addDB
 call :chkDNEFInstalled
 
 if exist "%pthmig%" (
     rmdir /s /q "%pthmig%"
+)
+
+if exist "%pthproj%\Database\%~1" (
+    rmdir /s /q "%pthproj%\Database\%~1"
 )
 
 if not exist "%pthproj%\Database\%~1" (
@@ -32,6 +36,7 @@ dotnet ef migrations remove --force --context "MDBContext%~1"
 dotnet ef database drop --force --context "MDBContext%~1"
 dotnet ef migrations add "InitialCreate%~1" --context "MDBContext%~1" --output-dir "%pthmig%/%~1"
 dotnet ef database update "InitialCreate%~1" --context "MDBContext%~1"
+dotnet ef migrations script --context "MDBContext%~1" --output "Scripts/sql/migscr%~1.sql"
 goto :end
 
 :addSQLite
@@ -109,5 +114,8 @@ goto :end
 :end
 pause
 exit
+
+:endalt
+exit /b 0
 
 endlocal
