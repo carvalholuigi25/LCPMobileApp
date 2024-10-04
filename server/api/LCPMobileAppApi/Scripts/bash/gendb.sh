@@ -54,8 +54,8 @@ chkDNEFInstalled() {
 addDB() {
     chkDNEFInstalled
 
-    if [ -d "$pthmig" ]; then
-        rm -rf "$pthmig"
+    if [ -d "$pthmig/$1" ]; then
+        rm -rf "$pthmig/$1"
     fi
 
     if [ -d "$pthproj/Database/$1" ]; then

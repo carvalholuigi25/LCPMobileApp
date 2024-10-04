@@ -20,8 +20,8 @@ goto :endalt
 :addDB
 call :chkDNEFInstalled
 
-if exist "%pthmig%" (
-    rmdir /s /q "%pthmig%"
+if exist "%pthmig%\%~1" (
+    rmdir /s /q "%pthmig%\%~1"
 )
 
 if exist "%pthproj%\Database\%~1" (
@@ -37,35 +37,35 @@ dotnet ef database drop --force --context "MDBContext%~1"
 dotnet ef migrations add "InitialCreate%~1" --context "MDBContext%~1" --output-dir "%pthmig%/%~1"
 dotnet ef database update "InitialCreate%~1" --context "MDBContext%~1"
 dotnet ef migrations script --context "MDBContext%~1" --output "Scripts/sql/migscr%~1.sql"
-goto :end
+goto :endalt
 
 :addSQLite
 cls
 SET DefDBMode=SQLite
 echo %DefDBMode%
 call :addDB %DefDBMode%
-goto :end
+goto :endalt
 
 :addSQLServer
 cls
 SET DefDBMode=SQLServer
 echo %DefDBMode%
 call :addDB %DefDBMode%
-goto :end
+goto :endalt
 
 :addPostgresSQL
 cls
 SET DefDBMode=PostgresSQL
 echo %DefDBMode%
 call :addDB %DefDBMode%
-goto :end
+goto :endalt
 
 :addMySQL
 cls
 SET DefDBMode=MySQL
 echo %DefDBMode%
 call :addDB %DefDBMode%
-goto :end
+goto :endalt
 
 :addAll
 call :addSQLite
