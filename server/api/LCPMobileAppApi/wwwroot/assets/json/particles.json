@@ -7,8 +7,9 @@
     "image": "/assets/images/bkg.jpg",
     "position": "center",
     "repeat": "no-repeat",
-    "size": "fixed",
-    "opacity": 1
+    "size": "cover",
+    "attachment": "fixed",
+    "opacity": 0.5
   },
   "backgroundMask": {
     "composite": "destination-out",
@@ -16,7 +17,7 @@
       "color": {
         "value": "#fff"
       },
-      "opacity": 1
+      "opacity": 0
     },
     "enable": false
   },
