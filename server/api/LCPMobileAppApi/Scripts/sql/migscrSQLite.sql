@@ -31,7 +31,7 @@ CREATE TABLE "RefreshToken" (
 CREATE INDEX "IX_RefreshToken_UserId" ON "RefreshToken" ("UserId");
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20241004114705_InitialCreateSQLite', '8.0.8');
+VALUES ('20241005102842_InitialCreateSQLite', '8.0.8');
 
 COMMIT;
 

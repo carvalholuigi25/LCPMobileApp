@@ -26,4 +26,10 @@ public class MDBContext : DbContext
 
         base.OnConfiguring(optionsBuilder);
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        new MDBSeed(modelBuilder).Seed(false);
+    }
 }

@@ -6,7 +6,7 @@ public class MDBContextSQLServer : MDBContext
 {   
     private readonly IConfiguration _config;
 
-    public MDBContextSQLServer(DbContextOptions<MDBContextSQLServer> options, IConfiguration config) : base(options, config)
+    public MDBContextSQLServer(DbContextOptions<MDBContextSQLServer> options, IConfiguration config, ILogger<MDBContext> logger) : base(options, config)
     {
         _config = config;
     }

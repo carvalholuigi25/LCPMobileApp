@@ -111,6 +111,7 @@ app.UseCors(x => x
     .AllowAnyHeader()
     .AllowCredentials());
 
+app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseAuthorization();

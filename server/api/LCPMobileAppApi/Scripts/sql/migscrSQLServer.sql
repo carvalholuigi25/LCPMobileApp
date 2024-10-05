@@ -42,7 +42,7 @@ CREATE INDEX [IX_RefreshToken_UserId] ON [RefreshToken] ([UserId]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20241004114740_InitialCreateSQLServer', N'8.0.8');
+VALUES (N'20241005094530_InitialCreateSQLServer', N'8.0.8');
 GO
 
 COMMIT;

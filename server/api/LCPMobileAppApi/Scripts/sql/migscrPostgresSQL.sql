@@ -34,7 +34,7 @@ CREATE TABLE "RefreshToken" (
 CREATE INDEX "IX_RefreshToken_UserId" ON "RefreshToken" ("UserId");
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20241004114813_InitialCreatePostgresSQL', '8.0.8');
+VALUES ('20241005094718_InitialCreatePostgresSQL', '8.0.8');
 
 COMMIT;
 

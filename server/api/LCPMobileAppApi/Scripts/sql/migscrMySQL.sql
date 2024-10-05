@@ -36,7 +36,7 @@ CREATE TABLE `RefreshToken` (
 CREATE INDEX `IX_RefreshToken_UserId` ON `RefreshToken` (`UserId`);
 
 INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
-VALUES ('20241004114847_InitialCreateMySQL', '8.0.8');
+VALUES ('20241005094625_InitialCreateMySQL', '8.0.8');
 
 COMMIT;
 
