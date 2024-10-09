@@ -11,6 +11,10 @@ using NSwag.Generation.Processors.Security;
 using NSwag;
 using Serilog;
 using System.Text.Json.Serialization;
+using LCPMobileAppApi.Localization;
+using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -46,6 +50,8 @@ else
 }
 
 builder.Services.AddCors();
+
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddControllers()
     .AddJsonOptions(x => {
@@ -96,9 +102,33 @@ builder.Services.AddScoped<IUsersRepo, UsersRepo>();
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddLocalization();
+builder.Services.AddSingleton<LocalizationMiddleware>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
+
 builder.Services.AddSignalR();
 
 var app = builder.Build();
+
+var supportedCultures = new List<CultureInfo>
+{
+    new CultureInfo("en-US"),
+    new CultureInfo("fr-FR"),
+    new CultureInfo("pt-PT")
+};
+
+var options = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(supportedCultures[0], supportedCultures[0]),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures,
+    RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new QueryStringRequestCultureProvider(),
+        new CookieRequestCultureProvider()
+    }
+};
 
 if (app.Environment.IsDevelopment())
 {
@@ -111,8 +141,10 @@ app.UseCors(x => x
     .AllowAnyHeader()
     .AllowCredentials());
 
+app.UseRequestLocalization(options);
 app.UseDefaultFiles();
 app.UseStaticFiles();
+app.UseMiddleware<LocalizationMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();
