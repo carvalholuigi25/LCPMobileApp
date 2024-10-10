@@ -1,11 +1,11 @@
 @font-face {
     font-family: "ethnocentric";
-    src: url('/assets/fonts/ethnocentric/ethnocentricrg.otf');
+    src: url('../fonts/ethnocentric/ethnocentricrg.otf');
 }
 
 @font-face {
     font-family: "roboto";
-    src: url('/assets/fonts/roboto/Roboto-Regular.ttf');
+    src: url('../fonts/roboto/Roboto-Regular.ttf');
 }
 
 * {
@@ -21,7 +21,7 @@ html {
 
 body {
     background-color: #00ff00b3;
-    background-image: url('/assets/images/bkg.jpg');
+    background-image: url('../images/bkg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

@@ -1,3 +1,5 @@
+const { loadAll, load } = require('./tsparticles.all.bundle.min');
+
 async function loadParticles() {
     var enableParticles = true;
 
