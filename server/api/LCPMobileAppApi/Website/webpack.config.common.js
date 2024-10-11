@@ -5,8 +5,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'assets/[name].[contenthash].js',
-        path: path.resolve(__dirname, 'dist')
+        filename: 'assets/js/[name].[contenthash].js',
+        path: path.resolve(__dirname, 'dist'),
+        clean: true
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -19,17 +20,31 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx|ts|tsx)$/,
+                test: /\.(js|jsx|mjs|cjs|ts|tsx)$/,
                 exclude: /[\\/]node_modules[\\/]/,
                 use: {
-                    loader: 'babel-loader',
-                },
+                    loader: 'babel-loader'
+                }
             },
             {
-                test: /\.(jpe?g|gif|png|svg|woff|ttf|otf|json)$/,
+                test: /\.(jpe?g|png|svg|gif|bmp|webp)$/,
                 type: "asset/resource",
                 generator: {
-                    filename: 'assets/[name].[hash][ext][query]'
+                    filename: 'assets/images/[name].[hash][ext][query]'
+                }
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                type: "asset/resource",
+                generator: {
+                    filename: 'assets/fonts/[name].[hash][ext][query]'
+                }
+            },
+            {
+                test: /\.(json)$/,
+                type: "asset/resource",
+                generator: {
+                    filename: 'assets/json/[name].[hash][ext][query]'
                 }
             }
         ]
