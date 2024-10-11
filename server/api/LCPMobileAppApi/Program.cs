@@ -3,6 +3,7 @@ using LCPMobileAppApi.Context;
 using LCPMobileAppApi.Helpers;
 using LCPMobileAppApi.Hubs;
 using LCPMobileAppApi.Interfaces;
+using LCPMobileAppApi.Functions;
 using LCPMobileAppApi.Operations;
 using LCPMobileAppApi.Repositories;
 using LCPMobileAppApi.Services;
@@ -15,7 +16,6 @@ using LCPMobileAppApi.Localization;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
-using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -112,12 +112,7 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
-var supportedCultures = new List<CultureInfo>
-{
-    new CultureInfo("en-US"),
-    new CultureInfo("fr-FR"),
-    new CultureInfo("pt-PT")
-};
+var supportedCultures = Functions.GetLanguagesCultureList();
 
 var options = new RequestLocalizationOptions
 {

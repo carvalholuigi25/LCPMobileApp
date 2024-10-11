@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using static LCPMobileAppApi.Functions.Functions;
 
 namespace LCPMobileAppApi.Controllers;
 
@@ -34,6 +35,13 @@ public class LanguageController : ControllerBase
     public IActionResult GetAll()
     {
         var message = _loc.GetAllStrings();
+        return Ok(message);
+    }
+
+    [HttpGet("list")]
+    public IActionResult GetListLangs(bool isdetailed = true)
+    {
+        var message = isdetailed ? GetLanguagesDetailedList() : (dynamic)GetLanguagesList();
         return Ok(message);
     }
 
