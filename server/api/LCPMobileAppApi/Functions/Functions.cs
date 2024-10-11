@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System.Globalization;
 using Newtonsoft.Json;
 
@@ -5,9 +6,14 @@ namespace LCPMobileAppApi.Functions;
 
 public static class Functions
 {
+    public static string GetSlash() {
+	return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/";
+    }
+
     public static List<string> GetLanguagesList()
     {
-        var fname = $"{Directory.GetCurrentDirectory()}\\languageslist.json";
+	var fslash = GetSlash(); 
+        var fname = $"{Directory.GetCurrentDirectory()}{fslash}languageslist.json";
         StreamReader r = new StreamReader(fname);
         string jsonString = r.ReadToEnd();
         var lst = JsonConvert.DeserializeObject<List<Languages>>(jsonString)!.ToList();
@@ -16,7 +22,8 @@ public static class Functions
 
     public static List<Languages> GetLanguagesDetailedList()
     {
-        var fname = $"{Directory.GetCurrentDirectory()}\\languageslist.json";
+	var fslash = GetSlash();
+        var fname = $"{Directory.GetCurrentDirectory()}{fslash}languageslist.json";
         StreamReader r = new StreamReader(fname);
         string jsonString = r.ReadToEnd();
         var lst = JsonConvert.DeserializeObject<List<Languages>>(jsonString)!.ToList();
