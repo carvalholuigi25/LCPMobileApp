@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using LCPMobileAppApi.Authorization;
 using LCPMobileAppApi.Context;
 using LCPMobileAppApi.Functions;
@@ -105,7 +106,12 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddLocalization();
 builder.Services.AddSingleton<LocalizationMiddleware>();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
+
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+builder.Services.AddInMemoryRateLimiting();
 
 builder.Services.AddSignalR();
 
@@ -141,6 +147,7 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseMiddleware<LocalizationMiddleware>();
 app.UseHttpsRedirection();
+app.UseIpRateLimiting();
 app.UseAuthorization();
 app.UseAuthentication();
 
