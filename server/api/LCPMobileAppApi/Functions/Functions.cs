@@ -6,41 +6,36 @@ namespace LCPMobileAppApi.Functions;
 
 public static class Functions
 {
-    public static string GetSlash() {
-	return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/";
+    public static string GetSlash()
+    {
+        return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/";
     }
 
-    public static List<string> GetLanguagesList()
+    public static async Task<List<dynamic>> GetLanguagesList(bool isdetailed = false)
     {
-	var fslash = GetSlash(); 
+        var fslash = GetSlash();
         var fname = $"{Directory.GetCurrentDirectory()}{fslash}languageslist.json";
-        StreamReader r = new StreamReader(fname);
-        string jsonString = r.ReadToEnd();
-        var lst = JsonConvert.DeserializeObject<List<Languages>>(jsonString)!.ToList();
-        return lst.Select(x => x.Value)!.ToList()!;
+        using (FileStream fs = new FileStream(fname, FileMode.Open, FileAccess.Read, FileShare.Read))
+        using (StreamReader r = new StreamReader(fs)) {
+            string jsonString = await r.ReadToEndAsync();
+            var lst = JsonConvert.DeserializeObject<List<Languages>>(jsonString)!.ToList();
+            return isdetailed ? lst.ToList<dynamic>()! : lst.Select(x => x.Value)!.ToList<dynamic>()!;    
+        }
     }
 
-    public static List<Languages> GetLanguagesDetailedList()
+    public static async Task<List<CultureInfo>> GetLanguagesCultureList()
     {
-	var fslash = GetSlash();
-        var fname = $"{Directory.GetCurrentDirectory()}{fslash}languageslist.json";
-        StreamReader r = new StreamReader(fname);
-        string jsonString = r.ReadToEnd();
-        var lst = JsonConvert.DeserializeObject<List<Languages>>(jsonString)!.ToList();
-        return lst.ToList()!;
-    }
-
-    public static List<CultureInfo> GetLanguagesCultureList()
-    {
-        var glang = GetLanguagesList();
+        var glang = await GetLanguagesList(false);
         var lc = new List<CultureInfo>();
-        for(var i = 0; i < glang.Count; i++) {
+        for (var i = 0; i < glang.Count; i++)
+        {
             lc.Add(new CultureInfo(glang[i]));
         }
         return lc;
     }
 
-    public class Languages {
+    public class Languages
+    {
         public int? Id { get; set; }
         public string? Name { get; set; }
         public string? Value { get; set; }

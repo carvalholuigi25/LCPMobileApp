@@ -1,21 +1,20 @@
 using LCPMobileAppApi.Authorization;
 using LCPMobileAppApi.Context;
+using LCPMobileAppApi.Functions;
 using LCPMobileAppApi.Helpers;
 using LCPMobileAppApi.Hubs;
 using LCPMobileAppApi.Interfaces;
-using LCPMobileAppApi.Functions;
+using LCPMobileAppApi.Localization;
 using LCPMobileAppApi.Operations;
 using LCPMobileAppApi.Repositories;
 using LCPMobileAppApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using NSwag.Generation.Processors.Security;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
 using NSwag;
+using NSwag.Generation.Processors.Security;
 using Serilog;
 using System.Text.Json.Serialization;
-using LCPMobileAppApi.Localization;
-using Microsoft.Extensions.Localization;
-using Microsoft.AspNetCore.Localization;
-using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -112,7 +111,7 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
-var supportedCultures = Functions.GetLanguagesCultureList();
+var supportedCultures = await Functions.GetLanguagesCultureList();
 
 var options = new RequestLocalizationOptions
 {

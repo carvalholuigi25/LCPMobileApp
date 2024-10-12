@@ -39,9 +39,9 @@ public class LanguageController : ControllerBase
     }
 
     [HttpGet("list")]
-    public IActionResult GetListLangs(bool isdetailed = true)
+    public async Task<IActionResult> GetListLangs(bool isdetailed = true)
     {
-        var message = isdetailed ? GetLanguagesDetailedList() : (dynamic)GetLanguagesList();
+        var message = await GetLanguagesList(isdetailed);
         return Ok(message);
     }
 
