@@ -107,10 +107,7 @@ public class UsersRepo : ControllerBase, IUsersRepo
         var query = _context.Users.AsQueryable();
 
         // Filtering
-        if (!string.IsNullOrEmpty(queryParams.Search))
-        {
-            query = query.Where(i => i.Username.Contains(queryParams.Search));
-        }
+        query = GetFilterData(query, queryParams);
 
         return await query.CountAsync();
     }
