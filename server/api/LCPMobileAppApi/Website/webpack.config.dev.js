@@ -12,6 +12,9 @@ module.exports = merge(commonConfig, {
       },
       {
         directory: path.join(__dirname, 'src/assets'),
+      },
+      {
+        directory: path.join(__dirname, 'src/favicon'),
       }
     ],
     compress: true,

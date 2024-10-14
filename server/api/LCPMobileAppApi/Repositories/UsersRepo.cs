@@ -139,13 +139,15 @@ public class UsersRepo : ControllerBase, IUsersRepo
     private static IQueryable<User> GetSortByData(IQueryable<User> query, QueryParams queryParams) {
         if (!string.IsNullOrEmpty(queryParams.SortBy))
         {
+            var sortorderval = queryParams.SortOrder!.Value.ToString();
+            StringComparison strcom = StringComparison.OrdinalIgnoreCase;
             query = queryParams.SortBy.ToLower() switch
             {
-                "username" => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.Username) : query.OrderBy(i => i.Username),
-                "firstname" => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.FirstName) : query.OrderBy(i => i.FirstName),
-                "lastname" => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.LastName) : query.OrderBy(i => i.LastName),
-                "role" => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.Role) : query.OrderBy(i => i.Role),
-                _ => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.Id) : query.OrderBy(i => i.Id),
+                "username" => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.Username) : query.OrderBy(i => i.Username),
+                "firstname" => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.FirstName) : query.OrderBy(i => i.FirstName),
+                "lastname" => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.LastName) : query.OrderBy(i => i.LastName),
+                "role" => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.Role) : query.OrderBy(i => i.Role),
+                _ => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.Id) : query.OrderBy(i => i.Id),
             };
         }
 

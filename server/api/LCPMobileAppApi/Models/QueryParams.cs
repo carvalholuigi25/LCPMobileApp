@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace LCPMobileAppApi.Models;
 
 public class QueryParams
@@ -13,6 +15,13 @@ public class QueryParams
     }
 
     public string? SortBy { get; set; } = "id";
-    public string? SortOrder { get; set; } = "asc";
+    public SortOrderEnum? SortOrder { get; set; } = SortOrderEnum.asc;
     public string? Search { get; set; }
+}
+
+public enum SortOrderEnum {
+    [EnumMember(Value = "asc")]
+    asc,
+    [EnumMember(Value = "desc")]
+    desc
 }
