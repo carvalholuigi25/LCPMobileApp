@@ -13,5 +13,30 @@
         "id": 3,
         "name": "Français (France)",
         "value": "fr-FR"
+    },
+    {
+        "id": 4,
+        "name": "日本語（日本)",
+        "value": "jp-JP"
+    },
+    {
+        "id": 5,
+        "name": "Italiano (Italia)",
+        "value": "it-IT"
+    },
+    {
+        "id": 6,
+        "name": "Deutsch (Deutschland)",
+        "value": "de-DE"
+    },
+    {
+        "id": 7,
+        "name": "Español (España)",
+        "value": "es-ES"
+    },
+    {
+        "id": 8,
+        "name": "Українська (Україна)",
+        "value": "uk-UA"
     }
 ]

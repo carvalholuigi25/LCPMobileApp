@@ -98,20 +98,20 @@ builder.Services.AddOpenApiDocument(options =>
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.Configure<AppSettings>(config.GetSection("AppSettings"));
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+
+builder.Services.AddLocalization();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddMemoryCache();
+builder.Services.AddInMemoryRateLimiting();
 
 builder.Services.AddScoped<IUsersRepo, UsersRepo>();
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Services.AddLocalization();
 builder.Services.AddSingleton<LocalizationMiddleware>();
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
-
-builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
-builder.Services.AddInMemoryRateLimiting();
 
 builder.Services.AddSignalR();
 
@@ -145,7 +145,6 @@ app.UseCors(x => x
 app.UseRequestLocalization(options);
 app.UseDefaultFiles();
 app.UseStaticFiles();
-app.UseMiddleware<LocalizationMiddleware>();
 app.UseHttpsRedirection();
 app.UseIpRateLimiting();
 app.UseAuthorization();
@@ -162,6 +161,7 @@ app.UseReDoc(options =>
     options.Path = "/docs";
 });
 
+app.UseMiddleware<LocalizationMiddleware>();
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseMiddleware<JwtMiddleware>();
 

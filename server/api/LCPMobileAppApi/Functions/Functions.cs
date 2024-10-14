@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Globalization;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace LCPMobileAppApi.Functions;
 
@@ -19,7 +20,7 @@ public static class Functions
         using (StreamReader r = new StreamReader(fs)) {
             string jsonString = await r.ReadToEndAsync();
             var lst = JsonConvert.DeserializeObject<List<Languages>>(jsonString)!.ToList();
-            return isdetailed ? lst.ToList<dynamic>()! : lst.Select(x => x.Value)!.ToList<dynamic>()!;    
+            return isdetailed ? lst.OrderBy(x => x.Id).ToList<dynamic>()! : lst.Select(x => x.Value)!.ToList<dynamic>()!;    
         }
     }
 
