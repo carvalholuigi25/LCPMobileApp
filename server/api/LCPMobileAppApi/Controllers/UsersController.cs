@@ -19,9 +19,18 @@ namespace LCPMobileAppApi.Controllers
         // GET: api/Users
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers([FromQuery] QueryParams queryParams)
         {
-            return await _usersRepo.GetUsers();
+            var users = await _usersRepo.GetUsers(queryParams);
+            var totalCount = await _usersRepo.GetTotalCountAsync(queryParams);
+            var response = new QueryParamsResp<User> {
+                TotalCount = totalCount,
+                Page = queryParams.Page,
+                PageSize = queryParams.PageSize,
+                Data = users.Value!.ToList()
+            };
+
+            return Ok(response);
         }
 
         // GET: api/Users/5

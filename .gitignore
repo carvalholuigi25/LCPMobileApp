@@ -17,6 +17,7 @@ ios/
 server/api/LCPMobileAppApi/bin/
 server/api/LCPMobileAppApi/obj/
 server/api/LCPMobileAppApi/Database/
+server/api/LCPMobileAppApi/Database/sqlite/lcpmaapidb.db
 server/api/LCPMobileAppApi/Website/node_modules/
 server/api/LCPMobileAppApi/Website/package-lock.json
 server/api/LCPMobileAppApi/Migrations/

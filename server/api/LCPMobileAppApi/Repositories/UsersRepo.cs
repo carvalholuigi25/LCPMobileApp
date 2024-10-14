@@ -15,9 +15,20 @@ public class UsersRepo : ControllerBase, IUsersRepo
         _context = context;
     }
 
-    public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+    public async Task<ActionResult<IEnumerable<User>>> GetUsers(QueryParams queryParams)
     {
-        return await _context.Users.ToListAsync();
+        var query =  _context.Users.AsQueryable();
+
+        // Filtering
+        query = GetFilterData(query, queryParams);
+
+        // Sorting
+        query = GetSortByData(query, queryParams);
+
+        // Pagination
+        query = GetPaginationData(query, queryParams);
+
+        return await query.ToListAsync();
     }
 
     public async Task<ActionResult<User>> GetUser(int? id)
@@ -91,8 +102,60 @@ public class UsersRepo : ControllerBase, IUsersRepo
         return NoContent();
     }
 
+    public async Task<int> GetTotalCountAsync(QueryParams queryParams)
+    {
+        var query = _context.Users.AsQueryable();
+
+        // Filtering
+        if (!string.IsNullOrEmpty(queryParams.Search))
+        {
+            query = query.Where(i => i.Username.Contains(queryParams.Search));
+        }
+
+        return await query.CountAsync();
+    }
+
     private bool UserExists(int? id)
     {
         return _context.Users.Any(e => e.Id == id);
+    }
+
+    private static IQueryable<User> GetFilterData(IQueryable<User> query, QueryParams queryParams) {
+        if (!string.IsNullOrEmpty(queryParams.Search))
+        {
+            if (!string.IsNullOrEmpty(queryParams.SortBy))
+            {
+                query = queryParams.SortBy.ToLower() switch
+                {
+                    "username" => query.Where(i => i.Username.Contains(queryParams.Search)),
+                    "firstname" => query.Where(i => i.FirstName!.Contains(queryParams.Search)),
+                    "lastname" => query.Where(i => i.LastName!.Contains(queryParams.Search)),
+                    "role" => query.Where(i => i.Role.ToString()!.Contains(queryParams.Search)),
+                    _ => query.Where(i => i.Id == int.Parse(queryParams.Search)),
+                };
+            }
+        }
+
+        return query;
+    }
+
+    private static IQueryable<User> GetSortByData(IQueryable<User> query, QueryParams queryParams) {
+        if (!string.IsNullOrEmpty(queryParams.SortBy))
+        {
+            query = queryParams.SortBy.ToLower() switch
+            {
+                "username" => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.Username) : query.OrderBy(i => i.Username),
+                "firstname" => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.FirstName) : query.OrderBy(i => i.FirstName),
+                "lastname" => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.LastName) : query.OrderBy(i => i.LastName),
+                "role" => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.Role) : query.OrderBy(i => i.Role),
+                _ => queryParams.SortOrder == "desc" ? query.OrderByDescending(i => i.Id) : query.OrderBy(i => i.Id),
+            };
+        }
+
+        return query;
+    }
+
+    private static IQueryable<User> GetPaginationData(IQueryable<User> query, QueryParams queryParams) {
+        return query.Skip((queryParams.Page - 1) * queryParams.PageSize).Take(queryParams.PageSize);
     }
 }
