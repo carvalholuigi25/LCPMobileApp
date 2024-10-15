@@ -24,7 +24,7 @@
     "expodepchk": "npx expo install --check",
     "ios": "expo run:ios",
     "iosrn": "npx react-native run-ios --mode=\"release\"",
-    "api": "cd server\\api\\LCPMobileAppApi && dotnet run --launch-profile https",
+    "api": "cd server\\api\\LCPMobileAppApi && dotnet run --launch-profile \"LCPMAPPI\"",
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint"

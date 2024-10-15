@@ -17,8 +17,27 @@ public class AuthController : ControllerBase
         _userService = userService;
     }
 
+    /// <summary>
+    /// User login
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns>User login</returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /api/auth/authenticate
+    ///     {
+    ///         "username": "string",
+    ///         "password": "string"
+    ///     }
+    ///
+    /// </remarks>
+    /// <response code="201">Returns the user is logged in or not by his authentication credientials</response>
+    /// <response code="400">If the user is not logged in by his authentication credientials</response>
     [AllowAnonymous]
     [HttpPost("authenticate")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
         var response = _userService.Authenticate(model, IpAddress());
@@ -26,8 +45,22 @@ public class AuthController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Refresh Token 
+    /// </summary>
+    /// <returns>Refresh token and updates his user session</returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /api/auth/refresh-token
+    ///
+    /// </remarks>
+    /// <response code="201">Returns the token info and updates his user session</response>
+    /// <response code="400">If the user is not updated about his session and token info</response>
     [AllowAnonymous]
     [HttpPost("refresh-token")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     // [IgnoreAPI]
     public IActionResult RefreshToken()
     {
@@ -37,8 +70,26 @@ public class AuthController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Revoke Token 
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns>Revokes token and removes his user session</returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /api/auth/revoke-token
+    ///     {
+    ///         "token": "string"
+    ///     }
+    ///
+    /// </remarks>
+    /// <response code="201">Returns the token info and removed the current user session</response>
+    /// <response code="400">If the user is not removed about his session and token info</response>
     [Authorize(Roles = "admin,moderator")]
     [HttpPost("revoke-token")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     // [IgnoreAPI]
     public IActionResult RevokeToken(RevokeTokenRequest model)
     {
@@ -52,8 +103,22 @@ public class AuthController : ControllerBase
         return Ok(new { message = "Token revoked" });
     }
 
+    /// <summary>
+    /// Gets all list of users 
+    /// </summary>
+    /// <returns>Gets all list of users</returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     GET /api/auth
+    ///
+    /// </remarks>
+    /// <response code="201">Returns of all list of users</response>
+    /// <response code="400">If the user list is empty</response>
     [Authorize(Roles = "admin,moderator")]
     [HttpGet]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     // [IgnoreAPI]
     public IActionResult GetAll()
     {
@@ -61,8 +126,22 @@ public class AuthController : ControllerBase
         return Ok(users);
     }
 
+    /// <summary>
+    /// Gets all list of users by id 
+    /// </summary>
+    /// <returns>Gets all list of users by id</returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     GET /api/auth/{id}
+    ///
+    /// </remarks>
+    /// <response code="201">Returns of all list of users by id</response>
+    /// <response code="400">If the user list by id is empty</response>
     [Authorize(Roles = "admin,moderator")]
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     // [IgnoreAPI]
     public IActionResult GetById(int id)
     {
@@ -70,8 +149,23 @@ public class AuthController : ControllerBase
         return Ok(user);
     }
 
+    /// <summary>
+    /// Refreshes tokens by user id 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Refreshes tokens the current user session by id</returns>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     GET /api/auth/{id}/refresh-tokens
+    ///
+    /// </remarks>
+    /// <response code="201">Returns and refreshes the current user session by id</response>
+    /// <response code="400">If the current user session by id is empty</response>
     [Authorize(Roles = "admin,moderator")]
     [HttpGet("{id}/refresh-tokens")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     // [IgnoreAPI]
     public IActionResult GetRefreshTokens(int id)
     {
