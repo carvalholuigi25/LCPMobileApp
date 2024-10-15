@@ -1,36 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\luisc\\Documents\\projects\\LCPMobileApp\\server\\api\\LCPMobileAppApi\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{CFD24015-23BE-4243-A42D-FAD33ABA26E7}|LCPMobileAppApi.csproj|c:\\users\\luisc\\documents\\projects\\lcpmobileapp\\server\\api\\lcpmobileappapi\\lcpmobileappapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{CFD24015-23BE-4243-A42D-FAD33ABA26E7}|LCPMobileAppApi.csproj|solutionrelative:lcpmobileappapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LCPMobileAppApi",
-              "DocumentMoniker": "C:\\Users\\luisc\\Documents\\projects\\LCPMobileApp\\server\\api\\LCPMobileAppApi\\LCPMobileAppApi.csproj",
-              "RelativeDocumentMoniker": "LCPMobileAppApi.csproj",
-              "ToolTip": "C:\\Users\\luisc\\Documents\\projects\\LCPMobileApp\\server\\api\\LCPMobileAppApi\\LCPMobileAppApi.csproj",
-              "RelativeToolTip": "LCPMobileAppApi.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-10-15T10:20:20.626Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

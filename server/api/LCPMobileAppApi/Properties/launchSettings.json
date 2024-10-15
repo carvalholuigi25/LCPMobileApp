@@ -1,57 +1,48 @@
 {
-  "$schema": "http://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:39973",
-      "sslPort": 44314
-    }
-  },
   "profiles": {
     "LCPMAPPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "https://localhost:5000/",
-      "applicationUrl": "https://localhost:5000;http://localhost:5001",
-      "dotnetRunMessages": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:5000;http://localhost:5001",
+      "dotnetRunMessages": true
     },
     "LCPMAPPI-prod": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "https://localhost:5000/",
-      "applicationUrl": "https://localhost:5000;http://localhost:5001",
-      "dotnetRunMessages": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
-      }
+      },
+      "applicationUrl": "https://localhost:5000;http://localhost:5001",
+      "dotnetRunMessages": true
     },
     "LCPMAPPI-http": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://localhost:5001/",
-      "applicationUrl": "http://localhost:5001",
-      "dotnetRunMessages": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:5001",
+      "dotnetRunMessages": true
     },
     "LCPMAPPI-watch": {
       "commandName": "Executable",
-      "executablePath": "dotnet",
-      "workingDirectory": "$(ProjectDir)",
-      "hotReloadEnabled": true,
-      "hotReloadProfile" : "aspnetcore",
+      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
       "commandLineArgs": "watch run -c $(Configuration)",
+      "workingDirectory": "$(ProjectDir)",
       "launchBrowser": true,
       "launchUrl": "https://localhost:5000/",
-      "applicationUrl": "https://localhost:5000;http://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "hotReloadEnabled": true,
+      "hotReloadProfile": "aspnetcore",
+      "applicationUrl": "https://localhost:5000;http://localhost:5001"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -59,6 +50,15 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:39973",
+      "sslPort": 44314
     }
   }
 }
