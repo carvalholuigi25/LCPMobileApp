@@ -18,7 +18,6 @@ using Serilog;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var config = builder.Configuration;
 var env = builder.Environment;
 
@@ -60,6 +59,14 @@ builder.Services.AddControllers()
         x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("GuestOnly", policy => policy.RequireRole("guest"));
+    options.AddPolicy("UsersOnly", policy => policy.RequireRole("user"));
+    options.AddPolicy("StaffOnly", policy => policy.RequireRole("admin", "moderator"));
+    options.AddPolicy("AllUsers", policy => policy.RequireRole("guest", "user", "moderator", "admin"));
+});
 
 builder.Services.AddOpenApiDocument(options =>
 {

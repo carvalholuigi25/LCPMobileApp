@@ -86,7 +86,8 @@ public class AuthController : ControllerBase
     /// </remarks>
     /// <response code="201">Returns the token info and removed the current user session</response>
     /// <response code="400">If the user is not removed about his session and token info</response>
-    [Authorize(Roles = "admin,moderator")]
+    // [Authorize(Roles = "admin,moderator")]
+    [Authorize(Policy = "StaffOnly")]
     [HttpPost("revoke-token")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -115,7 +116,8 @@ public class AuthController : ControllerBase
     /// </remarks>
     /// <response code="201">Returns of all list of users</response>
     /// <response code="400">If the user list is empty</response>
-    [Authorize(Roles = "admin,moderator")]
+    // [Authorize(Roles = "admin,moderator")]
+    [Authorize(Policy = "StaffOnly")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -138,7 +140,8 @@ public class AuthController : ControllerBase
     /// </remarks>
     /// <response code="201">Returns of all list of users by id</response>
     /// <response code="400">If the user list by id is empty</response>
-    [Authorize(Roles = "admin,moderator")]
+    // [Authorize(Roles = "admin,moderator")]
+    [Authorize(Policy = "StaffOnly")]
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -162,7 +165,8 @@ public class AuthController : ControllerBase
     /// </remarks>
     /// <response code="201">Returns and refreshes the current user session by id</response>
     /// <response code="400">If the current user session by id is empty</response>
-    [Authorize(Roles = "admin,moderator")]
+    // [Authorize(Roles = "admin,moderator")]
+    [Authorize(Policy = "StaffOnly")]
     [HttpGet("{id}/refresh-tokens")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

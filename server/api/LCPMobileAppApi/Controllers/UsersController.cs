@@ -42,7 +42,7 @@ namespace LCPMobileAppApi.Controllers
         /// <response code="201">Returns the all infos about users</response>
         /// <response code="400">If the users infos are empty</response>
         [HttpGet]
-        [Authorize]
+        [Authorize(Policy = "AllUsers")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers([FromQuery] QueryParams queryParams)
@@ -81,7 +81,7 @@ namespace LCPMobileAppApi.Controllers
         /// <response code="201">Returns the info about user</response>
         /// <response code="400">If the user info is empty</response>
         [HttpGet("{id}")]
-        [Authorize]
+        [Authorize(Policy = "StaffOnly")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<User>> GetUser(int? id)
@@ -144,7 +144,7 @@ namespace LCPMobileAppApi.Controllers
         /// <response code="400">If the users infos updated are empty by id and its body</response>
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        [Authorize]
+        [Authorize(Policy = "StaffOnly")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PutUser(int? id, User user)
@@ -166,7 +166,7 @@ namespace LCPMobileAppApi.Controllers
         /// <response code="201">Returns the all users infos are deleted by id</response>
         /// <response code="400">If the users infos are deleted by id</response>
         [HttpDelete("{id}")]
-        [Authorize]
+        [Authorize(Policy = "StaffOnly")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteUser(int? id)
