@@ -18,6 +18,7 @@ using Serilog;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var config = builder.Configuration;
 var env = builder.Environment;
 

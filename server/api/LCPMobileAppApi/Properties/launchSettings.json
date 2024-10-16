@@ -4,51 +4,56 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "https://localhost:5000/",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
       "applicationUrl": "https://localhost:5000;http://localhost:5001",
-      "dotnetRunMessages": true
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": ""
+      }
     },
     "LCPMAPPI-prod": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "https://localhost:5000/",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      },
       "applicationUrl": "https://localhost:5000;http://localhost:5001",
-      "dotnetRunMessages": true
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "ASPNETCORE_URLS": ""
+      }
     },
     "LCPMAPPI-http": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://localhost:5001/",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
       "applicationUrl": "http://localhost:5001",
-      "dotnetRunMessages": true
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": ""
+      }
     },
     "LCPMAPPI-watch": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
       "commandLineArgs": "watch run -c $(Configuration)",
       "workingDirectory": "$(ProjectDir)",
-      "launchBrowser": true,
-      "launchUrl": "https://localhost:5000/",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
       "hotReloadEnabled": true,
       "hotReloadProfile": "aspnetcore",
-      "applicationUrl": "https://localhost:5000;http://localhost:5001"
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:5000/",
+      "applicationUrl": "https://localhost:5000;http://localhost:5001",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": ""
+      }
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": ""
       }
     }
   },
