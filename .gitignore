@@ -14,6 +14,7 @@ android/
 ios/
 
 # api
+server/api/LCPMobileAppApi/.vs/
 server/api/LCPMobileAppApi/bin/
 server/api/LCPMobileAppApi/obj/
 server/api/LCPMobileAppApi/Database/
@@ -22,6 +23,11 @@ server/api/LCPMobileAppApi/Website/node_modules/
 server/api/LCPMobileAppApi/Website/package-lock.json
 server/api/LCPMobileAppApi/Migrations/
 server/api/LCPMobileAppApi/Logs/
+
+# api library
+server/api/LCPMobileAppApi.Library/.vs/
+server/api/LCPMobileAppApi.Library/bin/
+server/api/LCPMobileAppApi.Library/obj/
 
 # .env
 package-lock.json
