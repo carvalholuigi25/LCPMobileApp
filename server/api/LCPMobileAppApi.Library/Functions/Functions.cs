@@ -1,7 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Globalization;
 using Newtonsoft.Json;
-using System.Linq;
 
 namespace LCPMobileAppApi.Functions;
 
@@ -15,7 +14,8 @@ public static class Functions
     public static async Task<List<dynamic>> GetLanguagesList(bool isdetailed = false)
     {
         var fslash = GetSlash();
-        var fname = $"{Directory.GetCurrentDirectory()}{fslash}languageslist.json";
+        var fdir = $"{Path.GetDirectoryName(Directory.GetCurrentDirectory())}{fslash}LCPMobileAppApi.Library{fslash}JSON{fslash}";
+        var fname = $"{fdir}languageslist.json";
         using (FileStream fs = new FileStream(fname, FileMode.Open, FileAccess.Read, FileShare.Read))
         using (StreamReader r = new StreamReader(fs)) {
             string jsonString = await r.ReadToEndAsync();

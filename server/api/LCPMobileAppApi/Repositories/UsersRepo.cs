@@ -49,6 +49,10 @@ public class UsersRepo : ControllerBase, IUsersRepo
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, 10, false);
         }
 
+        if(!string.IsNullOrEmpty(user.Username) &&  _context.Users.Where(x => x.Username == user.Username).Count() == 1) {
+            return BadRequest("Username already exists!");
+        }
+
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
@@ -65,6 +69,10 @@ public class UsersRepo : ControllerBase, IUsersRepo
 
         if(!string.IsNullOrEmpty(user.Password)) {
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, 10, false);
+        }
+
+        if(!string.IsNullOrEmpty(user.Username) &&  _context.Users.Where(x => x.Username == user.Username).Count() == 1) {
+            return BadRequest("Username already exists!");
         }
 
         _context.Entry(user).State = EntityState.Modified;

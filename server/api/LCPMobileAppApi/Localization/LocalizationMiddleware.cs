@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace LCPMobileAppApi.Localization;
+namespace LCPMobileAppApi.Library.Localization;
 
 public class LocalizationMiddleware : IMiddleware
 {

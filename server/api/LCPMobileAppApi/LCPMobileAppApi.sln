@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LCPMobileAppApi", "LCPMobileAppApi.csproj", "{CFD24015-23BE-4243-A42D-FAD33ABA26E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LCPMobileAppApi.Library", "..\LCPMobileAppApi.Library\LCPMobileAppApi.Library.csproj", "{E8574542-E225-47CE-91DF-7A33F8A73B59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CFD24015-23BE-4243-A42D-FAD33ABA26E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFD24015-23BE-4243-A42D-FAD33ABA26E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFD24015-23BE-4243-A42D-FAD33ABA26E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8574542-E225-47CE-91DF-7A33F8A73B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8574542-E225-47CE-91DF-7A33F8A73B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8574542-E225-47CE-91DF-7A33F8A73B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8574542-E225-47CE-91DF-7A33F8A73B59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

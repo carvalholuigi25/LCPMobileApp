@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Localization;
 
-namespace LCPMobileAppApi.Localization;
+namespace LCPMobileAppApi.Library.Localization;
 
 public class JsonStringLocalizerFactory : IStringLocalizerFactory
 {

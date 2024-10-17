@@ -2,7 +2,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 
-namespace LCPMobileAppApi.Localization;
+namespace LCPMobileAppApi.Library.Localization;
 
 public class JsonStringLocalizer : IStringLocalizer
 {
@@ -32,7 +32,9 @@ public class JsonStringLocalizer : IStringLocalizer
     }
     public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
     {
-        string filePath = $"Resources/{Thread.CurrentThread.CurrentCulture.Name}.json";
+        var fslash = Functions.Functions.GetSlash();
+        var respath = $"{Path.GetDirectoryName(Directory.GetCurrentDirectory())}{fslash}LCPMobileAppApi.Library{fslash}Resources{fslash}";
+        string filePath = $"{respath}{Thread.CurrentThread.CurrentCulture.Name}.json";
         using (var str = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
         using (var sReader = new StreamReader(str))
         using (var reader = new JsonTextReader(sReader))
@@ -50,7 +52,9 @@ public class JsonStringLocalizer : IStringLocalizer
     }
     private string GetString(string key)
     {
-        string relativeFilePath = $"Resources/{Thread.CurrentThread.CurrentCulture.Name}.json";
+        var fslash = Functions.Functions.GetSlash();
+        var respath = $"{Path.GetDirectoryName(Directory.GetCurrentDirectory())}{fslash}LCPMobileAppApi.Library{fslash}Resources{fslash}";
+        string relativeFilePath = $"{respath}{Thread.CurrentThread.CurrentCulture.Name}.json";
         string fullFilePath = Path.GetFullPath(relativeFilePath);
         if (File.Exists(fullFilePath))
         {

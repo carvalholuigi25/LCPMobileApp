@@ -17,10 +17,10 @@ public class LanguageController : ControllerBase
     }
 
     /// <summary>
-    /// Gets language by the country code iso
+    /// Gets hello message
     /// </summary>
     /// <param name="culture"></param>
-    /// <returns>Gets language by the country code iso (culture)</returns>
+    /// <returns>Gets hello message by the country code iso (culture)</returns>
     /// <remarks>
     /// Sample request:
     ///

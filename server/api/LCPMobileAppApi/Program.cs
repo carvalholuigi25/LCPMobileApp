@@ -1,11 +1,11 @@
 using AspNetCoreRateLimit;
+using LCPMobileAppApi.Functions;
+using LCPMobileAppApi.Library.Localization;
 using LCPMobileAppApi.Authorization;
 using LCPMobileAppApi.Context;
-using LCPMobileAppApi.Functions;
 using LCPMobileAppApi.Helpers;
 using LCPMobileAppApi.Hubs;
 using LCPMobileAppApi.Interfaces;
-using LCPMobileAppApi.Localization;
 using LCPMobileAppApi.Operations;
 using LCPMobileAppApi.Repositories;
 using LCPMobileAppApi.Services;
@@ -29,25 +29,23 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
-if (config.GetSection("DefDBMode").Value == "MySQL")
+switch (config.GetSection("DefDBMode").Value)
 {
-    builder.Services.AddDbContext<MDBContext, MDBContextMySQL>();
-}
-else if (config.GetSection("DefDBMode").Value == "PostgresSQL")
-{
-    builder.Services.AddDbContext<MDBContext, MDBContextPostgresSQL>();
-}
-else if (config.GetSection("DefDBMode").Value == "SQLite")
-{
-    builder.Services.AddDbContext<MDBContext, MDBContextSQLite>();
-}
-else if (config.GetSection("DefDBMode").Value == "SQLServer")
-{
-    builder.Services.AddDbContext<MDBContext, MDBContextSQLServer>();
-}
-else
-{
-    builder.Services.AddDbContext<MDBContext>();
+    case "MySQL":
+        builder.Services.AddDbContext<MDBContext, MDBContextMySQL>();
+        break;
+    case "PostgresSQL":
+        builder.Services.AddDbContext<MDBContext, MDBContextPostgresSQL>();
+        break;
+    case "SQLite":
+        builder.Services.AddDbContext<MDBContext, MDBContextSQLite>();
+        break;
+    case "SQLServer":
+        builder.Services.AddDbContext<MDBContext, MDBContextSQLServer>();
+        break;
+    default:
+        builder.Services.AddDbContext<MDBContext>();
+        break;
 }
 
 builder.Services.AddCors();
