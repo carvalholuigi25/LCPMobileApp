@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #pthproj="$HOME/Documents/projects/LCPMobileApp/server/api/LCPMobileAppApi"
-pthproj=$(sudo find $HOME -type d -name "LCPMobileAppApi" 2>/dev/null)
+pthproj=$(sudo find $HOME -type d -name "LCPMobileAppApi" -prune 2>/dev/null)
 pthmig="$pthproj/Migrations"
 DefDBMode="SQLite"
 
