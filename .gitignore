@@ -19,7 +19,9 @@ server/api/LCPMobileAppApi/.vs/
 server/api/LCPMobileAppApi/bin/
 server/api/LCPMobileAppApi/obj/
 server/api/LCPMobileAppApi/Database/
+server/api/LCPMobileAppApi/Database/SQLite/
 server/api/LCPMobileAppApi/Database/SQLite/*.db
+server/api/LCPMobileAppApi/Database/SQLServer/
 server/api/LCPMobileAppApi/Database/SQLServer/*.mdf
 server/api/LCPMobileAppApi/Database/SQLServer/*.ndf
 server/api/LCPMobileAppApi/Database/SQLServer/*.ldf

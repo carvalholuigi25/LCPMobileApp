@@ -1,7 +1,13 @@
 #!/bin/bash
 
+getNumDays() {
+    ya=$(date +%Y)
+    numy=10
+    ((!($ya % 4) && ($ya % 100 || !($ya % 400)))) && echo $((366 * $numy)) || echo $((365 * $numy))
+}
+
 SERVERNAME="localhost"
-NUMDAYS=$((365 * 10))
+NUMDAYS=$(getNumDays)
 
 if [ ! -d "Keys" ]; then
     mkdir -p "Keys"
