@@ -1,3 +1,4 @@
-Website\node_modules
-Website\package-lock.json
-SSL\Keys
+Website/node_modules
+Website/package-lock.json
+SSL/Keys/
+.vs/
