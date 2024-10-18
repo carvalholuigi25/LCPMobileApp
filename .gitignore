@@ -18,7 +18,12 @@ server/api/LCPMobileAppApi/.vs/
 server/api/LCPMobileAppApi/bin/
 server/api/LCPMobileAppApi/obj/
 server/api/LCPMobileAppApi/Database/
-server/api/LCPMobileAppApi/Database/sqlite/lcpmaapidb.db
+server/api/LCPMobileAppApi/Database/SQLite/*.db
+server/api/LCPMobileAppApi/Database/SQLServer/*.mdf
+server/api/LCPMobileAppApi/Database/SQLServer/*.ndf
+server/api/LCPMobileAppApi/Database/SQLServer/*.ldf
+server/api/LCPMobileAppApi/Database/PostgresSQL/
+server/api/LCPMobileAppApi/Database/MySQL/
 server/api/LCPMobileAppApi/Website/node_modules/
 server/api/LCPMobileAppApi/Website/package-lock.json
 server/api/LCPMobileAppApi/Migrations/
