@@ -6,31 +6,34 @@ using LCPMobileAppApi.Models.UsersAuth;
 
 namespace LCPMobileAppApi.Models;
 
-public class User
+public class Team
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Key]
-    public int? User_Id { get; set; }
+    public int? Team_Member_Id { get; set; }
+    
     [Required]
-    public string Username { get; set; } = null!;
+    public string NameMember { get; set;} = null!;
+    
     [Required]
-    public string Password { get; set; } = null!;
-    public string? Email { get; set; }
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; }
-    public string? Avatar { get; set; } = "avatars/guest.png";
-    public string? Cover { get; set; } = "avatars/guest.png";
-    public int? Usersinfo_Id { get; set; } = 1;
-    public EUsersRoles? Role { get; set; } = EUsersRoles.user;
+    public string PasswordMember { get; set;} = null!;
+
+    public string? EmailMember { get; set; }
+    public string? FirstNameMember { get; set; }
+    public string? LastNameMember { get; set; }
+    public string? AvatarMember { get; set; } = "avatars/guest.png";
+    public string? CoverMember { get; set; } = "avatars/guest.png";
+    public int? TeamInfo_Id { get; set; } = 1;
+    public ETeamsMembersRoles? RoleMember { get; set; } = ETeamsMembersRoles.member;
 
     [JsonIgnore]
     public List<RefreshToken>? RefreshTokens { get; set; }
 }
 
-public class UsersInfo {
+public class TeamMembersInfo {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Key]
-    public int? Usersinfo_Id { get; set; }
+    public int? TeamInfo_Id { get; set; }
     public string? PhoneUser { get; set; }
     public string? AddressUser { get; set; }
     public string? CountryUser { get; set; }

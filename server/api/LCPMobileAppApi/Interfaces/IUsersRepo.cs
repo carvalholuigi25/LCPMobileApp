@@ -1,4 +1,5 @@
 using LCPMobileAppApi.Models;
+using LCPMobileAppApi.Models.QParams;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LCPMobileAppApi.Interfaces;

@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace LCPMobileAppApi.Models;
+namespace LCPMobileAppApi.Models.QParams;
 
 public class QueryParams
 {
@@ -11,7 +11,7 @@ public class QueryParams
     public int PageSize
     {
         get { return _pageSize; }
-        set { _pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
+        set { _pageSize = value > MaxPageSize ? MaxPageSize : value; }
     }
 
     public string? SortBy { get; set; } = "id";
@@ -19,7 +19,8 @@ public class QueryParams
     public string? Search { get; set; }
 }
 
-public enum SortOrderEnum {
+public enum SortOrderEnum
+{
     [EnumMember(Value = "asc")]
     asc,
     [EnumMember(Value = "desc")]

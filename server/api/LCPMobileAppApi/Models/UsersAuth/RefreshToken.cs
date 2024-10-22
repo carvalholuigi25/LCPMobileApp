@@ -1,4 +1,4 @@
-namespace LCPMobileAppApi.Models;
+namespace LCPMobileAppApi.Models.UsersAuth;
 
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;

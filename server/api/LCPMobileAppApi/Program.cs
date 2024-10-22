@@ -60,10 +60,10 @@ builder.Services.AddControllers()
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("GuestOnly", policy => policy.RequireRole("guest"));
     options.AddPolicy("UsersOnly", policy => policy.RequireRole("user"));
+    options.AddPolicy("TeamMembersOnly", policy => policy.RequireRole("member"));
     options.AddPolicy("StaffOnly", policy => policy.RequireRole("admin", "moderator"));
-    options.AddPolicy("AllUsers", policy => policy.RequireRole("guest", "user", "moderator", "admin"));
+    options.AddPolicy("AllUsers", policy => policy.RequireRole("user", "member", "moderator", "admin"));
 });
 
 builder.Services.AddOpenApiDocument(options =>
@@ -111,6 +111,19 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddMemoryCache();
 builder.Services.AddInMemoryRateLimiting();
 
+builder.Services.AddScoped<IDepartmentsRepo, DepartmentsRepo>();
+builder.Services.AddScoped<IInvoicesRepo, InvoicesRepo>();
+builder.Services.AddScoped<IMilestonesRepo, MilestonesRepo>();
+builder.Services.AddScoped<IOrdersRepo, OrdersRepo>();
+builder.Services.AddScoped<IPaymentsRepo, PaymentsRepo>();
+builder.Services.AddScoped<IPhasesRepo, PhasesRepo>();
+builder.Services.AddScoped<IProjectsRepo, ProjectsRepo>();
+builder.Services.AddScoped<IReviewsRepo, ReviewsRepo>();
+builder.Services.AddScoped<IStatusRepo, StatusRepo>();
+builder.Services.AddScoped<ITeamsRepo, TeamsRepo>();
+builder.Services.AddScoped<ITechnologiesRepo, TechnologiesRepo>();
+builder.Services.AddScoped<ITicketsRepo, TicketsRepo>();
+builder.Services.AddScoped<ITimeLogsRepo, TimeLogsRepo>();
 builder.Services.AddScoped<IUsersRepo, UsersRepo>();
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserService, UserService>();

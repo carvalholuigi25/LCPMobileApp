@@ -1,4 +1,5 @@
 using LCPMobileAppApi.Models;
+using LCPMobileAppApi.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 public class MDBSeed
@@ -15,12 +16,12 @@ public class MDBSeed
         if(isseed) {
             _modelBuilder.Entity<User>().HasData(
                 new User() { 
-                    Id = 1, 
+                    User_Id = 1, 
                     Username = "admin", 
                     FirstName = "Luis", 
                     LastName = "Carvalho", 
                     Password = BCrypt.Net.BCrypt.HashPassword("1234", 10, false), 
-                    Role = Roles.admin 
+                    Role = EUsersRoles.admin 
                 }
             );
         }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using LCPMobileAppApi.Context;
 using LCPMobileAppApi.Models;
 using LCPMobileAppApi.Interfaces;
+using LCPMobileAppApi.Models.QParams;
 
 namespace LCPMobileAppApi.Repositories;
 
@@ -57,12 +58,12 @@ public class UsersRepo : ControllerBase, IUsersRepo
         await _context.SaveChangesAsync();
 
         // return CreatedAtAction("GetUser", new { id = user.Id }, user);
-        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+        return CreatedAtAction(nameof(GetUser), new { id = user.User_Id }, user);
     }
 
     public async Task<IActionResult> PutUser(int? id, User user)
     {
-        if (id != user.Id)
+        if (id != user.User_Id)
         {
             return BadRequest();
         }
@@ -122,7 +123,7 @@ public class UsersRepo : ControllerBase, IUsersRepo
 
     private bool UserExists(int? id)
     {
-        return _context.Users.Any(e => e.Id == id);
+        return _context.Users.Any(e => e.User_Id == id);
     }
 
     private static IQueryable<User> GetFilterData(IQueryable<User> query, QueryParams queryParams) {
@@ -136,7 +137,7 @@ public class UsersRepo : ControllerBase, IUsersRepo
                     "firstname" => query.Where(i => i.FirstName!.Contains(queryParams.Search)),
                     "lastname" => query.Where(i => i.LastName!.Contains(queryParams.Search)),
                     "role" => query.Where(i => i.Role.ToString()!.Contains(queryParams.Search)),
-                    _ => query.Where(i => i.Id == int.Parse(queryParams.Search)),
+                    _ => query.Where(i => i.User_Id == int.Parse(queryParams.Search)),
                 };
             }
         }
@@ -155,7 +156,7 @@ public class UsersRepo : ControllerBase, IUsersRepo
                 "firstname" => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.FirstName) : query.OrderBy(i => i.FirstName),
                 "lastname" => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.LastName) : query.OrderBy(i => i.LastName),
                 "role" => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.Role) : query.OrderBy(i => i.Role),
-                _ => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.Id) : query.OrderBy(i => i.Id),
+                _ => sortorderval.Contains("desc", strcom) ? query.OrderByDescending(i => i.User_Id) : query.OrderBy(i => i.User_Id),
             };
         }
 

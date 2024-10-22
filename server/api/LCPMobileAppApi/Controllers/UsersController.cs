@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using LCPMobileAppApi.Models;
 using LCPMobileAppApi.Interfaces;
 using LCPMobileAppApi.Authorization;
+using LCPMobileAppApi.Models.QParams;
 
 namespace LCPMobileAppApi.Controllers
 {

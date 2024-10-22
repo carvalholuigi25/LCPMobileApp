@@ -12,6 +12,19 @@ public class MDBContext : DbContext
         _config = config;
     }
 
+    public DbSet<Department> Departments { get; set; } = null!;
+    public DbSet<Invoice> Invoices { get; set; } = null!;
+    public DbSet<Milestone> Milestones { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<Payment> Payments { get; set; } = null!;
+    public DbSet<Phase> Phases { get; set; } = null!;
+    public DbSet<Project> Projects { get; set; } = null!;
+    public DbSet<Review> Reviews { get; set; } = null!;
+    public DbSet<Status> Status { get; set; } = null!;
+    public DbSet<Team> Teams { get; set; } = null!;
+    public DbSet<Technology> Technologies { get; set; } = null!;
+    public DbSet<Ticket> Tickets { get; set; } = null!;
+    public DbSet<TimeLog> TimeLogs { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -1,0 +1,346 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table projects {
+  project_id integer [pk]
+  name_project varchar [not null]
+  desc_project text [null]
+  start_date datetime [not null, default: `now()`]
+  end_date datetime [not null, default: `now()`]
+  attachments varchar [null]
+  source_code_url varchar [null]
+  user_id integer [null, default: 1]
+  project_type_id integer [null, default: 1]
+  technology_id integer [null, default: 1]
+  status_id integer [null, default: 1]
+}
+
+Table users {
+  user_id integer [pk]
+  name_user varchar [not null]
+  password_user varchar [not null]
+  email_user varchar [null]
+  firstname_user varchar [null]
+  lastname_user varchar [null]
+  avatar_user varchar [null, default: 'avatars/guest.png']
+  cover_user varchar [null, default: 'covers/guest.png']
+  roles_user userroles [null, default: 'user']
+  usersinfo_id integer [null, default: 1]
+}
+
+Table usersinfo {
+  usersinfo_id integer [pk]
+  phone_user varchar [null]
+  address_user varchar [null]
+  country_user varchar [null]
+  city_user varchar [null]
+  district_user varchar [null]
+  datebirthday_user date [null]
+}
+
+Table teams {
+  team_member_id integer [pk]
+  name_member varchar [not null]
+  password_member varchar [not null]
+  email_member varchar [null]
+  firstname_member varchar [null]
+  lastname_member varchar [null]
+  avatar_member varchar [null, default: 'avatars/guest.png']
+  cover_member varchar [null, default: 'covers/guest.png']
+  role_member teammemberroles [null, default: 'member']
+  teaminfo_id integer [null, default: 1]
+}
+
+Table teaminfo {
+  teaminfo_id integer [pk]
+  phone_member varchar [null]
+  address_member varchar [null]
+  country_member varchar [null]
+  city_member varchar [null]
+  district_member varchar [null]
+  datebirthday_member date [null]
+}
+
+Table task {
+  task_id integer [pk]
+  task_name varchar [not null]
+  task_description text [null]
+  due_date datetime [not null, default: `now()`]
+  project_id integer [null, default: 1]
+  assigned_to integer [null, default: 1]
+  status_id integer [null, default: 1]
+}
+
+Table technology {
+  technology_id integer [pk]
+  technology_name technologytypes [null, default: 'react']
+}
+
+Table project_technology {
+  project_id integer [default: 1]
+  technology_id integer [default: 1]
+}
+
+Table project_type {
+  project_type_id integer [pk]
+  type_name projecttypes [null, default: 'website']
+}
+
+Table status {
+  status_id integer [pk]
+  status_name statustypes [null, default: 'planning']
+}
+
+Table time_log {
+  time_log_id integer [pk]
+  team_member_id integer [not null, default: 1]
+  task_id integer [not null, default: 1]
+  hours_logged decimal [null, default: 1.0]
+  date_logged datetime [null, default: `now()`]
+}
+
+Table project_budget {
+  project_budget_id integer [pk]
+  project_id integer [not null, default: 1]
+  estimated_budget decimal [null, default: 1.00]
+  actual_budget decimal [null, default: 1.00]
+  budget_variance decimal [null, default: 1.00]
+}
+
+Table task_dependencies {
+  task_dependency_id integer [pk]
+  task_id integer [not null, default: 1]
+  dependent_on_task_id integer [null, default: 1]
+}
+
+Table milestones {
+  milestone_id integer [pk]
+  milestone_name varchar [not null]
+  description text [not null]
+  due_date datetime [null, default: `now()`]
+  project_id integer [null, default: 1]
+}
+
+Table orders {
+  orders_id integer [pk]
+  orders_date datetime [null, default: `now()`]
+  total_amount decimal [null, default: 1.00]
+  user_id integer [null, default: 1]
+  status_id integer [null, default: 1]
+}
+
+Table orders_items {
+  orders_items_id integer [pk]
+  orders_id integer [not null, default: 1]
+  project_id integer [not null, default: 1]
+  unit_price decimal [not null, default: 1.00]
+  quantity int [not null, default: 1]
+  discount int [not null, default: 1]
+  subtotal decimal [null, default: 1.00]
+}
+
+Table payment {
+  payment_id integer [pk]
+  orders_id integer [not null, default: 1]
+  payment_date datetime [null, default: `now()`]
+  amount_paid decimal [null, default: 1.00]
+  payment_method paymentmethod [not null, default: 'creditcard']
+  payment_status_id int [null, default: 1]
+}
+
+Table payment_status {
+  payment_status_id integer [pk]
+  status_name paymentstatus [null, default: 'pending']
+}
+
+Table order_status {
+  order_status_id integer [pk]
+  status_name orderstatus [null, default: 'pending']
+}
+
+Table reviews {
+  reviews_id integer [pk]
+  reviews_title varchar [not null]
+  reviews_desc text [not null]
+  reviews_comment text [null]
+  reviews_rate int [null, default: 10]
+  reviews_image varchar [null, default: 'images/img.jpg']
+  reviews_isfeatured boolean [null, default: false]
+  reviews_date datetime [null, default: `now()`]
+  reviews_status reviewsstatus [null, default: 'pending']
+  reviews_privacy reviewsprivacy [null, default: 'public']
+  project_id int [null, default: 1]
+  user_id int [null, default: 1]
+  order_id int [null, default: 1]
+  team_member_id int [null, default: 1]
+}
+
+Table departments {
+  departments_id integer [pk]
+  departments_name varchar [not null, default: 'Development']
+  team_member_id int [null, default: 1]
+}
+
+Table tickets {
+  tickets_id integer [pk]
+  tickets_title varchar [not null]
+  tickets_desc text [not null]
+  tickets_created_date datetime [null, default: `now()`]
+  tickets_resolved_date datetime [null, default: `now()`]
+  tickets_attachment varchar [null, default: 'tickets/images/timg.jpg']
+  project_id int [null, default: 1]
+  user_id int [null, default: 1]
+  order_id int [null, default: 1]
+  status_id int [null, default: 1]
+  assigned_to int [null, default: 1]
+}
+
+Table tickets_status {
+  ticket_status_id integer [pk]
+  status_name ticketsstatus [not null, default: 'pending']
+}
+
+Table invoices {
+  invoice_id integer [pk]
+  invoice_date datetime [not null, default: `now()`]
+  due_date datetime [not null, default: `now()`]
+  total_amount decimal [not null]
+  tax_amount decimal [not null]
+  discount decimal [not null]
+  amount_due decimal [not null]
+  order_id int [null, default: 1]
+  client_id int [null, default: 1]
+  status_id int [null, default: 1]
+  payment_id int [null, default: 1]
+}
+
+Table invoice_status {
+  status_id integer [pk]
+  status_name invoicestatus [null, default: 'pending']
+}
+
+Ref usersinfofk: users.usersinfo_id - usersinfo.usersinfo_id
+Ref teamsinfofk: teams.teaminfo_id - teaminfo.teaminfo_id
+Ref projectusersfk: projects.user_id < users.user_id
+Ref projecttypefk: projects.project_type_id > project_type.project_type_id
+Ref projecttechfk: projects.technology_id > project_technology.technology_id
+Ref taskprojectfk: task.project_id > projects.project_id
+Ref teamstaskfk: teams.team_member_id < task.assigned_to
+Ref projectstatusfk: projects.status_id <> status.status_id
+Ref taskstatusfk: task.status_id <> status.status_id
+Ref technologyprojectfk: technology.technology_id > projects.technology_id
+Ref timelogteammembersfk: time_log.team_member_id > teams.team_member_id
+Ref timelogtasksfk: time_log.task_id > task.task_id
+Ref projectbudgetsprojfk: project_budget.project_id > projects.project_id
+Ref taskdependenciestasksfk: task_dependencies.task_id <> task.task_id
+Ref taskstaskdependenciesfk: task.task_id <> task_dependencies.dependent_on_task_id
+Ref milestonesprojectfk: milestones.project_id > projects.project_id
+Ref userordersfk: users.user_id < orders.user_id
+Ref ordersoitemsfk: orders.orders_id < orders_items.orders_id
+Ref ordersitemsprojectsfk: orders_items.project_id > projects.project_id
+Ref ordersstatusfk: orders.status_id < status.status_id
+Ref paymentordersfk: payment.orders_id > orders.orders_id
+Ref paymentstatuspayfk: payment_status.payment_status_id < payment.payment_status_id
+Ref orderstatusordersfk: order_status.order_status_id <> orders.status_id
+Ref reviewsprojectsfk: reviews.project_id <> projects.project_id
+Ref reviewsusersfk: reviews.user_id <> users.user_id
+Ref reviewsordersfk: reviews.order_id <> orders.orders_id
+Ref reviewsteammembersfk: reviews.team_member_id <> teams.team_member_id
+Ref departmentsteammembersfk: departments.team_member_id > teams.team_member_id
+Ref ticketsprojectsfk: tickets.project_id <> projects.project_id
+Ref ticketsusersfk: tickets.user_id <> users.user_id
+Ref ticketsordersfk: tickets.order_id <> orders.orders_id
+Ref ticketsstatusfk: tickets.status_id <> tickets_status.ticket_status_id
+Ref ticketsteammembersfk: tickets.assigned_to <> teams.team_member_id
+Ref ordersinvoicesfk: orders.orders_id > invoices.order_id
+Ref paymentsinvoicesfk: payment.payment_id > invoices.payment_id
+Ref invoicesstatusfk: invoice_status.status_id <> invoices.status_id
+
+enum userroles {
+  user
+}
+
+enum teammemberroles {
+  member
+  moderator
+  admin
+}
+
+enum technologytypes {
+  react
+  angular
+  flutter
+  vue
+  expo
+  other
+}
+
+enum projecttypes {
+  website
+  app
+  software
+  webapp
+  other
+}
+
+enum statustypes {
+  planning
+  inprogress
+  paused
+  completed
+  cancelled
+  unknown
+}
+
+enum paymentstatus {
+  pending
+  paid
+  failed
+}
+
+enum paymentmethod {
+  creditcard
+  debitcard
+  paypal
+  visa
+  mastercard
+  other
+}
+
+enum orderstatus {
+  pending
+  completed
+  cancelled
+  unknown
+}
+
+enum reviewsstatus {
+  pending
+  accepted
+  rejected
+  draft
+  locked
+  deleted
+}
+
+enum reviewsprivacy {
+  public
+  private
+}
+
+enum ticketsstatus {
+  pending
+  accepted
+  rejected
+  locked
+  deleted
+}
+
+enum invoicestatus {
+  pending
+  paid
+  unpaid
+  overdue
+}
+
+// src: https://dbdiagram.io/d/LCPMobileApp-Diagram-DB-6713cb6c97a66db9a38e305a
